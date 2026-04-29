@@ -9,6 +9,7 @@ import { getProductById, listProducts } from "@/lib/products/server";
 
 type ProdutosPageProps = {
   searchParams?: Promise<{
+    created?: string;
     edit?: string;
     mode?: string;
     q?: string;
@@ -36,6 +37,7 @@ export default async function ProdutosPage({
 
   const isCreating = params.mode === "new" || products.length === 0;
   const hasSearch = query.length > 0;
+  const createdState = params.created;
 
   return (
     <AppShell
@@ -43,6 +45,32 @@ export default async function ProdutosPage({
       description="Cadastre preços, recompra e status dos produtos do seu catálogo."
     >
       <section className="space-y-4">
+        {createdState === "product-order" ? (
+          <section className="rounded-lg border border-emerald-200 bg-white p-5 shadow-soft">
+            <p className="text-sm font-semibold text-primary">Produto salvo</p>
+            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+              Agora crie seu primeiro pedido.
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-stone-600">
+              Você já tem cliente e produto. Falta só registrar a venda.
+            </p>
+            <div className="mt-5 grid gap-3">
+              <Link
+                className="min-h-12 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
+                href="/app/pedidos?mode=new#novo-pedido"
+              >
+                Criar pedido
+              </Link>
+              <Link
+                className="min-h-12 rounded-md border border-border px-4 py-3 text-center text-sm font-semibold text-foreground"
+                href="/app/produtos?mode=new#novo-produto"
+              >
+                Adicionar outro produto
+              </Link>
+            </div>
+          </section>
+        ) : null}
+
         <form
           action="/app/produtos"
           className="rounded-lg border border-border bg-white p-4 shadow-soft"
@@ -90,20 +118,19 @@ export default async function ProdutosPage({
 
         {products.length === 0 ? (
           <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-            <p className="text-sm font-semibold text-primary">Estado vazio</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
               {hasSearch
                 ? "Nenhum produto encontrado"
-                : "Seu catálogo ainda está vazio"}
+                : "Cadastre seu primeiro produto"}
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
               {hasSearch
                 ? "Tente outro nome para encontrar o produto."
-                : "Comece cadastrando seu primeiro produto para montar pedidos depois."}
+                : "Produtos ajudam a criar pedidos mais rápido e lembrar quando vender de novo."}
             </p>
             {!hasSearch ? (
               <Link
-                className="mt-5 inline-flex rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+                className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
                 href="/app/produtos?mode=new#novo-produto"
               >
                 Adicionar primeiro produto
@@ -157,7 +184,7 @@ export default async function ProdutosPage({
                     <dd>
                       {product.repurchase_interval_days
                         ? `${product.repurchase_interval_days} dias`
-                        : "Não definida"}
+                        : "Não lembrar"}
                     </dd>
                   </div>
                 </dl>

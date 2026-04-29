@@ -102,14 +102,14 @@ export function OrderForm({ customers, products }: OrderFormProps) {
             Novo pedido
           </h2>
           <p className="mt-2 text-sm leading-6 text-stone-600">
-            Para criar pedidos, você precisa ter pelo menos uma cliente e um
+            Para criar um pedido, você precisa ter pelo menos uma cliente e um
             produto ativo cadastrados.
           </p>
         </div>
         <div className="rounded-md border border-dashed border-border bg-muted px-4 py-4 text-sm text-stone-700">
           {customers.length === 0
-            ? "Cadastre uma cliente antes de criar o primeiro pedido."
-            : "Ative ou cadastre um produto para começar a montar pedidos."}
+            ? "Cadastre uma cliente antes de registrar sua primeira venda."
+            : "Cadastre um produto ativo para começar a montar pedidos."}
         </div>
       </section>
     );

@@ -98,16 +98,14 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
 
         {orders.length === 0 ? (
           <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-            <p className="text-sm font-semibold text-primary">Estado vazio</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-              Ainda não existe nenhum pedido
+              Crie seu primeiro pedido
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              Crie seu primeiro pedido para acompanhar pagamento e entrega sem
-              sair do celular.
+              Um pedido junta cliente, produto, valor e status de pagamento.
             </p>
             <Link
-              className="mt-5 inline-flex rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+              className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
               href="/app/pedidos?mode=new#novo-pedido"
             >
               Criar primeiro pedido

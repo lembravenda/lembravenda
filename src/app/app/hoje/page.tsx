@@ -141,14 +141,19 @@ export default async function HojePage({ searchParams }: HojePageProps) {
 
         {!hasTasks && firstSteps.allDone ? (
           <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-            <p className="text-sm font-semibold text-primary">Estado vazio</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-              Nada pendente por hoje
+              Tudo em dia por enquanto
             </h2>
             <p className="mt-2 text-sm leading-6 text-stone-600">
-              Quando você criar pedidos, cobranças e entregas, elas vão aparecer
-              aqui.
+              Quando surgirem novas cobranças, entregas ou recompras, elas vão
+              aparecer aqui.
             </p>
+            <Link
+              className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+              href="/app/pedidos?mode=new#novo-pedido"
+            >
+              Criar pedido
+            </Link>
           </section>
         ) : null}
 

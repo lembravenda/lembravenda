@@ -3,6 +3,7 @@
 import { randomUUID } from "node:crypto";
 import { redirect } from "next/navigation";
 import { isE2EAuthModeEnabled } from "@/lib/auth/e2e-mode";
+import { getAuthCallbackUrl } from "@/lib/auth/redirects";
 import { getAuthState } from "@/lib/auth/server";
 import { setTestSession } from "@/lib/auth/test-mode";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
@@ -109,7 +110,12 @@ export async function signupAction(
   }
 
   const supabase = await createSupabaseServerClient();
-  const { data, error } = await supabase.auth.signUp(credentials);
+  const { data, error } = await supabase.auth.signUp({
+    ...credentials,
+    options: {
+      emailRedirectTo: getAuthCallbackUrl()
+    }
+  });
 
   if (error) {
     return {
@@ -120,7 +126,7 @@ export async function signupAction(
   if (!data.session) {
     return {
       success:
-        "Conta criada. Confirme seu e-mail para continuar o primeiro acesso."
+        "Conta criada. Confira seu e-mail para confirmar o cadastro e continuar."
     };
   }
 

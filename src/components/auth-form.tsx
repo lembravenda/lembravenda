@@ -10,7 +10,13 @@ import { SubmitButton } from "@/components/submit-button";
 
 const initialState: AuthActionState = {};
 
-export function AuthForm({ isConfigured }: { isConfigured: boolean }) {
+export function AuthForm({
+  isConfigured,
+  message
+}: {
+  isConfigured: boolean;
+  message?: string;
+}) {
   const [loginState, loginFormAction] = useActionState(
     loginAction,
     initialState
@@ -22,6 +28,12 @@ export function AuthForm({ isConfigured }: { isConfigured: boolean }) {
 
   return (
     <div className="space-y-5">
+      {message ? (
+        <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 shadow-soft">
+          {message}
+        </section>
+      ) : null}
+
       <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
         <h2 className="text-lg font-semibold tracking-normal text-foreground">
           Entrar
@@ -53,7 +65,7 @@ export function AuthForm({ isConfigured }: { isConfigured: boolean }) {
           </label>
           {!isConfigured ? (
             <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-800">
-              Configure as variáveis públicas do Supabase para usar autenticação
+              Configure as variáveis públicas do ambiente para usar autenticação
               fora do modo de teste.
             </p>
           ) : null}
@@ -71,7 +83,7 @@ export function AuthForm({ isConfigured }: { isConfigured: boolean }) {
           Criar conta
         </h2>
         <p className="mt-2 text-sm leading-6 text-stone-600">
-          Crie sua conta para começar o onboarding da revendedora.
+          Crie sua conta para começar a organizar suas vendas.
         </p>
         <form action={signupFormAction} className="mt-5 space-y-4">
           <label className="block text-sm font-medium text-foreground">

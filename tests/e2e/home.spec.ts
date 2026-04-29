@@ -66,7 +66,7 @@ async function createCustomerFromApp(
   }
 
   if (options?.tags) {
-    await page.getByLabel("Tags").fill(options.tags);
+    await page.getByLabel("Grupos da cliente").fill(options.tags);
   }
 
   if (options?.notes) {
@@ -96,7 +96,9 @@ async function createProductFromApp(
   }
 
   if (options?.repurchaseDays) {
-    await page.getByLabel("Dias para recompra").fill(options.repurchaseDays);
+    await page
+      .getByLabel("Quando lembrar de vender de novo?")
+      .fill(options.repurchaseDays);
   }
 
   await page.getByRole("button", { name: "Salvar produto" }).click();
@@ -188,9 +190,15 @@ test("home carrega a base técnica do MVP", async ({ page }) => {
   await page.goto("/");
 
   await expect(
-    page.getByRole("heading", { name: "Organize o dia de venda pelo celular." })
+    page.getByRole("heading", {
+      name: "Lembre quem cobrar, entregar e chamar para comprar de novo."
+    })
   ).toBeVisible();
-  await expect(page.getByText("Sem WhatsApp API")).toBeVisible();
+  await expect(
+    page.getByText(
+      "O LembraVenda ajuda quem vende pelo WhatsApp a organizar clientes, pedidos, cobranças e recompras em poucos minutos."
+    )
+  ).toBeVisible();
 });
 
 test("rota protegida redireciona para login sem sessão", async ({ page }) => {
@@ -284,7 +292,7 @@ test("editar cliente", async ({ page }) => {
   await createCustomerFromApp(page, "Renata Lima");
   await page.getByRole("link", { name: "Editar" }).click();
   await page.getByLabel("Telefone").fill("(21) 97777-1111");
-  await page.getByLabel("Tags").fill("atacado");
+  await page.getByLabel("Grupos da cliente").fill("atacado");
   await page.getByRole("button", { name: "Salvar alterações" }).click();
 
   await expect(page).toHaveURL(/\/app\/clientes$/);
@@ -349,7 +357,7 @@ test("editar produto", async ({ page }) => {
   });
   await page.getByRole("link", { name: "Editar" }).click();
   await page.getByLabel("Categoria").fill("Skincare");
-  await page.getByLabel("Dias para recompra").fill("30");
+  await page.getByLabel("Quando lembrar de vender de novo?").fill("30");
   await page.getByRole("button", { name: "Salvar alterações" }).click();
 
   await expect(page.getByText("Skincare")).toBeVisible();

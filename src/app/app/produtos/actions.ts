@@ -3,9 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
+import { listCustomers } from "@/lib/customers/server";
+import { listOrders } from "@/lib/orders/server";
 import { parsePriceInput } from "@/lib/products/format";
 import {
   createProduct,
+  listProducts,
   setProductActiveState,
   updateProduct
 } from "@/lib/products/server";
@@ -111,7 +114,17 @@ export async function createProductAction(
   }
 
   revalidatePath("/app/produtos");
-  redirect("/app/produtos");
+  const [customers, orders, products] = await Promise.all([
+    listCustomers(user.id, ""),
+    listOrders(user.id),
+    listProducts(user.id, "")
+  ]);
+
+  if (customers.length > 0 && orders.length === 0 && products.length > 0) {
+    redirect("/app/produtos?created=product-order");
+  }
+
+  redirect("/app/produtos?created=product");
 }
 
 export async function updateProductAction(

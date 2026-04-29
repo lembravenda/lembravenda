@@ -4,10 +4,11 @@
 
 1. Usuária cria conta ou entra.
 2. App verifica se o perfil está completo.
-3. Se incompleto, exibe formulário curto: nome, marca, telefone e chave Pix opcional.
-4. Ao salvar, envia para a tela "Hoje" com card de "Primeiros passos".
-5. O card orienta cliente, produto e pedido sem abrir wizard complexo.
-6. Se pular campos opcionais, mantém aviso discreto em configurações.
+3. Se o cadastro foi confirmado por e-mail, o link leva para `/auth/callback`, que abre a sessão e manda a pessoa para o lugar certo.
+4. Se o perfil estiver incompleto, app exibe formulário curto: nome, marca, telefone e chave Pix opcional.
+5. Ao salvar, envia para a tela "Hoje" com card de "Primeiros passos".
+6. O card orienta cliente, produto e pedido sem abrir wizard complexo.
+7. Se pular campos opcionais, mantém aviso discreto em configurações.
 
 ## Criar cliente
 

@@ -118,7 +118,7 @@ export async function createOrderAction(
   }
 
   revalidatePath("/app/pedidos");
-  redirect(`/app/pedidos/${order.id}`);
+  redirect(`/app/pedidos/${order.id}?created=1#pedido-criado`);
 }
 
 export async function markOrderPaidAction(formData: FormData) {

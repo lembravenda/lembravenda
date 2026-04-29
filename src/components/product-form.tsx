@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import type { ProductActionState } from "@/app/app/produtos/actions";
 import {
   createProductAction,
@@ -11,6 +11,16 @@ import { formatPriceCents } from "@/lib/products/format";
 import type { Product } from "@/types/database";
 
 const initialState: ProductActionState = {};
+const categorySuggestions = [
+  "Cosmético",
+  "Roupa",
+  "Acessório",
+  "Semijoia",
+  "Casa",
+  "Alimento",
+  "Outro"
+] as const;
+const repurchaseSuggestions = [15, 30, 45, 60] as const;
 
 type ProductFormProps = {
   mode: "create" | "edit";
@@ -32,6 +42,12 @@ export function ProductForm({ mode, product }: ProductFormProps) {
   const buttonLabel =
     mode === "create" ? "Salvar produto" : "Salvar alterações";
   const [state, formAction] = useActionState(action, initialState);
+  const [categoryValue, setCategoryValue] = useState(product?.category ?? "");
+  const [repurchaseValue, setRepurchaseValue] = useState(
+    product?.repurchase_interval_days
+      ? String(product.repurchase_interval_days)
+      : ""
+  );
 
   return (
     <form
@@ -88,24 +104,76 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         Categoria
         <input
           className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
-          defaultValue={product?.category ?? ""}
           name="category"
-          placeholder="Ex.: batom, bolsa, kit presente"
+          onChange={(event) => setCategoryValue(event.target.value)}
+          placeholder="Ex.: hidratante, kit presente, bolsa"
           type="text"
+          value={categoryValue}
         />
+        <span className="mt-2 block text-xs text-stone-500">
+          Use para organizar seus produtos. Você pode escrever do seu jeito.
+        </span>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {categorySuggestions.map((suggestion) => (
+            <button
+              className={`rounded-full border px-3 py-2 text-sm ${
+                categoryValue === suggestion
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border bg-white text-foreground"
+              }`}
+              key={suggestion}
+              onClick={() => setCategoryValue(suggestion)}
+              type="button"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
       </label>
 
       <label className="block text-sm font-medium text-foreground">
-        Dias para recompra
+        Quando lembrar de vender de novo?
         <input
           className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
-          defaultValue={product?.repurchase_interval_days ?? ""}
           inputMode="numeric"
           min={1}
           name="repurchase_interval_days"
-          placeholder="Ex.: 30"
+          onChange={(event) => setRepurchaseValue(event.target.value)}
+          placeholder="Outro prazo em dias"
           type="number"
+          value={repurchaseValue}
         />
+        <span className="mt-2 block text-xs text-stone-500">
+          Ex: se o produto costuma acabar em 30 dias, o LembraVenda te lembra de
+          chamar a cliente.
+        </span>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {repurchaseSuggestions.map((suggestion) => (
+            <button
+              className={`rounded-full border px-3 py-2 text-sm ${
+                repurchaseValue === String(suggestion)
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border bg-white text-foreground"
+              }`}
+              key={suggestion}
+              onClick={() => setRepurchaseValue(String(suggestion))}
+              type="button"
+            >
+              {suggestion} dias
+            </button>
+          ))}
+          <button
+            className={`rounded-full border px-3 py-2 text-sm ${
+              repurchaseValue === ""
+                ? "border-primary bg-primary/10 text-primary"
+                : "border-border bg-white text-foreground"
+            }`}
+            onClick={() => setRepurchaseValue("")}
+            type="button"
+          >
+            Não lembrar
+          </button>
+        </div>
       </label>
 
       <label className="flex items-center gap-3 rounded-md border border-border bg-background px-3 py-3 text-sm font-medium text-foreground">

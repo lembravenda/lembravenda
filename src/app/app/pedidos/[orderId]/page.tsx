@@ -56,13 +56,18 @@ type PedidoDetalhePageProps = {
   params: Promise<{
     orderId: string;
   }>;
+  searchParams?: Promise<{
+    created?: string;
+  }>;
 };
 
 export default async function PedidoDetalhePage({
-  params
+  params,
+  searchParams
 }: PedidoDetalhePageProps) {
   const authState = await getAuthState();
   const { orderId } = await params;
+  const parsedSearchParams = (await searchParams) ?? {};
   const currentUserId = authState.user?.id;
 
   if (!currentUserId) {
@@ -81,6 +86,32 @@ export default async function PedidoDetalhePage({
       description="Acompanhe itens, total, pagamento e entrega sem depender do produto atual."
     >
       <section className="space-y-4">
+        {parsedSearchParams.created === "1" ? (
+          <section
+            className="rounded-lg border border-emerald-200 bg-white p-5 shadow-soft"
+            id="pedido-criado"
+          >
+            <p className="text-sm font-semibold text-primary">Pedido criado</p>
+            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+              Agora você pode cobrar a cliente ou acompanhar o pagamento.
+            </h2>
+            <div className="mt-5 grid gap-3">
+              <Link
+                className="min-h-12 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
+                href="#cobranca-pedido"
+              >
+                Cobrar cliente
+              </Link>
+              <Link
+                className="min-h-12 rounded-md border border-border px-4 py-3 text-center text-sm font-semibold text-foreground"
+                href="#itens-pedido"
+              >
+                Ver pedido
+              </Link>
+            </div>
+          </section>
+        ) : null}
+
         <Link
           className="inline-flex rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
           href="/app/pedidos"
@@ -88,7 +119,10 @@ export default async function PedidoDetalhePage({
           Voltar para pedidos
         </Link>
 
-        <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
+        <section
+          className="rounded-lg border border-border bg-white p-5 shadow-soft"
+          id="itens-pedido"
+        >
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-sm font-semibold text-primary">Cliente</p>

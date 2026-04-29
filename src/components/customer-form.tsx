@@ -84,16 +84,16 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       </label>
 
       <label className="block text-sm font-medium text-foreground">
-        Tags
+        Grupos da cliente
         <input
           className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
           defaultValue={customer ? formatTags(customer.tags) : ""}
           name="tags"
-          placeholder="vip, atacado, recorrente"
+          placeholder="VIP, compra todo mês, atacado"
           type="text"
         />
         <span className="mt-2 block text-xs text-stone-500">
-          Separe as tags por vírgula.
+          Ex: VIP, compra todo mês, atacado. Separe por vírgula.
         </span>
       </label>
 

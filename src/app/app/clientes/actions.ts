@@ -6,8 +6,11 @@ import { getAuthState } from "@/lib/auth/server";
 import {
   createCustomer,
   deleteCustomer,
+  listCustomers,
   updateCustomer
 } from "@/lib/customers/server";
+import { listOrders } from "@/lib/orders/server";
+import { listProducts } from "@/lib/products/server";
 
 export type CustomerActionState = {
   error?: string;
@@ -86,7 +89,21 @@ export async function createCustomerAction(
   }
 
   revalidatePath("/app/clientes");
-  redirect("/app/clientes");
+  const [customers, orders, products] = await Promise.all([
+    listCustomers(user.id, ""),
+    listOrders(user.id),
+    listProducts(user.id, "")
+  ]);
+
+  if (products.length === 0) {
+    redirect("/app/clientes?created=customer-product");
+  }
+
+  if (products.length > 0 && orders.length === 0 && customers.length > 0) {
+    redirect("/app/clientes?created=customer-order");
+  }
+
+  redirect("/app/clientes?created=customer");
 }
 
 export async function updateCustomerAction(

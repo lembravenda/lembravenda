@@ -140,6 +140,16 @@ npx playwright install chromium
 5. Criar testes de acesso cruzado entre usuários antes de liberar funcionalidades de negócio.
 6. Nunca usar service role key no frontend.
 
+### Redirect URLs do Supabase Auth
+
+Antes de testar cadastro com confirmação por e-mail, configure no Supabase Auth:
+
+- `http://localhost:3000/**`
+- `https://lembravenda.vercel.app/**`
+- `https://lembravenda.vercel.app/auth/callback`
+
+O app usa a rota `/auth/callback` para trocar o `code` do e-mail por sessão e redirecionar a pessoa para `/onboarding` ou `/app/hoje`.
+
 As instruções de aplicação das migrations estão em `docs/15_SUPABASE_MIGRATIONS.md`.
 
 Para validar a migration inicial de forma estática:

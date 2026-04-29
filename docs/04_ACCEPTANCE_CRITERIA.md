@@ -3,6 +3,7 @@
 ## Autenticação
 
 - Usuária consegue criar conta, entrar e sair.
+- Link de confirmação de e-mail abre sessão e não deixa a pessoa parada na home pública.
 - Rotas privadas bloqueiam acesso sem sessão.
 - Erros de login são exibidos em português brasileiro.
 - Nenhum segredo é exposto no frontend.
@@ -22,10 +23,11 @@
 - Cliente exige nome.
 - Telefone é opcional, mas necessário para abrir WhatsApp.
 - Aniversário é opcional.
-- Tags são opcionais.
+- Grupos da cliente são opcionais.
 - Listagem mostra apenas clientes do usuário autenticado.
 - Busca filtra por nome e telefone.
 - Usuária consegue criar, editar e excluir cliente com feedback claro.
+- Depois de criar cliente, o app indica a próxima ação principal quando fizer sentido.
 - Exclusão pede confirmação ou usa ação segura equivalente.
 - Cliente com pedidos associados não pode quebrar histórico; usar bloqueio, arquivamento ou remoção segura definida na implementação.
 
@@ -37,8 +39,11 @@
 - Usuária consegue editar produto.
 - Usuária consegue inativar produto sem apagar histórico.
 - Produto inativo permanece visível para histórico, mas não deve aparecer como opção principal em novos pedidos.
+- Campo de categoria aceita escrita livre e sugestões simples.
+- Campo de recompra usa linguagem simples e sugestões rápidas de prazo.
 - Listagem mostra apenas produtos do usuário autenticado.
 - Busca filtra por nome.
+- Depois de criar produto, o app indica a próxima ação principal quando fizer sentido.
 - Produto usado em pedido não deve quebrar histórico.
 
 ## Pedidos
@@ -53,6 +58,7 @@
 - Usuária consegue marcar pedido como entregue sem processar pagamento no app.
 - Pedido cancelado não aparece como cobrança, entrega ou recompra ativa.
 - Itens do pedido guardam snapshot de nome e preço para preservar histórico.
+- Depois de criar pedido, o app orienta cobrança ou acompanhamento do pagamento.
 
 ## Cobrança
 

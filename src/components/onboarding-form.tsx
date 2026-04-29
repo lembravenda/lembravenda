@@ -33,8 +33,8 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
 
       {!profile ? (
         <p className="rounded-md border border-dashed border-border bg-muted px-3 py-3 text-sm text-stone-700">
-          Estado vazio: você ainda não tem perfil salvo. Preencha os campos
-          abaixo para continuar.
+          Preencha os campos abaixo para abrir sua área e começar a organizar
+          suas vendas.
         </p>
       ) : null}
 

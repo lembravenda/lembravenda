@@ -2,8 +2,15 @@ import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/auth-form";
 import { getAuthState } from "@/lib/auth/server";
 
-export default async function LoginPage() {
+type LoginPageProps = {
+  searchParams?: Promise<{
+    message?: string;
+  }>;
+};
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
   const authState = await getAuthState();
+  const params = (await searchParams) ?? {};
 
   if (authState.user) {
     redirect(authState.isProfileComplete ? "/app/hoje" : "/onboarding");
@@ -17,11 +24,13 @@ export default async function LoginPage() {
           Entre na sua agenda
         </h1>
         <p className="mt-2 text-sm leading-6 text-stone-600">
-          Faça login ou crie uma conta para configurar seu perfil de
-          revendedora.
+          Entre ou crie sua conta para começar a organizar suas vendas.
         </p>
       </section>
-      <AuthForm isConfigured={authState.isConfigured} />
+      <AuthForm
+        isConfigured={authState.isConfigured}
+        message={params.message}
+      />
     </main>
   );
 }
