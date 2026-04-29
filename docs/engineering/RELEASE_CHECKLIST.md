@@ -2,7 +2,7 @@
 
 ## Pronto
 
-- [x] Escopo do MVP revisado contra `docs/02_MVP_SCOPE.md`.
+- [x] Escopo do MVP revisado contra `docs/product/MVP_SCOPE.md`.
 - [x] Fluxos centrais implementados: autenticação, onboarding, clientes, produtos, pedidos, cobrança manual, tela "Hoje" e recompra.
 - [x] Lint, typecheck e testes unitários podem ser executados no repositório.
 - [x] RLS está modelado para todas as tabelas de negócio.

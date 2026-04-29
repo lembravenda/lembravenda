@@ -1,64 +1,47 @@
-# Agenda Inteligente para Revendedoras
+# LembraVenda
 
-Webapp mobile-first para revendedoras e social sellers que vendem por WhatsApp e Instagram. O produto ajuda a controlar clientes, produtos, pedidos, cobranças manuais e lembretes de recompra sem assumir o papel de gateway de pagamento, checkout, marketplace, emissão fiscal, app nativo ou automação oficial do WhatsApp.
+O LembraVenda é um webapp mobile-first para quem vende pelo WhatsApp organizar clientes, produtos, pedidos, cobranças manuais e recompras com simplicidade.
 
-## Objetivo do MVP
+## Status atual
 
-Validar se revendedoras pagariam por uma agenda simples, rápida e confiável para organizar o dia de venda: saber quem cobrar, quais pedidos entregar e quando chamar clientes para recompra.
+- MVP funcional
+- produção online: [https://lembravenda.vercel.app](https://lembravenda.vercel.app)
+- aprovado para teste externo pequeno
+- documentação reorganizada como fonte de verdade do projeto
 
-O MVP deve entregar valor com fluxos manuais assistidos:
+O produto não envia mensagens automaticamente, não usa WhatsApp API, não processa pagamentos, não faz checkout, não faz split, não emite nota fiscal e não é marketplace.
 
-- Cadastro de clientes, produtos e pedidos.
-- Mensagens prontas para copiar e enviar manualmente.
-- Status de pagamento e entrega.
-- Oportunidades de recompra.
-- Tela "Hoje" com prioridades do dia.
+## Stack
 
-O MVP não envia mensagens automaticamente, não usa WhatsApp API, não processa pagamentos, não faz split, não emite nota fiscal, não possui checkout próprio, não é marketplace e não tem app nativo. Pix é apenas uma chave cadastrada pela revendedora e exibida em mensagens copiáveis.
+- Next.js App Router
+- TypeScript
+- Tailwind CSS
+- Supabase Auth + Postgres + Row Level Security
+- Playwright
+- Vercel
 
-Na versão atual do piloto, a tela **Hoje** prioriza cobranças, entregas e pedidos recentes. As oportunidades de recompra ficam na página **Recompra**, com mensagem pronta e marcação manual de contato.
+## Documentação
 
-## Estrutura de pastas
+- índice geral: [docs/README.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/README.md)
+- produto: [docs/product](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/product)
+- UX: [docs/ux](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/ux)
+- pesquisa: [docs/research](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/research)
+- brand: [docs/brand](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/brand)
+- engenharia: [docs/engineering](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering)
+- QA: [docs/qa](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/qa)
 
-```text
-/
-├── AGENTS.md
-├── README.md
-└── docs/
-    ├── 01_PRD.md
-    ├── 02_MVP_SCOPE.md
-    ├── 03_USER_STORIES.md
-    ├── 04_ACCEPTANCE_CRITERIA.md
-    ├── 05_UX_FLOWS.md
-    ├── 06_DATABASE_SCHEMA.md
-    ├── 07_SECURITY_REQUIREMENTS.md
-    ├── 08_TEST_PLAN.md
-    ├── 09_RELEASE_CHECKLIST.md
-    ├── 10_ANALYTICS_EVENTS.md
-    ├── 11_ROADMAP.md
-    ├── 12_BACKLOG.md
-    ├── 13_RISK_REGISTER.md
-    ├── 14_GO_TO_MARKET.md
-    ├── 15_SUPABASE_MIGRATIONS.md
-    └── ADR/
-        └── 0001-stack.md
-```
+## Último status de QA
 
-## Como o projeto deve evoluir
+- relatório principal: [docs/qa/QA_REPORT_2026-04-29.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/qa/QA_REPORT_2026-04-29.md)
+- validação do release `ba45761`: [docs/qa/RELEASE_VALIDATION_BA45761.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/qa/RELEASE_VALIDATION_BA45761.md)
 
-1. Manter a documentação como fonte de verdade antes de implementar.
-2. Criar o app apenas quando o escopo do MVP estiver validado.
-3. Implementar em fatias pequenas, com testes e critérios de aceite claros.
-4. Validar com usuárias reais antes de expandir automações, integrações ou monetização.
-5. Evitar complexidade de CRM, marketplace, checkout e integrações no MVP.
+## Como evoluir o projeto
 
-## Como trabalhar com Codex neste repositório
-
-- Comece toda tarefa lendo `AGENTS.md` e os arquivos relevantes em `docs/`.
-- Descreva claramente o escopo antes de pedir implementação.
-- Não peça dependências, app Next.js ou código de aplicação enquanto a tarefa for apenas documental.
-- Para implementação futura, exigir lint, typecheck e testes antes do encerramento.
-- Respeitar as decisões de segurança: dados por usuário, RLS, sem segredos no frontend e sem intermediação de dinheiro.
+1. Tratar a documentação como fonte de verdade antes de cada implementação.
+2. Implementar em fatias pequenas com critérios de aceite claros.
+3. Rodar verificações locais antes de abrir ou concluir mudanças.
+4. Atualizar documentação sempre que comportamento, fluxo ou escopo mudarem.
+5. Validar com pessoas reais antes de expandir escopo ou aquisição.
 
 ## Setup técnico
 
@@ -75,6 +58,8 @@ Crie um arquivo `.env.local` a partir de `.env.example`:
 ```bash
 cp .env.example .env.local
 ```
+
+**Nunca faça commit de `.env.local`.**
 
 Preencha apenas chaves públicas do Supabase no formato abaixo. Nunca coloque service role key ou segredos no frontend.
 
@@ -97,6 +82,7 @@ O app sobe em `http://127.0.0.1:3000`.
 npm run lint
 npm run typecheck
 npm run format
+npm run test:unit
 npm run test:e2e
 ```
 
@@ -135,7 +121,7 @@ npx playwright install chromium
 
 1. Criar projeto no Supabase.
 2. Copiar somente `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` para `.env.local`.
-3. Criar migrations seguindo `docs/06_DATABASE_SCHEMA.md`.
+3. Criar migrations seguindo [docs/engineering/DATABASE_SCHEMA.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering/DATABASE_SCHEMA.md).
 4. Habilitar RLS antes de qualquer tela consultar dados reais.
 5. Criar testes de acesso cruzado entre usuários antes de liberar funcionalidades de negócio.
 6. Nunca usar service role key no frontend.
@@ -150,7 +136,7 @@ Antes de testar cadastro com confirmação por e-mail, configure no Supabase Aut
 
 O app usa a rota `/auth/callback` para trocar o `code` do e-mail por sessão e redirecionar a pessoa para `/onboarding` ou `/app/hoje`.
 
-As instruções de aplicação das migrations estão em `docs/15_SUPABASE_MIGRATIONS.md`.
+As instruções de aplicação das migrations estão em [docs/engineering/SUPABASE_MIGRATIONS.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering/SUPABASE_MIGRATIONS.md).
 
 Para validar a migration inicial de forma estática:
 
@@ -160,7 +146,7 @@ npm run db:validate
 
 ### Como aplicar migrations no Supabase
 
-Use o guia completo em `docs/15_SUPABASE_MIGRATIONS.md`.
+Use o guia completo em [docs/engineering/SUPABASE_MIGRATIONS.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering/SUPABASE_MIGRATIONS.md).
 
 Fluxo típico:
 
@@ -213,10 +199,6 @@ git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
 git push -u origin main
 ```
 
-## Decisão sobre migrations
-
-A migration inicial segue consolidada porque não há nenhum indicativo no repositório de que ela já tenha sido aplicada em ambiente compartilhado. Se isso mudar, as próximas alterações de schema devem entrar como migrations incrementais.
-
 ## Próximo passo recomendado
 
-Usar `docs/09_RELEASE_CHECKLIST.md` como gate final do piloto e só seguir para usuárias externas depois de rodar a suíte E2E completa em um ambiente sem bloqueio de porta.
+Usar [docs/engineering/RELEASE_CHECKLIST.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering/RELEASE_CHECKLIST.md) como gate final antes de novos ciclos de teste externo, e preparar a rodada de identidade visual e landing page com base nos briefs em [docs/brand](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/brand).

@@ -16,7 +16,7 @@
 - Página de recompra com oportunidades derivadas de pedidos, mensagem pronta e marcação de contato.
 - Follow-ups de recompra usados para persistir estado de contato (`done` ou `dismissed`) quando aplicável.
 - Tela "Hoje" com cartões de cobrança, entrega e pedidos recentes.
-- Configurações informativas com limites claros do MVP.
+- Configurações básicas com perfil, mensagens e conta.
 - Estados de loading, erro e vazio em todas as telas.
 - Eventos de analytics documentados, sem bloquear o piloto enquanto a instrumentação não existir.
 - Testes para fluxos críticos.

@@ -14,7 +14,7 @@ Este backlog está em ordem recomendada de implementação. Cada etapa deve pres
 ## P0.2 - Banco, autenticação e segurança base
 
 - Configurar Supabase Auth.
-- Criar migrations conceituadas em `docs/06_DATABASE_SCHEMA.md`.
+- Criar migrations conceituadas em `docs/engineering/DATABASE_SCHEMA.md`.
 - Habilitar RLS em `profiles`, `customers`, `products`, `orders`, `order_items` e `follow_ups`.
 - Criar políticas por usuário autenticado.
 - Testar acesso cruzado com dois usuários.
@@ -26,7 +26,7 @@ Este backlog está em ordem recomendada de implementação. Cada etapa deve pres
 - Proteger rotas privadas.
 - Criar tela de onboarding de perfil.
 - Editar perfil em configurações.
-- Exibir limite do MVP: sem WhatsApp API, sem checkout, sem split, sem emissão fiscal, sem marketplace, sem app nativo e sem intermediação financeira.
+- Criar área simples de configurações com perfil, mensagens e conta.
 - Testar sessão, rotas privadas e perfil por usuário.
 
 ## P0.4 - Clientes

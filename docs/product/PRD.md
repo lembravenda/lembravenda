@@ -40,7 +40,7 @@ Validar se a usuária percebe valor suficiente para usar e pagar por uma agenda 
 - Geração de oportunidades de recompra a partir de pedidos entregues com produto recorrente.
 - Tela "Hoje" com cobranças, entregas e pedidos recentes.
 - Página de recompra com mensagens prontas e marcação de contato.
-- Configurações básicas informativas para o piloto.
+- Configurações básicas de perfil, mensagens e conta.
 
 ## Fora de escopo
 

@@ -49,4 +49,5 @@
 ## Configurações
 
 - Como revendedora, quero revisar meus dados de perfil e preferências.
-- Como revendedora, quero entender que o app não envia mensagens automaticamente, não tem checkout próprio, não faz split, não emite nota fiscal, não é marketplace, não é app nativo e não intermedeia pagamentos.
+- Como revendedora, quero entender como as mensagens prontas funcionam antes de enviar.
+- Como revendedora, quero sair da minha conta com segurança quando terminar o uso.

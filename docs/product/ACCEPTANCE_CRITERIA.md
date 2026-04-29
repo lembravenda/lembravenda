@@ -92,6 +92,7 @@
 
 ## Configurações
 
-- No piloto atual, a tela deixa claros os limites do MVP e mantém o acesso ao logout.
+- Tela apresenta área simples de perfil, mensagens e conta.
 - O cadastro inicial do perfil acontece no onboarding.
-- Tela informa claramente limites do MVP: sem WhatsApp API, sem checkout próprio, sem split, sem emissão fiscal, sem marketplace, sem app nativo e sem intermediação financeira.
+- Tela mantém acesso ao logout.
+- A interface de configurações não deve expor termos técnicos ao usuário final.
