@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "db:validate": "node scripts/validate-migrations.mjs",
-    "test:unit": "node --test --experimental-strip-types tests/unit/products-format.test.mjs tests/unit/orders-calc.test.mjs tests/unit/orders-charge.test.mjs tests/unit/repurchase-calc.test.mjs tests/unit/first-steps.test.mjs tests/unit/phone-validation.test.mjs",
+    "test:unit": "node --test --experimental-strip-types tests/unit/products-format.test.mjs tests/unit/orders-calc.test.mjs tests/unit/orders-charge.test.mjs tests/unit/repurchase-calc.test.mjs tests/unit/first-steps.test.mjs tests/unit/phone-validation.test.mjs tests/unit/next-config.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:local": "PLAYWRIGHT_SKIP_WEBSERVER=1 PLAYWRIGHT_BASE_URL=http://127.0.0.1:3000 playwright test",
     "format": "prettier --check .",

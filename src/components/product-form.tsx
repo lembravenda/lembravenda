@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { useActionState, useState } from "react";
 import type { ProductActionState } from "@/app/app/produtos/actions";
 import {
@@ -7,7 +8,7 @@ import {
   updateProductAction
 } from "@/app/app/produtos/actions";
 import { SubmitButton } from "@/components/submit-button";
-import { formatPriceCents } from "@/lib/products/format";
+import { formatPriceCents, parsePriceInput } from "@/lib/products/format";
 import type { Product } from "@/types/database";
 
 const initialState: ProductActionState = {};
@@ -43,11 +44,21 @@ export function ProductForm({ mode, product }: ProductFormProps) {
     mode === "create" ? "Salvar produto" : "Salvar alterações";
   const [state, formAction] = useActionState(action, initialState);
   const [categoryValue, setCategoryValue] = useState(product?.category ?? "");
+  const [priceValue, setPriceValue] = useState(
+    formatPriceForInput(product?.price_cents)
+  );
   const [repurchaseValue, setRepurchaseValue] = useState(
     product?.repurchase_interval_days
       ? String(product.repurchase_interval_days)
       : ""
   );
+  const parsedPrice = useMemo(() => {
+    if (!priceValue.trim()) {
+      return null;
+    }
+
+    return parsePriceInput(priceValue);
+  }, [priceValue]);
 
   return (
     <form
@@ -86,13 +97,29 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         Preço
         <input
           className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
-          defaultValue={formatPriceForInput(product?.price_cents)}
           inputMode="decimal"
           name="price"
+          onChange={(event) => setPriceValue(event.target.value)}
           placeholder="0,00"
           required
           type="text"
+          value={priceValue}
         />
+        <span className="mt-2 block text-xs text-stone-500">
+          Use vírgula ou ponto para centavos. Ex.: 49,90
+        </span>
+        {parsedPrice && "error" in parsedPrice ? (
+          <span className="mt-2 block text-xs font-medium text-red-700">
+            {parsedPrice.error}
+          </span>
+        ) : null}
+        {parsedPrice &&
+        "priceCents" in parsedPrice &&
+        typeof parsedPrice.priceCents === "number" ? (
+          <span className="mt-2 block text-xs text-emerald-700">
+            Será salvo como {formatPriceCents(parsedPrice.priceCents)}.
+          </span>
+        ) : null}
         {product ? (
           <span className="mt-2 block text-xs text-stone-500">
             Valor atual: {formatPriceCents(product.price_cents)}

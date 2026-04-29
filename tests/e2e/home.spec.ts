@@ -337,7 +337,7 @@ test("criar e listar produto", async ({ page }) => {
 
   await createProductFromApp(page, "Kit Batom Matte", {
     category: "Maquiagem",
-    price: "39,90",
+    price: "49.90",
     repurchaseDays: "45"
   });
 
@@ -345,7 +345,7 @@ test("criar e listar produto", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Kit Batom Matte" })
   ).toBeVisible();
-  await expect(page.getByText("R$ 39,90")).toBeVisible();
+  await expect(page.getByText("R$ 49,90")).toBeVisible();
   await expect(page.getByText("Maquiagem")).toBeVisible();
 });
 
@@ -514,6 +514,12 @@ test("gera cobranca manual com Pix e link do WhatsApp", async ({ page }) => {
   ).toBeVisible();
   await expect(page.getByLabel("Mensagem de cobrança")).toContainText(
     "Ana Cliente"
+  );
+  await expect(page.getByLabel("Mensagem de cobrança")).toContainText(
+    "• Batom Cremoso x1"
+  );
+  await expect(page.getByLabel("Mensagem de cobrança")).toContainText(
+    "Total: R$ 39,90"
   );
   await expect(page.getByLabel("Mensagem de cobrança")).toContainText(
     "pix@lojadaana.com"

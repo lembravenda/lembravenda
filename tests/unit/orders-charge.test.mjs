@@ -30,6 +30,28 @@ test("gera mensagem de cobrança com Pix", () => {
   );
 });
 
+test("gera mensagem de cobrança com múltiplos itens", () => {
+  const message = buildPaymentMessage({
+    customerName: "Lia",
+    items: [
+      {
+        product_name_snapshot: "Batom Cremoso",
+        quantity: 1
+      },
+      {
+        product_name_snapshot: "Perfume Floral",
+        quantity: 2
+      }
+    ],
+    pixKey: "lia@pix.com",
+    totalCents: 13970
+  });
+
+  assert.match(message, /• Batom Cremoso x1/);
+  assert.match(message, /• Perfume Floral x2/);
+  assert.match(message, /Total: R\$\s139,70/);
+});
+
 test("gera mensagem de cobrança sem Pix", () => {
   const message = buildPaymentMessage({
     customerName: "Bia",
@@ -45,6 +67,7 @@ test("gera mensagem de cobrança sem Pix", () => {
     message,
     /Me avisa por aqui que combinamos a melhor forma de pagamento\./
   );
+  assert.match(message, /Total: R\$\s29,90/);
 });
 
 test("gera link wa.me com telefone valido", () => {
