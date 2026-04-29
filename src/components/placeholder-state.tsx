@@ -9,9 +9,7 @@ export function PlaceholderState({
 }: PlaceholderStateProps) {
   return (
     <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
-      <p className="text-sm font-semibold text-primary">
-        Área limitada no piloto
-      </p>
+      <p className="text-sm font-semibold text-primary">Acompanhe por aqui</p>
       <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
         {title}
       </h2>

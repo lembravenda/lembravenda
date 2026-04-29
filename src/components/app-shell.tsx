@@ -33,10 +33,12 @@ export function AppShell({ title, description, children }: AppShellProps) {
         </div>
         <p className="mt-2 text-sm leading-6 text-stone-600">{description}</p>
       </header>
-      <main className="flex-1 px-5 py-5 pb-28">{children}</main>
+      <main className="flex-1 px-5 py-5 pb-[calc(11rem+env(safe-area-inset-bottom))]">
+        {children}
+      </main>
       <nav
         aria-label="Navegação principal"
-        className="fixed inset-x-0 bottom-0 border-t border-border bg-background/95 px-3 py-3 backdrop-blur"
+        className="fixed inset-x-0 bottom-0 border-t border-border bg-background/95 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur"
       >
         <div className="mx-auto grid max-w-md grid-cols-3 gap-2">
           {navigationItems.map((item) => (

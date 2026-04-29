@@ -57,8 +57,7 @@ export function OrderChargeCard({
           Mensagem pronta para WhatsApp
         </h2>
         <p className="mt-2 text-sm leading-6 text-stone-600">
-          Copie a mensagem ou abra o WhatsApp com o texto preenchido. O envio e
-          o pagamento continuam 100% manuais no MVP.
+          Copie a mensagem ou abra o WhatsApp com tudo pronto para enviar.
         </p>
       </div>
 
@@ -98,28 +97,20 @@ export function OrderChargeCard({
 
         {!pixKey ? (
           <p className="rounded-md border border-dashed border-border bg-muted px-3 py-3 text-sm text-stone-700">
-            A chave Pix ainda não foi cadastrada no seu perfil. A mensagem foi
-            gerada sem Pix por enquanto.
+            Se você ainda não cadastrou uma chave Pix, a mensagem segue pronta
+            para combinar outra forma de pagamento.
           </p>
         ) : null}
 
         {copyStatus === "success" ? (
           <p className="text-sm font-medium text-emerald-700">
-            Mensagem copiada. Evento `payment_message_copied` ainda está
-            pendente de instrumentação.
+            Mensagem copiada.
           </p>
         ) : null}
 
         {copyStatus === "error" ? (
           <p className="text-sm font-medium text-red-700">
             Não foi possível copiar agora. Tente novamente.
-          </p>
-        ) : null}
-
-        {whatsappLink ? (
-          <p className="text-xs leading-5 text-stone-500">
-            Abertura do WhatsApp disponível. Evento `whatsapp_opened` ainda está
-            pendente de instrumentação.
           </p>
         ) : null}
       </div>

@@ -186,7 +186,7 @@ function getSectionByLabel(page: Page, label: string) {
   return page.locator("section[aria-label]").filter({ hasText: label }).first();
 }
 
-test("home carrega a base técnica do MVP", async ({ page }) => {
+test("home pública apresenta o produto com copy simples", async ({ page }) => {
   await page.goto("/");
 
   await expect(

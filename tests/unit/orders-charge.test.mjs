@@ -20,9 +20,14 @@ test("gera mensagem de cobrança com Pix", () => {
   });
 
   assert.match(message, /Oi, Ana! Tudo bem\?/);
+  assert.match(message, /Passando para lembrar do pagamento do seu pedido:/);
   assert.match(message, /Base Liquida x2/);
   assert.match(message, /R\$\s99,80/);
-  assert.match(message, /Pix: ana@pix\.com/);
+  assert.match(message, /Pode fazer pelo Pix:\nana@pix\.com/);
+  assert.match(
+    message,
+    /Assim que fizer, me avisa por aqui que eu já separo para entrega 😊/
+  );
 });
 
 test("gera mensagem de cobrança sem Pix", () => {
@@ -36,17 +41,21 @@ test("gera mensagem de cobrança sem Pix", () => {
   assert.match(message, /Oi, Bia! Tudo bem\?/);
   assert.match(message, /R\$\s29,90/);
   assert.doesNotMatch(message, /Pode fazer pelo Pix:/);
+  assert.match(
+    message,
+    /Me avisa por aqui que combinamos a melhor forma de pagamento\./
+  );
 });
 
 test("gera link wa.me com telefone valido", () => {
   const link = buildWhatsAppLink(
     "(11) 99888-7766",
-    "Oi! Pode me responder por aqui?"
+    "Oi!\nPode me responder por aqui?"
   );
 
   assert.equal(
     link,
-    "https://wa.me/5511998887766?text=Oi!%20Pode%20me%20responder%20por%20aqui%3F"
+    "https://wa.me/5511998887766?text=Oi!%0APode%20me%20responder%20por%20aqui%3F"
   );
 });
 

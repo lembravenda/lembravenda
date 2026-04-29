@@ -22,17 +22,12 @@ export function summarizeOrderItemsForMessage(
   items: Pick<OrderItem, "product_name_snapshot" | "quantity">[]
 ) {
   if (items.length === 0) {
-    return "seu pedido";
+    return "• Seu pedido";
   }
 
-  const [firstItem, ...otherItems] = items;
-  const firstLabel = `${firstItem.product_name_snapshot} x${firstItem.quantity}`;
-
-  if (otherItems.length === 0) {
-    return `seu pedido de ${firstLabel}`;
-  }
-
-  return `seu pedido com ${firstLabel} e mais ${otherItems.length} item(ns)`;
+  return items
+    .map((item) => `• ${item.product_name_snapshot} x${item.quantity}`)
+    .join("\n");
 }
 
 export function buildPaymentMessage({
@@ -45,17 +40,25 @@ export function buildPaymentMessage({
   const totalLabel = formatChargeTotalCents(totalCents);
   const safeCustomerName = normalizeWhitespace(customerName) || "cliente";
   const safePixKey = pixKey ? normalizeWhitespace(pixKey) : "";
+  const messageBlocks = [
+    `Oi, ${safeCustomerName}! Tudo bem?`,
+    "Passando para lembrar do pagamento do seu pedido:",
+    orderSummary,
+    `Total: ${totalLabel}`
+  ];
 
-  const paymentSnippet = safePixKey
-    ? `Pode fazer pelo Pix: ${safePixKey}. `
-    : "";
+  if (safePixKey) {
+    messageBlocks.push(
+      `Pode fazer pelo Pix:\n${safePixKey}`,
+      "Assim que fizer, me avisa por aqui que eu já separo para entrega 😊"
+    );
+  } else {
+    messageBlocks.push(
+      "Me avisa por aqui que combinamos a melhor forma de pagamento."
+    );
+  }
 
-  return (
-    `Oi, ${safeCustomerName}! Tudo bem? ` +
-    `Passando para lembrar do pagamento do ${orderSummary} no valor de ${totalLabel}. ` +
-    paymentSnippet +
-    "Assim que fizer, me avisa por aqui que eu já separo para entrega."
-  );
+  return messageBlocks.join("\n\n");
 }
 
 export function normalizeBrazilPhoneForWhatsApp(phone: string | null) {

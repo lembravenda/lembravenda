@@ -12,7 +12,7 @@ export default function OnboardingError({
       <section className="rounded-lg border border-red-200 bg-white p-5 shadow-soft">
         <p className="text-sm font-semibold text-red-700">Erro</p>
         <h1 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-          Não foi possível abrir o onboarding
+          Não foi possível abrir seu perfil
         </h1>
         <p className="mt-2 text-sm leading-6 text-stone-600">
           {error.message || "Tente novamente em instantes."}

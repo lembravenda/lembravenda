@@ -5,11 +5,11 @@ export default function ConfiguracoesLoading() {
   return (
     <AppShell
       title="Configurações"
-      description="Perfil, preferências e limites claros do MVP."
+      description="Ajuste informações da sua conta e preferências do LembraVenda."
     >
       <PlaceholderState
         title="Carregando configurações"
-        description="Estamos preparando os dados básicos desta área."
+        description="Estamos preparando esta área para você."
       />
     </AppShell>
   );

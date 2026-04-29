@@ -7,11 +7,11 @@ export default function ConfiguracoesError() {
   return (
     <AppShell
       title="Configurações"
-      description="Perfil, preferências e limites claros do MVP."
+      description="Ajuste informações da sua conta e preferências do LembraVenda."
     >
       <PlaceholderState
         title="Não foi possível abrir configurações"
-        description="Tente novamente em instantes para revisar os limites desta área."
+        description="Tente novamente em instantes para continuar ajustando sua conta."
       />
     </AppShell>
   );
