@@ -5,8 +5,9 @@
 1. Usuária cria conta ou entra.
 2. App verifica se o perfil está completo.
 3. Se incompleto, exibe formulário curto: nome, marca, telefone e chave Pix opcional.
-4. Ao salvar, envia para a tela "Hoje".
-5. Se pular campos opcionais, mantém aviso discreto em configurações.
+4. Ao salvar, envia para a tela "Hoje" com card de "Primeiros passos".
+5. O card orienta cliente, produto e pedido sem abrir wizard complexo.
+6. Se pular campos opcionais, mantém aviso discreto em configurações.
 
 ## Criar cliente
 
@@ -71,6 +72,7 @@
 
 1. Usuária abre o app.
 2. Tela "Hoje" carrega tarefas separadas por cobrança, entrega e pedidos recentes.
-3. Usuária toca em uma tarefa para agir.
-4. Ao concluir, tarefa desaparece ou muda de seção.
-5. Se não houver tarefas, app mostra estado vazio motivando criação de cliente, produto ou pedido.
+3. Se a conta ainda não tem base suficiente, a tela mostra checklist de primeiros passos com CTAs claros.
+4. Usuária toca em uma tarefa para agir.
+5. Ao concluir, tarefa desaparece ou muda de seção.
+6. Se não houver tarefas e a usuária já tiver criado a base inicial, app mostra estado vazio da rotina do dia.

@@ -99,6 +99,8 @@ Este backlog está em ordem recomendada de implementação. Cada etapa deve pres
 - Criar formulário de feedback.
 - Ajustar onboarding com base no piloto.
 - Medir intenção de pagamento.
+- Customizar o template `Confirm signup` do Supabase para português brasileiro e marca LembraVenda.
+- Configurar SMTP próprio com domínio antes de tráfego pago ou piloto externo ampliado.
 
 ## Fora do backlog do MVP
 

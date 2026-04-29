@@ -46,7 +46,7 @@ export async function saveOnboardingAction(
 
   if (isE2EAuthModeEnabled()) {
     await setTestProfile(payload);
-    redirect("/app/hoje");
+    redirect("/app/hoje?welcome=1#primeiros-passos");
   }
 
   const supabase = await createSupabaseServerClient();
@@ -65,5 +65,5 @@ export async function saveOnboardingAction(
     return { error: "Não foi possível salvar seu perfil agora." };
   }
 
-  redirect("/app/hoje");
+  redirect("/app/hoje?welcome=1#primeiros-passos");
 }

@@ -36,6 +36,12 @@ async function createAccountAndCompleteOnboarding(
     .fill(options?.primaryCategory ?? "Cosméticos");
   await page.getByRole("button", { name: "Salvar e continuar" }).click();
   await expect(page).toHaveURL(/\/app\/hoje$/);
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: "Vamos organizar sua primeira venda?"
+    })
+  ).toBeVisible();
 }
 
 async function createCustomerFromApp(
@@ -222,6 +228,12 @@ test("onboarding salva perfil", async ({ page }) => {
   await expect(page).toHaveURL(/\/app\/hoje$/);
   await expect(
     page.getByRole("heading", { exact: true, name: "Hoje" })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("heading", {
+      level: 2,
+      name: "Vamos organizar sua primeira venda?"
+    })
   ).toBeVisible();
 });
 
@@ -651,12 +663,13 @@ test("usuária não vê dados de outra usuária em Hoje", async ({ page }) => {
 
   await expect(page.getByText("Cliente Privada Hoje")).toHaveCount(0);
   await expect(
-    page.getByRole("heading", { level: 2, name: "Nada pendente por hoje" })
+    page.getByRole("heading", {
+      level: 2,
+      name: "Vamos organizar sua primeira venda?"
+    })
   ).toBeVisible();
   await expect(
-    page.getByText(
-      "Quando você criar pedidos, cobranças e entregas, elas vão aparecer aqui."
-    )
+    page.getByRole("link", { name: "Adicionar cliente" })
   ).toBeVisible();
 });
 

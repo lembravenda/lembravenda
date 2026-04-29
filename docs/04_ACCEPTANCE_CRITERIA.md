@@ -14,6 +14,7 @@
 - Categoria principal é obrigatória.
 - Chave Pix é opcional.
 - Dados salvos aparecem nas mensagens geradas.
+- Após concluir o onboarding, a usuária volta para a tela "Hoje" com orientação de primeiros passos.
 - Tela possui loading, erro e estado vazio/incompleto.
 
 ## Clientes
@@ -77,6 +78,8 @@
 - Exibe cobranças pendentes de pedidos não pagos.
 - Exibe entregas pendentes de pedidos não entregues.
 - Exibe pedidos recentes para acompanhamento rápido.
+- Quando a conta ainda está começando, mostra checklist de primeiros passos com cliente, produto e pedido.
+- Checklist marca passos concluídos quando já existem dados suficientes.
 - Permite ações rápidas sem sair da tela quando possível.
 - Exibe estado vazio quando não há tarefas.
 - Dados pertencem apenas ao usuário autenticado.
