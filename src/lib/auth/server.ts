@@ -76,7 +76,6 @@ export async function getAuthState(): Promise<AuthState> {
   }
 
   if (authError || !user) {
-
     return {
       isConfigured: true,
       isProfileComplete: false,
