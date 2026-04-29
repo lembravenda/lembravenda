@@ -1,0 +1,15 @@
+# Registro de riscos
+
+| Risco                                         | Probabilidade | Impacto | Mitigação                                                                                    | Sinal de alerta                                               |
+| --------------------------------------------- | ------------- | ------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Usuária não pagar                             | Alta          | Alto    | Validar preço cedo no piloto e testar oferta antes de automações caras.                      | Uso gratuito sem intenção declarada de pagar.                 |
+| Usuária achar WhatsApp suficiente             | Alta          | Alto    | Posicionar como agenda do que fazer hoje, não substituto do WhatsApp.                        | Baixo uso fora da primeira sessão.                            |
+| Produto virar CRM complexo                    | Média         | Alto    | Manter escopo do MVP e recusar funis, campos excessivos e automações prematuras.             | Backlog dominado por customizações.                           |
+| Concorrência copiar                           | Média         | Médio   | Aprender rápido com nicho, distribuição e experiência mobile simples.                        | Ferramentas similares mirando revendedoras.                   |
+| Problemas de LGPD                             | Média         | Alto    | Minimização de dados, política clara e exclusão sob solicitação.                             | Usuárias cadastrando dados sensíveis em observações.          |
+| Falhas de segurança                           | Média         | Alto    | RLS obrigatório, testes de acesso cruzado e gestão rigorosa de segredos.                     | Query sem `user_id` ou política permissiva.                   |
+| Criação parcial de pedido                     | Média         | Alto    | Hoje há cleanup compensatório; planejar função Postgres/RPC para criação atômica.            | Pedido salvo sem itens ou inconsistência entre total e itens. |
+| Baixa retenção                                | Alta          | Alto    | Focar na tela "Hoje", lembretes de recompra e valor recorrente semanal.                      | Usuárias criam dados uma vez e não retornam.                  |
+| Escopo financeiro crescer cedo demais         | Média         | Alto    | Manter fora do MVP checkout, split, gateway, conciliação e emissão fiscal.                   | Pedidos de link de pagamento começam a entrar no P0.          |
+| Ambiguidade entre WhatsApp manual e automação | Alta          | Médio   | Interface e documentação devem reforçar cópia manual e abertura por link, sem API.           | Usuárias esperam disparo automático ou confirmação de envio.  |
+| E2E crítico não rodado antes do piloto        | Média         | Alto    | Rodar `npm run test:e2e` em ambiente local ou CI com porta liberada antes do piloto externo. | Release segue só com validação estática e unitária.           |
