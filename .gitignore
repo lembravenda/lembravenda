@@ -20,3 +20,4 @@ pnpm-debug.log*
 .env.*.local
 !.env.example
 .git-new/
+*.docx
