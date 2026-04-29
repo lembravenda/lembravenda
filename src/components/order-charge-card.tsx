@@ -52,9 +52,9 @@ export function OrderChargeCard({
       id="cobranca-pedido"
     >
       <div>
-        <p className="text-sm font-semibold text-primary">Cobrança manual</p>
+        <p className="text-sm font-semibold text-primary">Cobrar cliente</p>
         <h2 className="mt-2 text-lg font-semibold tracking-normal text-foreground">
-          Mensagem pronta para WhatsApp
+          Mensagem pronta para copiar
         </h2>
         <p className="mt-2 text-sm leading-6 text-stone-600">
           Copie a mensagem ou abra o WhatsApp com tudo pronto para enviar.

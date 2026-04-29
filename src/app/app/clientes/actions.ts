@@ -11,6 +11,7 @@ import {
 } from "@/lib/customers/server";
 import { listOrders } from "@/lib/orders/server";
 import { listProducts } from "@/lib/products/server";
+import { normalizePhone, validatePhone } from "@/lib/customers/phone";
 
 export type CustomerActionState = {
   error?: string;
@@ -42,11 +43,20 @@ function readCustomerDraft(formData: FormData) {
     return { error: "Informe uma data de aniversário válida." };
   }
 
+  const rawPhone = String(formData.get("phone") ?? "").trim();
+  const phoneValidation = validatePhone(rawPhone);
+
+  if (phoneValidation === "invalid") {
+    return { error: "Digite um telefone válido com DDD." };
+  }
+
+  const phone = phoneValidation === "valid" ? normalizePhone(rawPhone) : null;
+
   return {
     birthday,
     name,
     notes: optionalText(formData, "notes"),
-    phone: optionalText(formData, "phone"),
+    phone,
     tags: readTags(formData)
   };
 }

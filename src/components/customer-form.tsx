@@ -1,12 +1,13 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import type { CustomerActionState } from "@/app/app/clientes/actions";
 import {
   createCustomerAction,
   updateCustomerAction
 } from "@/app/app/clientes/actions";
 import { SubmitButton } from "@/components/submit-button";
+import { validatePhone } from "@/lib/customers/phone";
 import type { Customer } from "@/types/database";
 
 const initialState: CustomerActionState = {};
@@ -28,6 +29,19 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
   const buttonLabel =
     mode === "create" ? "Salvar cliente" : "Salvar alterações";
   const [state, formAction] = useActionState(action, initialState);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+
+  function handlePhoneBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const val = e.currentTarget.value;
+    if (!val) {
+      setPhoneError(null);
+      return;
+    }
+    const result = validatePhone(val);
+    setPhoneError(
+      result === "invalid" ? "Digite um telefone válido com DDD." : null
+    );
+  }
 
   return (
     <form
@@ -62,16 +76,26 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
         />
       </label>
 
-      <label className="block text-sm font-medium text-foreground">
-        Telefone
-        <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
-          defaultValue={customer?.phone ?? ""}
-          name="phone"
-          placeholder="(11) 99999-9999"
-          type="tel"
-        />
-      </label>
+      <div>
+        <label className="block text-sm font-medium text-foreground">
+          Telefone
+          <input
+            className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+            defaultValue={customer?.phone ?? ""}
+            inputMode="numeric"
+            name="phone"
+            onBlur={handlePhoneBlur}
+            placeholder="Ex.: 21987654321"
+            type="tel"
+          />
+        </label>
+        <span className="mt-2 block text-xs text-stone-500">
+          Use DDD + número. Ex.: 21987654321
+        </span>
+        {phoneError ? (
+          <span className="mt-1 block text-xs text-red-600">{phoneError}</span>
+        ) : null}
+      </div>
 
       <label className="block text-sm font-medium text-foreground">
         Aniversário
@@ -97,15 +121,21 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
         </span>
       </label>
 
-      <label className="block text-sm font-medium text-foreground">
-        Observações
-        <textarea
-          className="mt-2 min-h-28 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
-          defaultValue={customer?.notes ?? ""}
-          name="notes"
-          placeholder="Preferências, histórico manual ou contexto útil."
-        />
-      </label>
+      <div>
+        <label className="block text-sm font-medium text-foreground">
+          Observações da cliente
+          <textarea
+            className="mt-2 min-h-28 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+            defaultValue={customer?.notes ?? ""}
+            name="notes"
+            placeholder="Ex.: prefere receber à noite, costuma pagar por Pix, gosta de kits, endereço do trabalho."
+          />
+        </label>
+        <span className="mt-2 block text-xs text-stone-500">
+          Anote preferências, forma de pagamento, endereço, horário ideal para
+          contato ou qualquer detalhe importante para o atendimento.
+        </span>
+      </div>
 
       {state.error ? (
         <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
