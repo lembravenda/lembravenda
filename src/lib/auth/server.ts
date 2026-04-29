@@ -70,11 +70,13 @@ export async function getAuthState(): Promise<AuthState> {
     error: authError
   } = await supabase.auth.getUser();
 
-  if (authError) {
+  // "Auth session missing!" is normal for unauthenticated users — not an actual error
+  if (authError && authError.message !== "Auth session missing!") {
     throw new Error(authError.message);
   }
 
-  if (!user) {
+  if (authError || !user) {
+
     return {
       isConfigured: true,
       isProfileComplete: false,
