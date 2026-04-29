@@ -1,7 +1,0 @@
-0000000000000000000000000000000000000000 f69d14bdc8cc06d5ac948eee7ae572c897216dbc Wagner Soares <wagnersoares@MacBook-Air-de-Wagner.local> 1777475230 -0300	commit (initial): chore: bootstrap MVP
-f69d14bdc8cc06d5ac948eee7ae572c897216dbc 93cbd86d45dee1354bea8f176d3929fa862e85a4 Wagner <lembravenda@gmail.com> 1777484421 -0300	commit: fix: handle Auth session missing as normal unauthenticated state
-93cbd86d45dee1354bea8f176d3929fa862e85a4 4e60a61a504f2f03378c03e2b20c581ea92b336d Wagner <lembravenda@gmail.com> 1777485068 +0000	commit: style: fix prettier formatting in server.ts
-4e60a61a504f2f03378c03e2b20c581ea92b336d 2ee64fd3de578cfe82ef94c9d3487f7b45b83dd4 Wagner <lembravenda@gmail.com> 1777486942 -0300	commit: feat: improve first user journey
-2ee64fd3de578cfe82ef94c9d3487f7b45b83dd4 3eff037f344368e3d8d7e9047c3433da2952745c Wagner <lembravenda@gmail.com> 1777489520 -0300	commit: feat: polish onboarding and UX writing
-3eff037f344368e3d8d7e9047c3433da2952745c 2af1f2d0d120ba38d05d350d4c55675a16547d2c Wagner <lembravenda@gmail.com> 1777490455 -0300	commit: fix: remove technical copy and polish mobile layout
-2af1f2d0d120ba38d05d350d4c55675a16547d2c ccc5fd7554c68fdcfdd5a746f123ab75edda9bfb Wagner Soares <wsmagalhaes@gmail.com> 1777493442 +0000	commit: fix: polish UX and form validation
