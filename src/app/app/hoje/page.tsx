@@ -174,8 +174,8 @@ export default async function HojePage({ searchParams }: HojePageProps) {
 
         {shouldShowFirstSteps ? (
           <AppCard className="p-6" id="primeiros-passos">
-            <p className="lv-section-label">Primeiros passos</p>
-            <h2 className="mt-2.5 text-[1.1rem] font-semibold tracking-[-0.015em] text-foreground">
+            <p className="lv-eyebrow">Primeiros passos</p>
+            <h2 className="mt-2.5 text-[1.1rem] font-bold tracking-[-0.025em] text-foreground">
               Vamos organizar sua primeira venda?
             </h2>
             <p className="mt-2 text-sm leading-6 text-text-secondary">
@@ -236,7 +236,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <StatusBadge tone="warning">Pagamento pendente</StatusBadge>
-                    <h3 className="mt-2 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
+                    <h3 className="mt-2 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
                     <p className="mt-1 text-sm text-text-secondary">
@@ -269,7 +269,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                     <StatusBadge tone="success">
                       {getDeliveryStatusLabel(order.delivery_status)}
                     </StatusBadge>
-                    <h3 className="mt-2 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
+                    <h3 className="mt-2 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
                   </div>
@@ -296,7 +296,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
-                <h3 className="mt-2.5 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
+                <h3 className="mt-2.5 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
                   Volte a falar com as clientes no momento certo.
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-text-secondary">
@@ -325,7 +325,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
               <AppCard className="p-4" key={order.id}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
+                    <h3 className="text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
                     <p className="mt-1 text-sm text-text-secondary">

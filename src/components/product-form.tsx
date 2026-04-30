@@ -63,17 +63,17 @@ export function ProductForm({ mode, product }: ProductFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
+      className="lv-card space-y-5 p-6"
       id={mode === "create" ? "novo-produto" : undefined}
     >
       <div>
-        <p className="lv-section-label">
+        <p className="lv-eyebrow">
           {mode === "create" ? "Novo produto" : "Editar produto"}
         </p>
-        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
           {mode === "create" ? "Novo produto" : "Editar produto"}
         </h2>
-        <p className="mt-2 text-sm leading-7 text-text-secondary">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           {mode === "create"
             ? "Cadastre os produtos principais para montar pedidos depois."
             : "Atualize preço, categoria, recompra e status sem mexer no histórico."}
@@ -119,7 +119,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         {parsedPrice &&
         "priceCents" in parsedPrice &&
         typeof parsedPrice.priceCents === "number" ? (
-          <span className="mt-2 block text-xs font-medium text-emerald-700">
+          <span className="mt-2 block text-xs font-medium text-success">
             Será salvo como {formatPriceCents(parsedPrice.priceCents)}.
           </span>
         ) : null}
@@ -206,7 +206,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         </div>
       </label>
 
-      <label className="flex items-center gap-3 rounded-2xl border border-border bg-muted px-4 py-4 text-sm font-medium text-foreground">
+      <label className="flex items-center gap-3 rounded-[10px] border border-border bg-muted px-4 py-4 text-sm font-medium text-foreground">
         <input
           className="h-4 w-4"
           defaultChecked={product?.is_active ?? true}
@@ -217,7 +217,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       </label>
 
       {state.error ? (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="rounded-[10px] border border-danger/30 bg-[#FEF2F2] px-4 py-3 text-sm text-danger">
           {state.error}
         </p>
       ) : null}

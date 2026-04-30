@@ -94,8 +94,8 @@ export default async function PedidoDetalhePage({
       <section className="space-y-4">
         {parsedSearchParams.created === "1" ? (
           <AppCard className="border-emerald-200 p-6" id="pedido-criado">
-            <p className="lv-section-label">Pedido criado</p>
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+            <p className="lv-eyebrow">Pedido criado</p>
+            <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora você pode cobrar a cliente ou acompanhar o pagamento.
             </h2>
             <div className="mt-5 grid gap-3">
@@ -184,7 +184,7 @@ export default async function PedidoDetalhePage({
 
         <AppCard className="p-5">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
+            <h2 className="text-lg font-bold tracking-[-0.02em] text-foreground">
               Itens do pedido
             </h2>
             <p className="text-lg font-semibold text-foreground">

@@ -66,7 +66,7 @@ export default async function ProdutosPage({
             <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora crie seu primeiro pedido.
             </h2>
-            <p className="mt-2 text-sm leading-7 text-text-secondary">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
               Você já tem cliente e produto. Falta só registrar a venda.
             </p>
             <div className="mt-5 grid gap-3">
