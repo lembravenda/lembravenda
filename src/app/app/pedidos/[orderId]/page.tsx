@@ -7,6 +7,7 @@ import {
 } from "@/app/app/pedidos/actions";
 import { OrderChargeCard } from "@/components/order-charge-card";
 import { OrderStatusActionForm } from "@/components/order-status-action-form";
+import { AppCard, StatusBadge, buttonStyles } from "@/components/ui";
 import { getAuthState } from "@/lib/auth/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
 import { getOrderDetail } from "@/lib/orders/server";
@@ -87,45 +88,30 @@ export default async function PedidoDetalhePage({
     >
       <section className="space-y-4">
         {parsedSearchParams.created === "1" ? (
-          <section
-            className="rounded-lg border border-emerald-200 bg-white p-5 shadow-soft"
-            id="pedido-criado"
-          >
-            <p className="text-sm font-semibold text-primary">Pedido criado</p>
+          <AppCard className="border-emerald-200 p-6" id="pedido-criado">
+            <p className="lv-section-label">Pedido criado</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
               Agora você pode cobrar a cliente ou acompanhar o pagamento.
             </h2>
             <div className="mt-5 grid gap-3">
-              <Link
-                className="min-h-12 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
-                href="#cobranca-pedido"
-              >
+              <Link className={buttonStyles("primary")} href="#cobranca-pedido">
                 Cobrar cliente
               </Link>
-              <Link
-                className="min-h-12 rounded-md border border-border px-4 py-3 text-center text-sm font-semibold text-foreground"
-                href="#itens-pedido"
-              >
+              <Link className={buttonStyles("secondary")} href="#itens-pedido">
                 Ver pedido
               </Link>
             </div>
-          </section>
+          </AppCard>
         ) : null}
 
-        <Link
-          className="inline-flex rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
-          href="/app/pedidos"
-        >
+        <Link className={buttonStyles("secondary", false)} href="/app/pedidos">
           Voltar para pedidos
         </Link>
 
-        <section
-          className="rounded-lg border border-border bg-white p-5 shadow-soft"
-          id="itens-pedido"
-        >
+        <AppCard className="p-5" id="itens-pedido">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-primary">Cliente</p>
+              <p className="lv-section-label">Cliente</p>
               <h2 className="mt-2 text-xl font-semibold tracking-normal text-foreground">
                 {detail.customer?.name ?? "Cliente não encontrada"}
               </h2>
@@ -135,19 +121,29 @@ export default async function PedidoDetalhePage({
             </p>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-stone-700">
-            <div className="rounded-md bg-muted px-3 py-3">
-              <p className="font-medium text-foreground">Pagamento</p>
-              <p className="mt-1">
-                {getPaymentStatusLabel(detail.order.payment_status)}
-              </p>
-            </div>
-            <div className="rounded-md bg-muted px-3 py-3">
-              <p className="font-medium text-foreground">Entrega</p>
-              <p className="mt-1">
-                {getDeliveryStatusLabel(detail.order.delivery_status)}
-              </p>
-            </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <StatusBadge
+              tone={
+                detail.order.payment_status === "paid"
+                  ? "success"
+                  : detail.order.payment_status === "canceled"
+                    ? "danger"
+                    : "accent"
+              }
+            >
+              Pagamento: {getPaymentStatusLabel(detail.order.payment_status)}
+            </StatusBadge>
+            <StatusBadge
+              tone={
+                detail.order.delivery_status === "delivered"
+                  ? "success"
+                  : detail.order.delivery_status === "canceled"
+                    ? "danger"
+                    : "primary"
+              }
+            >
+              Entrega: {getDeliveryStatusLabel(detail.order.delivery_status)}
+            </StatusBadge>
           </div>
 
           <div className="mt-4 grid gap-3">
@@ -173,7 +169,7 @@ export default async function PedidoDetalhePage({
               />
             ) : null}
           </div>
-        </section>
+        </AppCard>
 
         {detail.order.payment_status === "pending" ? (
           <OrderChargeCard
@@ -185,12 +181,12 @@ export default async function PedidoDetalhePage({
           />
         ) : null}
 
-        <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
+        <AppCard className="p-5">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-lg font-semibold tracking-normal text-foreground">
               Itens do pedido
             </h2>
-            <p className="text-base font-semibold text-foreground">
+            <p className="text-lg font-semibold text-foreground">
               {formatOrderTotalCents(detail.order.total_cents)}
             </p>
           </div>
@@ -198,7 +194,7 @@ export default async function PedidoDetalhePage({
           <div className="mt-4 space-y-3">
             {detail.items.map((item) => (
               <article
-                className="rounded-md border border-border bg-background p-4"
+                className="rounded-2xl border border-border bg-muted p-4"
                 key={item.id}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -218,7 +214,7 @@ export default async function PedidoDetalhePage({
               </article>
             ))}
           </div>
-        </section>
+        </AppCard>
       </section>
     </AppShell>
   );

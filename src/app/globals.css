@@ -4,16 +4,47 @@
 
 :root {
   color-scheme: light;
+  --lv-bg: #f5f0e8;
+  --lv-surface: #ffffff;
+  --lv-surface-muted: #f8f3ec;
+  --lv-primary: #2e7d57;
+  --lv-primary-dark: #1a5c40;
+  --lv-primary-light: #eaf4ef;
+  --lv-accent: #f5a623;
+  --lv-accent-light: #fff9e6;
+  --lv-text: #111827;
+  --lv-text-secondary: #6b7280;
+  --lv-border: #e5e7eb;
+  --lv-success: #16a34a;
+  --lv-danger: #dc2626;
+  --lv-radius-card: 1.25rem;
+  --lv-radius-button: 0.95rem;
+  --lv-shadow-card: 0 16px 40px rgba(17, 24, 39, 0.08);
+  --lv-shadow-lift: 0 24px 64px rgba(26, 92, 64, 0.14);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
-  background: #fbfaf8;
-  color: #201f1d;
+  background:
+    radial-gradient(circle at top, rgba(245, 166, 35, 0.08), transparent 26%),
+    var(--lv-bg);
+  color: var(--lv-text);
+  font-family:
+    Inter,
+    Geist,
+    "Plus Jakarta Sans",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 a {
@@ -26,4 +57,77 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(46, 125, 87, 0.16);
+}
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid rgba(46, 125, 87, 0.65);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .lv-card {
+    @apply rounded-2xl border border-border bg-surface shadow-card;
+  }
+
+  .lv-card-soft {
+    @apply rounded-2xl border border-border/80 bg-surface/80 shadow-soft backdrop-blur-sm;
+  }
+
+  .lv-section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-primary;
+  }
+
+  .lv-title {
+    @apply text-2xl font-semibold tracking-normal text-foreground;
+  }
+
+  .lv-body {
+    @apply text-sm leading-6 text-text-secondary;
+  }
+
+  .lv-button {
+    @apply inline-flex min-h-11 items-center justify-center rounded-[var(--lv-radius-button)] px-4 py-3 text-sm font-semibold transition duration-150 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+
+  .lv-button-primary {
+    @apply lv-button bg-primary text-primary-foreground shadow-soft hover:bg-primary-dark;
+  }
+
+  .lv-button-secondary {
+    @apply lv-button border border-border bg-surface text-foreground hover:bg-primary-light;
+  }
+
+  .lv-button-ghost {
+    @apply lv-button bg-primary-light text-primary hover:bg-primary-light/80;
+  }
+
+  .lv-input {
+    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-stone-400 focus:border-primary;
+  }
+
+  .lv-textarea {
+    @apply mt-2 min-h-28 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-stone-400 focus:border-primary;
+  }
+
+  .lv-select {
+    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none focus:border-primary;
+  }
+
+  .lv-chip {
+    @apply inline-flex min-h-10 items-center rounded-full border border-border bg-surface px-3 py-2 text-sm font-medium text-foreground transition hover:border-primary hover:bg-primary-light;
+  }
 }

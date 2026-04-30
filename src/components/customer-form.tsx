@@ -46,14 +46,17 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-4 rounded-lg border border-border bg-white p-5 shadow-soft"
+      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
       id={mode === "create" ? "nova-cliente" : undefined}
     >
       <div>
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+        <p className="lv-section-label">
+          {mode === "create" ? "Nova cliente" : "Editar cliente"}
+        </p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           {mode === "create" ? "Nova cliente" : "Editar cliente"}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           {mode === "create"
             ? "Salve os dados essenciais para organizar contatos e pedidos depois."
             : "Atualize as informações da cliente sem perder o histórico."}
@@ -67,7 +70,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Nome
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={customer?.name ?? ""}
           name="name"
           placeholder="Nome da cliente"
@@ -80,7 +83,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
         <label className="block text-sm font-medium text-foreground">
           Telefone
           <input
-            className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+            className="lv-input"
             defaultValue={customer?.phone ?? ""}
             inputMode="numeric"
             name="phone"
@@ -89,7 +92,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
             type="tel"
           />
         </label>
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Use DDD + número. Ex.: 21987654321
         </span>
         {phoneError ? (
@@ -100,7 +103,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Aniversário
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={customer?.birthday ?? ""}
           name="birthday"
           type="date"
@@ -110,13 +113,13 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Grupos da cliente
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={customer ? formatTags(customer.tags) : ""}
           name="tags"
           placeholder="VIP, compra todo mês, atacado"
           type="text"
         />
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Ex: VIP, compra todo mês, atacado. Separe por vírgula.
         </span>
       </label>
@@ -125,20 +128,20 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
         <label className="block text-sm font-medium text-foreground">
           Observações da cliente
           <textarea
-            className="mt-2 min-h-28 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+            className="lv-textarea"
             defaultValue={customer?.notes ?? ""}
             name="notes"
             placeholder="Ex.: prefere receber à noite, costuma pagar por Pix, gosta de kits, endereço do trabalho."
           />
         </label>
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Anote preferências, forma de pagamento, endereço, horário ideal para
           contato ou qualquer detalhe importante para o atendimento.
         </span>
       </div>
 
       {state.error ? (
-        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {state.error}
         </p>
       ) : null}

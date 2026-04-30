@@ -29,23 +29,24 @@ export function AuthForm({
   return (
     <div className="space-y-5">
       {message ? (
-        <section className="rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 shadow-soft">
+        <section className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-800 shadow-soft">
           {message}
         </section>
       ) : null}
 
-      <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+      <section className="rounded-2xl border border-border bg-white p-6 shadow-card">
+        <p className="lv-section-label">Acessar conta</p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Entrar
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           Use seu e-mail e sua senha para continuar.
         </p>
         <form action={loginFormAction} className="mt-5 space-y-4">
           <label className="block text-sm font-medium text-foreground">
             E-mail
             <input
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+              className="lv-input"
               name="email"
               placeholder="voce@exemplo.com"
               required
@@ -55,7 +56,7 @@ export function AuthForm({
           <label className="block text-sm font-medium text-foreground">
             Senha
             <input
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+              className="lv-input"
               minLength={6}
               name="password"
               placeholder="Sua senha"
@@ -64,13 +65,12 @@ export function AuthForm({
             />
           </label>
           {!isConfigured ? (
-            <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-800">
-              Configure as variáveis públicas do ambiente para usar autenticação
-              fora do modo de teste.
+            <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+              O acesso por e-mail ainda não está disponível neste ambiente.
             </p>
           ) : null}
           {loginState.error ? (
-            <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+            <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
               {loginState.error}
             </p>
           ) : null}
@@ -78,18 +78,19 @@ export function AuthForm({
         </form>
       </section>
 
-      <section className="rounded-lg border border-border bg-white p-5 shadow-soft">
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+      <section className="rounded-2xl border border-border bg-white p-6 shadow-card">
+        <p className="lv-section-label">Primeiro acesso</p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Criar conta
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           Crie sua conta para começar a organizar suas vendas.
         </p>
         <form action={signupFormAction} className="mt-5 space-y-4">
           <label className="block text-sm font-medium text-foreground">
             E-mail
             <input
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+              className="lv-input"
               name="email"
               placeholder="voce@exemplo.com"
               required
@@ -99,7 +100,7 @@ export function AuthForm({
           <label className="block text-sm font-medium text-foreground">
             Senha
             <input
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+              className="lv-input"
               minLength={6}
               name="password"
               placeholder="Crie uma senha"
@@ -108,16 +109,16 @@ export function AuthForm({
             />
           </label>
           {signupState.error ? (
-            <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+            <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
               {signupState.error}
             </p>
           ) : null}
           {signupState.success ? (
-            <p className="rounded-md border border-emerald-200 bg-emerald-50 px-3 py-3 text-sm text-emerald-700">
+            <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
               {signupState.success}
             </p>
           ) : null}
-          <SubmitButton pendingLabel="Criando conta..." variant="secondary">
+          <SubmitButton pendingLabel="Criando conta...">
             Criar conta
           </SubmitButton>
         </form>

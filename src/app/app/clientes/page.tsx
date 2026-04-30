@@ -2,6 +2,13 @@ import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { CustomerDeleteForm } from "@/components/customer-delete-form";
 import { CustomerForm } from "@/components/customer-form";
+import {
+  AppCard,
+  EmptyState,
+  SectionHeader,
+  StatusBadge,
+  buttonStyles
+} from "@/components/ui";
 import { deleteCustomerAction } from "@/app/app/clientes/actions";
 import { getAuthState } from "@/lib/auth/server";
 import { getCustomerById, listCustomers } from "@/lib/customers/server";
@@ -56,59 +63,56 @@ export default async function ClientesPage({
     >
       <section className="space-y-4">
         {createdState === "customer-product" ? (
-          <section className="rounded-lg border border-emerald-200 bg-white p-5 shadow-soft">
-            <p className="text-sm font-semibold text-primary">Cliente salva</p>
+          <AppCard className="border-emerald-200 bg-surface p-6">
+            <p className="lv-section-label">Cliente salva</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
               Agora cadastre seu primeiro produto.
             </h2>
-            <p className="mt-2 text-sm leading-6 text-stone-600">
+            <p className="mt-2 text-sm leading-7 text-text-secondary">
               Com cliente e produto, você já consegue criar sua primeira venda.
             </p>
             <div className="mt-5 grid gap-3">
               <Link
-                className="min-h-12 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
+                className={buttonStyles("primary")}
                 href="/app/produtos?mode=new#novo-produto"
               >
                 Cadastrar produto
               </Link>
               <Link
-                className="min-h-12 rounded-md border border-border px-4 py-3 text-center text-sm font-semibold text-foreground"
+                className={buttonStyles("secondary")}
                 href="/app/clientes?mode=new#nova-cliente"
               >
                 Adicionar outra cliente
               </Link>
             </div>
-          </section>
+          </AppCard>
         ) : null}
 
         {createdState === "customer-order" ? (
-          <section className="rounded-lg border border-emerald-200 bg-white p-5 shadow-soft">
-            <p className="text-sm font-semibold text-primary">Cliente salva</p>
+          <AppCard className="border-emerald-200 bg-surface p-6">
+            <p className="lv-section-label">Cliente salva</p>
             <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
               Agora você pode criar um pedido.
             </h2>
-            <p className="mt-2 text-sm leading-6 text-stone-600">
+            <p className="mt-2 text-sm leading-7 text-text-secondary">
               Sua base já está pronta para registrar a primeira venda.
             </p>
             <div className="mt-5 grid gap-3">
               <Link
-                className="min-h-12 rounded-md bg-primary px-4 py-3 text-center text-sm font-semibold text-primary-foreground"
+                className={buttonStyles("primary")}
                 href="/app/pedidos?mode=new#novo-pedido"
               >
                 Criar pedido
               </Link>
             </div>
-          </section>
+          </AppCard>
         ) : null}
 
-        <form
-          action="/app/clientes"
-          className="rounded-lg border border-border bg-white p-4 shadow-soft"
-        >
+        <form action="/app/clientes" className="lv-card p-5">
           <label className="block text-sm font-medium text-foreground">
             Buscar cliente
             <input
-              className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+              className="lv-input"
               defaultValue={query}
               name="q"
               placeholder="Busque por nome ou telefone"
@@ -116,22 +120,19 @@ export default async function ClientesPage({
             />
           </label>
           <div className="mt-3 flex gap-3">
-            <button
-              className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
-              type="submit"
-            >
+            <button className={buttonStyles("primary", false)} type="submit">
               Buscar
             </button>
             {hasSearch ? (
               <Link
-                className="rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
+                className={buttonStyles("secondary", false)}
                 href="/app/clientes"
               >
                 Limpar busca
               </Link>
             ) : (
               <Link
-                className="rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
+                className={buttonStyles("secondary", false)}
                 href="/app/clientes?mode=new"
               >
                 Adicionar cliente
@@ -147,33 +148,38 @@ export default async function ClientesPage({
         ) : null}
 
         {customers.length === 0 ? (
-          <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-              {hasSearch
-                ? "Nenhuma cliente encontrada"
-                : "Cadastre sua primeira cliente"}
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-stone-600">
-              {hasSearch
+          <EmptyState
+            action={
+              !hasSearch ? (
+                <Link
+                  className={buttonStyles("primary")}
+                  href="/app/clientes?mode=new#nova-cliente"
+                >
+                  Adicionar primeira cliente
+                </Link>
+              ) : undefined
+            }
+            description={
+              hasSearch
                 ? "Tente outro nome ou telefone para encontrar a cliente."
-                : "Assim você começa a organizar contatos, pedidos e cobranças."}
-            </p>
-            {!hasSearch ? (
-              <Link
-                className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
-                href="/app/clientes?mode=new#nova-cliente"
-              >
-                Adicionar primeira cliente
-              </Link>
-            ) : null}
-          </section>
+                : "Assim você começa a organizar contatos, pedidos e cobranças."
+            }
+            eyebrow={hasSearch ? "Busca" : "Primeiro passo"}
+            title={
+              hasSearch
+                ? "Nenhuma cliente encontrada"
+                : "Cadastre sua primeira cliente"
+            }
+          />
         ) : (
           <section className="space-y-3">
+            <SectionHeader
+              description="Sua base fica mais clara quando cada cliente tem telefone, grupos e observações."
+              eyebrow="Base organizada"
+              title="Clientes cadastradas"
+            />
             {customers.map((customer) => (
-              <article
-                className="rounded-lg border border-border bg-white p-4 shadow-soft"
-                key={customer.id}
-              >
+              <AppCard className="p-4" key={customer.id}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-base font-semibold text-foreground">
@@ -184,7 +190,7 @@ export default async function ClientesPage({
                     </p>
                   </div>
                   <Link
-                    className="rounded-md border border-border px-3 py-2 text-sm font-medium text-foreground"
+                    className={buttonStyles("secondary", false)}
                     href={`/app/clientes?edit=${customer.id}`}
                   >
                     Editar
@@ -203,15 +209,23 @@ export default async function ClientesPage({
                       Grupos da cliente
                     </dt>
                     <dd className="text-right">
-                      {customer.tags.length > 0
-                        ? customer.tags.join(", ")
-                        : "Sem grupos"}
+                      {customer.tags.length > 0 ? (
+                        <div className="flex flex-wrap justify-end gap-2">
+                          {customer.tags.map((tag) => (
+                            <StatusBadge key={tag} tone="muted">
+                              {tag}
+                            </StatusBadge>
+                          ))}
+                        </div>
+                      ) : (
+                        "Sem grupos"
+                      )}
                     </dd>
                   </div>
                 </dl>
 
                 {customer.notes ? (
-                  <p className="mt-4 rounded-md bg-muted px-3 py-3 text-sm leading-6 text-stone-700">
+                  <p className="mt-4 rounded-2xl bg-muted px-4 py-4 text-sm leading-6 text-stone-700">
                     {customer.notes}
                   </p>
                 ) : null}
@@ -223,7 +237,7 @@ export default async function ClientesPage({
                     customerName={customer.name}
                   />
                 </div>
-              </article>
+              </AppCard>
             ))}
           </section>
         )}

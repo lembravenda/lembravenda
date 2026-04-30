@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { OrderItem } from "@/types/database";
+import { AppCard, StatusBadge, buttonStyles } from "@/components/ui";
 import { buildPaymentMessage, buildWhatsAppLink } from "@/lib/orders/charge";
 
 type OrderChargeCardProps = {
@@ -47,16 +48,16 @@ export function OrderChargeCard({
   }
 
   return (
-    <section
-      className="rounded-lg border border-border bg-white p-5 shadow-soft"
-      id="cobranca-pedido"
-    >
+    <AppCard className="overflow-hidden p-6" id="cobranca-pedido">
       <div>
-        <p className="text-sm font-semibold text-primary">Cobrar cliente</p>
-        <h2 className="mt-2 text-lg font-semibold tracking-normal text-foreground">
+        <div className="flex items-center gap-3">
+          <p className="lv-section-label">Cobrar cliente</p>
+          <StatusBadge tone="accent">Mensagem pronta</StatusBadge>
+        </div>
+        <h2 className="mt-2 text-xl font-semibold tracking-normal text-foreground">
           Mensagem pronta para copiar
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           Copie a mensagem ou abra o WhatsApp com tudo pronto para enviar.
         </p>
       </div>
@@ -64,7 +65,7 @@ export function OrderChargeCard({
       <label className="mt-4 block text-sm font-medium text-foreground">
         Mensagem de cobrança
         <textarea
-          className="mt-2 min-h-32 w-full rounded-md border border-border bg-background px-3 py-3 text-sm leading-6 text-foreground outline-none"
+          className="lv-textarea min-h-40 bg-muted font-medium"
           readOnly
           value={paymentMessage}
         />
@@ -72,7 +73,7 @@ export function OrderChargeCard({
 
       <div className="mt-4 grid gap-3">
         <button
-          className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+          className={buttonStyles("primary")}
           onClick={handleCopyMessage}
           type="button"
         >
@@ -81,7 +82,7 @@ export function OrderChargeCard({
 
         {whatsappLink ? (
           <a
-            className="inline-flex items-center justify-center rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
+            className={buttonStyles("secondary")}
             href={whatsappLink}
             rel="noreferrer"
             target="_blank"
@@ -89,14 +90,14 @@ export function OrderChargeCard({
             Abrir no WhatsApp
           </a>
         ) : (
-          <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-800">
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-800">
             Cadastre um telefone válido da cliente para abrir essa cobrança no
             WhatsApp. Por enquanto, você ainda pode copiar a mensagem.
           </p>
         )}
 
         {!pixKey ? (
-          <p className="rounded-md border border-dashed border-border bg-muted px-3 py-3 text-sm text-stone-700">
+          <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
             Se você ainda não cadastrou uma chave Pix, a mensagem segue pronta
             para combinar outra forma de pagamento.
           </p>
@@ -114,6 +115,6 @@ export function OrderChargeCard({
           </p>
         ) : null}
       </div>
-    </section>
+    </AppCard>
   );
 }

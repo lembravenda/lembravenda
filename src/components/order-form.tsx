@@ -94,19 +94,20 @@ export function OrderForm({ customers, products }: OrderFormProps) {
   if (customers.length === 0 || activeProducts.length === 0) {
     return (
       <section
-        className="space-y-3 rounded-lg border border-border bg-white p-5 shadow-soft"
+        className="space-y-4 rounded-2xl border border-border bg-white p-6 shadow-card"
         id="novo-pedido"
       >
         <div>
-          <h2 className="text-lg font-semibold tracking-normal text-foreground">
+          <p className="lv-section-label">Novo pedido</p>
+          <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
             Novo pedido
           </h2>
-          <p className="mt-2 text-sm leading-6 text-stone-600">
+          <p className="mt-2 text-sm leading-7 text-text-secondary">
             Para criar um pedido, você precisa ter pelo menos uma cliente e um
             produto ativo cadastrados.
           </p>
         </div>
-        <div className="rounded-md border border-dashed border-border bg-muted px-4 py-4 text-sm text-stone-700">
+        <div className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
           {customers.length === 0
             ? "Cadastre uma cliente antes de registrar sua primeira venda."
             : "Cadastre um produto ativo para começar a montar pedidos."}
@@ -118,14 +119,15 @@ export function OrderForm({ customers, products }: OrderFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-4 rounded-lg border border-border bg-white p-5 shadow-soft"
+      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
       id="novo-pedido"
     >
       <div>
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+        <p className="lv-section-label">Novo pedido</p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Novo pedido
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           Escolha a cliente, adicione produtos ativos e confira o total antes de
           salvar.
         </p>
@@ -134,7 +136,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Cliente
         <select
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none"
+          className="lv-select"
           name="customer_id"
           onChange={(event) => setCustomerId(event.target.value)}
           value={customerId}
@@ -147,12 +149,12 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         </select>
       </label>
 
-      <section className="space-y-3 rounded-md border border-border bg-background p-4">
+      <section className="space-y-4 rounded-2xl border border-border bg-muted p-4">
         <div>
           <h3 className="text-sm font-semibold text-foreground">
             Produtos ativos
           </h3>
-          <p className="mt-1 text-sm leading-6 text-stone-600">
+          <p className="mt-1 text-sm leading-6 text-text-secondary">
             Busque por nome e toque para adicionar ao pedido.
           </p>
         </div>
@@ -160,7 +162,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         <label className="block text-sm font-medium text-foreground">
           Buscar produto
           <input
-            className="mt-2 w-full rounded-md border border-border bg-white px-3 py-3 outline-none placeholder:text-stone-400"
+            className="lv-input bg-surface"
             onChange={(event) => setProductSearch(event.target.value)}
             placeholder="Digite o nome do produto"
             type="search"
@@ -172,7 +174,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <button
-                className="flex w-full items-center justify-between rounded-md border border-border bg-white px-3 py-3 text-left"
+                className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface px-4 py-4 text-left shadow-soft"
                 key={product.id}
                 onClick={() => {
                   setSelectedItems((currentItems) => [
@@ -200,7 +202,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
               </button>
             ))
           ) : (
-            <p className="rounded-md border border-dashed border-border bg-white px-3 py-3 text-sm text-stone-600">
+            <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-4 text-sm text-text-secondary">
               Nenhum produto ativo encontrado para essa busca.
             </p>
           )}
@@ -218,13 +220,13 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         </div>
 
         {selectedItemsWithProduct.length === 0 ? (
-          <p className="rounded-md border border-dashed border-border bg-muted px-3 py-3 text-sm text-stone-700">
+          <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm text-foreground">
             Nenhum produto adicionado ainda.
           </p>
         ) : (
           selectedItemsWithProduct.map((item) => (
             <article
-              className="rounded-md border border-border bg-white p-4"
+              className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
               key={item.product.id}
             >
               <div className="flex items-start justify-between gap-3">
@@ -237,7 +239,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                   </p>
                 </div>
                 <button
-                  className="rounded-md border border-red-200 px-3 py-2 text-sm font-medium text-red-700"
+                  className="inline-flex min-h-11 items-center justify-center rounded-[0.95rem] border border-red-200 px-4 py-3 text-sm font-semibold text-red-700"
                   onClick={() => {
                     setSelectedItems((currentItems) =>
                       currentItems.filter(
@@ -256,7 +258,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                 <label className="block flex-1 text-sm font-medium text-foreground">
                   Quantidade
                   <input
-                    className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none"
+                    className="lv-input"
                     inputMode="numeric"
                     min={1}
                     onChange={(event) => {
@@ -300,17 +302,19 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         value={JSON.stringify(selectedItems)}
       />
 
-      <section className="rounded-md bg-muted px-4 py-4">
+      <section className="rounded-2xl bg-primary px-4 py-4 text-primary-foreground">
         <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-medium text-foreground">Total do pedido</p>
-          <p className="text-base font-semibold text-foreground">
+          <p className="text-sm font-medium text-primary-foreground">
+            Total do pedido
+          </p>
+          <p className="text-base font-semibold text-primary-foreground">
             {formatPriceCents(totalCents)}
           </p>
         </div>
       </section>
 
       {state.error ? (
-        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {state.error}
         </p>
       ) : null}

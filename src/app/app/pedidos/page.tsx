@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { OrderForm } from "@/components/order-form";
+import {
+  AppCard,
+  EmptyState,
+  SectionHeader,
+  StatusBadge,
+  buttonStyles
+} from "@/components/ui";
 import { getAuthState } from "@/lib/auth/server";
 import { listCustomers } from "@/lib/customers/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
@@ -75,49 +82,50 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
       description="Monte pedidos com cliente, itens, total e acompanhamento separado de pagamento e entrega."
     >
       <section className="space-y-4">
-        <div className="rounded-lg border border-border bg-white p-4 shadow-soft">
+        <AppCard className="p-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-sm font-medium text-foreground">Novo pedido</p>
-              <p className="mt-1 text-sm text-stone-600">
+              <p className="lv-section-label">Novo pedido</p>
+              <p className="mt-2 text-sm leading-6 text-text-secondary">
                 Produtos ativos aparecem como lista principal para pedido novo.
               </p>
             </div>
             <Link
-              className="rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
+              className={buttonStyles("secondary", false)}
               href="/app/pedidos?mode=new"
             >
               Criar pedido
             </Link>
           </div>
-        </div>
+        </AppCard>
 
         {isCreating ? (
           <OrderForm customers={customers} products={activeProducts} />
         ) : null}
 
         {orders.length === 0 ? (
-          <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-              Crie seu primeiro pedido
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-stone-600">
-              Um pedido junta cliente, produto, valor e status de pagamento.
-            </p>
-            <Link
-              className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
-              href="/app/pedidos?mode=new#novo-pedido"
-            >
-              Criar primeiro pedido
-            </Link>
-          </section>
+          <EmptyState
+            action={
+              <Link
+                className={buttonStyles("primary")}
+                href="/app/pedidos?mode=new#novo-pedido"
+              >
+                Criar primeiro pedido
+              </Link>
+            }
+            description="Um pedido junta cliente, produto, valor e status de pagamento."
+            eyebrow="Primeira venda"
+            title="Crie seu primeiro pedido"
+          />
         ) : (
           <section className="space-y-3">
+            <SectionHeader
+              description="Veja rapidamente o total e os status de cada pedido."
+              eyebrow="Pedidos"
+              title="Pedidos cadastrados"
+            />
             {orders.map((order) => (
-              <article
-                className="rounded-lg border border-border bg-white p-4 shadow-soft"
-                key={order.id}
-              >
+              <AppCard className="p-4" key={order.id}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-base font-semibold text-foreground">
@@ -129,31 +137,41 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                     </p>
                   </div>
                   <Link
-                    className="rounded-md border border-border px-3 py-2 text-sm font-medium text-foreground"
+                    className={buttonStyles("secondary", false)}
                     href={`/app/pedidos/${order.id}`}
                   >
                     Ver detalhes
                   </Link>
                 </div>
 
-                <div className="mt-4 grid grid-cols-2 gap-3 text-sm text-stone-700">
-                  <div className="rounded-md bg-muted px-3 py-3">
-                    <p className="font-medium text-foreground">Pagamento</p>
-                    <p className="mt-1">
-                      {getPaymentStatusLabel(order.payment_status)}
-                    </p>
-                  </div>
-                  <div className="rounded-md bg-muted px-3 py-3">
-                    <p className="font-medium text-foreground">Entrega</p>
-                    <p className="mt-1">
-                      {getDeliveryStatusLabel(order.delivery_status)}
-                    </p>
-                  </div>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <StatusBadge
+                    tone={
+                      order.payment_status === "paid"
+                        ? "success"
+                        : order.payment_status === "canceled"
+                          ? "danger"
+                          : "accent"
+                    }
+                  >
+                    Pagamento: {getPaymentStatusLabel(order.payment_status)}
+                  </StatusBadge>
+                  <StatusBadge
+                    tone={
+                      order.delivery_status === "delivered"
+                        ? "success"
+                        : order.delivery_status === "canceled"
+                          ? "danger"
+                          : "primary"
+                    }
+                  >
+                    Entrega: {getDeliveryStatusLabel(order.delivery_status)}
+                  </StatusBadge>
                 </div>
 
                 <div className="mt-4 flex items-center justify-between gap-4">
                   <p className="text-sm font-medium text-foreground">Total</p>
-                  <p className="text-base font-semibold text-foreground">
+                  <p className="text-lg font-semibold text-foreground">
                     {formatOrderTotalCents(order.total_cents)}
                   </p>
                 </div>
@@ -161,14 +179,14 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                 {order.payment_status === "pending" ? (
                   <div className="mt-4 flex justify-end">
                     <Link
-                      className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+                      className={buttonStyles("primary", false)}
                       href={`/app/pedidos/${order.id}#cobranca-pedido`}
                     >
                       Cobrar
                     </Link>
                   </div>
                 ) : null}
-              </article>
+              </AppCard>
             ))}
           </section>
         )}

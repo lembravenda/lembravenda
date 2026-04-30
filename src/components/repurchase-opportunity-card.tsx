@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
+import { AppCard, StatusBadge, buttonStyles } from "@/components/ui";
 import type { RepurchaseOpportunity } from "@/lib/repurchase/server";
 import { buildWhatsAppLink } from "@/lib/orders/charge";
 
@@ -10,7 +11,7 @@ function ContactedButton() {
 
   return (
     <button
-      className="rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground disabled:cursor-not-allowed disabled:opacity-70"
+      className={buttonStyles("secondary")}
       disabled={pending}
       type="submit"
     >
@@ -50,9 +51,13 @@ export function RepurchaseOpportunityCard({
   }
 
   return (
-    <article className="rounded-lg border border-border bg-white p-4 shadow-soft">
+    <AppCard className="p-5">
       <div className="flex items-start justify-between gap-4">
         <div>
+          <div className="flex items-center gap-2">
+            <p className="lv-section-label">Recompra</p>
+            <StatusBadge tone="accent">Hora de chamar</StatusBadge>
+          </div>
           <h3 className="text-base font-semibold text-foreground">
             {opportunity.customer_name}
           </h3>
@@ -85,7 +90,7 @@ export function RepurchaseOpportunityCard({
       <label className="mt-4 block text-sm font-medium text-foreground">
         Mensagem de recompra
         <textarea
-          className="mt-2 min-h-28 w-full rounded-md border border-border bg-background px-3 py-3 text-sm leading-6 text-foreground outline-none"
+          className="lv-textarea min-h-36 bg-muted"
           readOnly
           value={opportunity.message}
         />
@@ -93,7 +98,7 @@ export function RepurchaseOpportunityCard({
 
       <div className="mt-4 grid gap-3">
         <button
-          className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
+          className={buttonStyles("primary")}
           onClick={handleCopyMessage}
           type="button"
         >
@@ -102,7 +107,7 @@ export function RepurchaseOpportunityCard({
 
         {whatsappLink ? (
           <a
-            className="inline-flex items-center justify-center rounded-md border border-border px-4 py-3 text-sm font-semibold text-foreground"
+            className={buttonStyles("secondary")}
             href={whatsappLink}
             rel="noreferrer"
             target="_blank"
@@ -110,7 +115,7 @@ export function RepurchaseOpportunityCard({
             Abrir no WhatsApp
           </a>
         ) : (
-          <p className="rounded-md border border-amber-200 bg-amber-50 px-3 py-3 text-sm text-amber-800">
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-800">
             Cadastre um telefone válido da cliente para abrir a conversa no
             WhatsApp. Por enquanto, você ainda pode copiar a mensagem.
           </p>
@@ -149,6 +154,6 @@ export function RepurchaseOpportunityCard({
           </p>
         ) : null}
       </div>
-    </article>
+    </AppCard>
   );
 }

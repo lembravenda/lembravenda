@@ -20,19 +20,20 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
   return (
     <form
       action={formAction}
-      className="space-y-4 rounded-lg border border-border bg-white p-5 shadow-soft"
+      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
     >
       <div>
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+        <p className="lv-section-label">Seu perfil</p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Complete seu perfil
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           Vamos salvar apenas os dados essenciais para liberar sua área.
         </p>
       </div>
 
       {!profile ? (
-        <p className="rounded-md border border-dashed border-border bg-muted px-3 py-3 text-sm text-stone-700">
+        <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
           Preencha os campos abaixo para abrir sua área e começar a organizar
           suas vendas.
         </p>
@@ -41,7 +42,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-foreground">
         Nome da revendedora
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={profile?.full_name ?? ""}
           name="full_name"
           placeholder="Seu nome"
@@ -53,7 +54,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-foreground">
         Nome do negócio
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={profile?.brand_name ?? ""}
           name="brand_name"
           placeholder="Ex.: Bella Cosméticos"
@@ -64,7 +65,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-foreground">
         Telefone
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={profile?.phone ?? ""}
           name="phone"
           placeholder="(11) 99999-9999"
@@ -75,13 +76,13 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-foreground">
         Chave Pix
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={profile?.pix_key ?? ""}
           name="pix_key"
           placeholder="CPF, e-mail, telefone ou chave aleatória"
           type="text"
         />
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Opcional. O app apenas exibe essa chave nas mensagens.
         </span>
       </label>
@@ -89,7 +90,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-foreground">
         Categoria principal
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={profile?.primary_category ?? ""}
           name="primary_category"
           placeholder="Ex.: Cosméticos, semijoias, roupas"
@@ -99,7 +100,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </label>
 
       {state.error ? (
-        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {state.error}
         </p>
       ) : null}

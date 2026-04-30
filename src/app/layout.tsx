@@ -2,15 +2,16 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Agenda Inteligente para Revendedoras",
+  title: "LembraVenda",
   description:
-    "Agenda mobile-first para organizar clientes, produtos, pedidos, cobranças manuais e recompras."
+    "Agenda de vendas para quem vende pelo WhatsApp organizar clientes, pedidos, cobranças e recompras.",
+  manifest: "/manifest.webmanifest"
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f766e"
+  themeColor: "#2E7D57"
 };
 
 export default function RootLayout({

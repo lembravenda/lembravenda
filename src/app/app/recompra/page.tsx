@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { RepurchaseOpportunityCard } from "@/components/repurchase-opportunity-card";
+import { EmptyState, SectionHeader, buttonStyles } from "@/components/ui";
 import { getAuthState } from "@/lib/auth/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
 import { listRepurchaseOpportunities } from "@/lib/repurchase/server";
@@ -30,23 +31,26 @@ export default async function RecompraPage() {
       description="Acompanhe quando pode ser um bom momento para oferecer reposição de produtos comprados."
     >
       {opportunities.length === 0 ? (
-        <section className="rounded-lg border border-dashed border-border bg-white p-5 text-center shadow-soft">
-          <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
-            Nenhuma cliente para chamar de novo ainda
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-stone-600">
-            As oportunidades aparecem quando você cria pedidos com produtos que
-            têm lembrete de recompra.
-          </p>
-          <Link
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground"
-            href="/app/produtos?mode=new#novo-produto"
-          >
-            Ajustar produtos
-          </Link>
-        </section>
+        <EmptyState
+          action={
+            <Link
+              className={buttonStyles("primary")}
+              href="/app/produtos?mode=new#novo-produto"
+            >
+              Ajustar produtos
+            </Link>
+          }
+          description="As oportunidades aparecem quando você cria pedidos com produtos que têm lembrete de recompra."
+          eyebrow="Sem alertas agora"
+          title="Nenhuma cliente para chamar de novo ainda"
+        />
       ) : (
         <section className="space-y-4">
+          <SectionHeader
+            description="Use a data da última compra para retomar a conversa no momento certo."
+            eyebrow="Oportunidades"
+            title="Chamar de novo"
+          />
           {opportunities.map((opportunity) => (
             <RepurchaseOpportunityCard
               action={markRepurchaseContactedAction}

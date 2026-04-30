@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import { buttonStyles } from "@/components/ui";
 
 function StatusButtonInner({
   idleLabel,
@@ -13,7 +14,7 @@ function StatusButtonInner({
 
   return (
     <button
-      className="rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground disabled:cursor-not-allowed disabled:opacity-70"
+      className={buttonStyles("primary")}
       disabled={pending}
       type="submit"
     >

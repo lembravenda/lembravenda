@@ -63,14 +63,17 @@ export function ProductForm({ mode, product }: ProductFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-4 rounded-lg border border-border bg-white p-5 shadow-soft"
+      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
       id={mode === "create" ? "novo-produto" : undefined}
     >
       <div>
-        <h2 className="text-lg font-semibold tracking-normal text-foreground">
+        <p className="lv-section-label">
+          {mode === "create" ? "Novo produto" : "Editar produto"}
+        </p>
+        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           {mode === "create" ? "Novo produto" : "Editar produto"}
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-7 text-text-secondary">
           {mode === "create"
             ? "Cadastre os produtos principais para montar pedidos depois."
             : "Atualize preço, categoria, recompra e status sem mexer no histórico."}
@@ -84,7 +87,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Nome
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           defaultValue={product?.name ?? ""}
           name="name"
           placeholder="Nome do produto"
@@ -96,7 +99,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Preço
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           inputMode="decimal"
           name="price"
           onChange={(event) => setPriceValue(event.target.value)}
@@ -105,7 +108,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           type="text"
           value={priceValue}
         />
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Use vírgula ou ponto para centavos. Ex.: 49,90
         </span>
         {parsedPrice && "error" in parsedPrice ? (
@@ -116,12 +119,12 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         {parsedPrice &&
         "priceCents" in parsedPrice &&
         typeof parsedPrice.priceCents === "number" ? (
-          <span className="mt-2 block text-xs text-emerald-700">
+          <span className="mt-2 block text-xs font-medium text-emerald-700">
             Será salvo como {formatPriceCents(parsedPrice.priceCents)}.
           </span>
         ) : null}
         {product ? (
-          <span className="mt-2 block text-xs text-stone-500">
+          <span className="mt-2 block text-xs text-text-secondary">
             Valor atual: {formatPriceCents(product.price_cents)}
           </span>
         ) : null}
@@ -130,23 +133,23 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Categoria
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           name="category"
           onChange={(event) => setCategoryValue(event.target.value)}
           placeholder="Ex.: hidratante, kit presente, bolsa"
           type="text"
           value={categoryValue}
         />
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Use para organizar seus produtos. Você pode escrever do seu jeito.
         </span>
         <div className="mt-3 flex flex-wrap gap-2">
           {categorySuggestions.map((suggestion) => (
             <button
-              className={`rounded-full border px-3 py-2 text-sm ${
+              className={`lv-chip ${
                 categoryValue === suggestion
                   ? "border-primary bg-primary/10 text-primary"
-                  : "border-border bg-white text-foreground"
+                  : ""
               }`}
               key={suggestion}
               onClick={() => setCategoryValue(suggestion)}
@@ -161,7 +164,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       <label className="block text-sm font-medium text-foreground">
         Quando lembrar de vender de novo?
         <input
-          className="mt-2 w-full rounded-md border border-border bg-background px-3 py-3 outline-none placeholder:text-stone-400"
+          className="lv-input"
           inputMode="numeric"
           min={1}
           name="repurchase_interval_days"
@@ -170,17 +173,17 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           type="number"
           value={repurchaseValue}
         />
-        <span className="mt-2 block text-xs text-stone-500">
+        <span className="mt-2 block text-xs text-text-secondary">
           Ex: se o produto costuma acabar em 30 dias, o LembraVenda te lembra de
           chamar a cliente.
         </span>
         <div className="mt-3 flex flex-wrap gap-2">
           {repurchaseSuggestions.map((suggestion) => (
             <button
-              className={`rounded-full border px-3 py-2 text-sm ${
+              className={`lv-chip ${
                 repurchaseValue === String(suggestion)
                   ? "border-primary bg-primary/10 text-primary"
-                  : "border-border bg-white text-foreground"
+                  : ""
               }`}
               key={suggestion}
               onClick={() => setRepurchaseValue(String(suggestion))}
@@ -190,10 +193,10 @@ export function ProductForm({ mode, product }: ProductFormProps) {
             </button>
           ))}
           <button
-            className={`rounded-full border px-3 py-2 text-sm ${
+            className={`lv-chip ${
               repurchaseValue === ""
                 ? "border-primary bg-primary/10 text-primary"
-                : "border-border bg-white text-foreground"
+                : ""
             }`}
             onClick={() => setRepurchaseValue("")}
             type="button"
@@ -203,7 +206,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
         </div>
       </label>
 
-      <label className="flex items-center gap-3 rounded-md border border-border bg-background px-3 py-3 text-sm font-medium text-foreground">
+      <label className="flex items-center gap-3 rounded-2xl border border-border bg-muted px-4 py-4 text-sm font-medium text-foreground">
         <input
           className="h-4 w-4"
           defaultChecked={product?.is_active ?? true}
@@ -214,7 +217,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       </label>
 
       {state.error ? (
-        <p className="rounded-md border border-red-200 bg-red-50 px-3 py-3 text-sm text-red-700">
+        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {state.error}
         </p>
       ) : null}

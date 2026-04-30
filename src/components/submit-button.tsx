@@ -1,6 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
+import { buttonStyles } from "@/components/ui";
 
 type SubmitButtonProps = {
   children: React.ReactNode;
@@ -17,16 +18,9 @@ export function SubmitButton({
 }: SubmitButtonProps) {
   const { pending } = useFormStatus();
 
-  const baseStyles =
-    "w-full rounded-md px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-70";
-  const variantStyles =
-    variant === "primary"
-      ? "bg-primary text-primary-foreground"
-      : "border border-border bg-white text-foreground";
-
   return (
     <button
-      className={`${baseStyles} ${variantStyles}`}
+      className={buttonStyles(variant === "primary" ? "primary" : "secondary")}
       disabled={pending || disabled}
       type="submit"
     >

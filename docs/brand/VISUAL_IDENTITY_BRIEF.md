@@ -1,37 +1,57 @@
 # Visual Identity Brief
 
-## Objetivo visual
+## Território visual
 
-Dar ao LembraVenda aparência de ferramenta pronta, confiável e fácil de usar, com sensação premium sem parecer complexa.
+`Calor Profissional`
 
-## Público
+Uma identidade que mistura:
 
-Revendedoras e social sellers que usam o celular como principal ferramenta de trabalho e valorizam praticidade acima de “efeito visual”.
+- clareza de ferramenta de trabalho;
+- acolhimento discreto;
+- energia comercial sem agressividade;
+- visual limpo o bastante para uso recorrente no celular.
 
-## Referências desejadas
+## O que foi aplicado no app
 
-- apps mobile organizados e claros
-- ferramentas de rotina com boa legibilidade
-- marcas com calor humano e seriedade
+- fundo quente e claro, diferente do padrão azul/cinza;
+- cards brancos e arejados;
+- verde profissional como CTA principal;
+- âmbar usado apenas como ponto de atenção e destaque;
+- logo simples com agenda + ponto de atenção;
+- landing com mockup em CSS da tela `Hoje`;
+- app autenticado com header e navegação mais consistentes.
 
-## O que a identidade deve comunicar
+## O que a marca deve comunicar
 
-- confiança
-- clareza
-- praticidade
-- leveza
-- organização
+- “isso me ajuda a vender sem bagunça”;
+- “é simples, mas passa confiança”;
+- “parece um produto cuidado e pronto para usar”.
 
-## Entregáveis esperados
+## Público de referência
 
-- paleta principal e neutros
-- tipografia de interface
-- componentes base
-- direção visual da landing
-- polish visual do app
+- quem vende pelo WhatsApp e trabalha primeiro pelo celular;
+- pessoas que se organizam entre agenda, conversa e memória;
+- negócios pequenos com rotina comercial recorrente.
 
 ## Restrições
 
-- não parecer ERP
-- não parecer app infantil
-- não depender de ilustrações genéricas desconectadas do produto
+- não parecer banco digital;
+- não parecer catálogo de e-commerce;
+- não parecer app infantil;
+- não parecer ferramenta exclusivamente feminina;
+- não depender de ilustrações genéricas desconectadas do uso real.
+
+## Elementos centrais
+
+- logo tipográfico com símbolo simples;
+- fundo claro com calor visual;
+- superfícies brancas;
+- tipografia limpa e legível;
+- blocos que priorizam leitura rápida e toque confortável.
+
+## O que ficou para v2
+
+- direção visual completa para assets de campanha;
+- kit de social proof e depoimentos;
+- evolução da marca em anúncios e criativos de tráfego;
+- exploração de fotografia ou mockups mais ricos para landing futura.

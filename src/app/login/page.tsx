@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/auth-form";
+import { BrandLogo } from "@/components/brand-logo";
+import { AppCard } from "@/components/ui";
 import { getAuthState } from "@/lib/auth/server";
 
 type LoginPageProps = {
@@ -18,15 +20,19 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-md bg-background px-5 py-8">
-      <section className="mb-5 rounded-lg border border-border bg-white p-5 shadow-soft">
-        <p className="text-sm font-semibold text-primary">Acesso</p>
-        <h1 className="mt-3 text-2xl font-semibold tracking-normal text-foreground">
-          Entre na sua agenda
-        </h1>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
-          Entre ou crie sua conta para começar a organizar suas vendas.
-        </p>
+      <section className="mb-5">
+        <BrandLogo href="/" showTagline />
       </section>
+      <AppCard className="mb-5 overflow-hidden bg-surface p-6">
+        <p className="lv-section-label">Entrar ou criar conta</p>
+        <h1 className="mt-3 text-3xl font-semibold tracking-normal text-foreground">
+          Organize sua rotina de vendas em poucos minutos.
+        </h1>
+        <p className="mt-3 text-sm leading-7 text-text-secondary">
+          Entre para acompanhar pedidos, cobranças e recompra com mais clareza
+          no dia a dia.
+        </p>
+      </AppCard>
       <AuthForm
         isConfigured={authState.isConfigured}
         message={params.message}

@@ -7,7 +7,7 @@ function DeactivateButtonInner() {
 
   return (
     <button
-      className="rounded-md border border-amber-200 px-3 py-2 text-sm font-medium text-amber-800 transition disabled:cursor-not-allowed disabled:opacity-70"
+      className="inline-flex min-h-11 items-center justify-center rounded-[0.95rem] border border-amber-200 bg-accent-light px-4 py-3 text-sm font-semibold text-amber-800 transition disabled:cursor-not-allowed disabled:opacity-70"
       disabled={pending}
       type="submit"
     >
