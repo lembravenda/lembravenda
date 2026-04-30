@@ -132,9 +132,12 @@ export function AppShell({ title, action, children }: AppShellProps) {
       </main>
       <nav
         aria-label="Navegação principal"
-        className="fixed inset-x-0 bottom-0 border-t border-border bg-surface/98 backdrop-blur"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-surface/95 backdrop-blur-md"
       >
-        <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-stretch px-1 pb-[env(safe-area-inset-bottom)]">
+        <div
+          className="mx-auto grid max-w-md grid-cols-5 items-stretch px-0"
+          style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        >
           {navigationItems.map((item) => {
             const isActive =
               item.href === "/app/hoje"
@@ -144,22 +147,39 @@ export function AppShell({ title, action, children }: AppShellProps) {
 
             return (
               <Link
-                className={`flex min-h-16 flex-col items-center justify-center gap-1 px-1 text-center transition ${
+                className={`group relative flex min-h-[3.75rem] flex-col items-center justify-center gap-1 px-1 transition-colors ${
                   isActive
                     ? "text-primary"
-                    : "text-text-tertiary hover:text-primary"
+                    : "text-text-tertiary hover:text-text-secondary"
                 }`}
                 href={item.href}
                 key={item.href}
               >
+                {/* Active top-line indicator */}
                 <span
-                  className={`flex h-7 w-7 items-center justify-center rounded-full ${
-                    isActive ? "bg-primary-light" : ""
+                  aria-hidden="true"
+                  className={`absolute inset-x-3 top-0 h-[2px] rounded-b-full transition-all ${
+                    isActive ? "bg-primary" : "bg-transparent"
+                  }`}
+                />
+
+                {/* Icon container */}
+                <span
+                  className={`flex h-8 w-8 items-center justify-center rounded-[0.75rem] transition-all ${
+                    isActive
+                      ? "bg-primary-light text-primary"
+                      : "text-text-tertiary group-hover:text-text-secondary"
                   }`}
                 >
                   {item.icon}
                 </span>
-                <span className="text-[10px] font-semibold leading-none">
+
+                {/* Label */}
+                <span
+                  className={`text-[9.5px] font-semibold leading-none tracking-wide ${
+                    isActive ? "text-primary" : "text-text-tertiary"
+                  }`}
+                >
                   {item.label}
                 </span>
               </Link>

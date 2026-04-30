@@ -108,25 +108,77 @@ export default async function HojePage({ searchParams }: HojePageProps) {
       description="Comece pelo que pede ação agora: cobrar, entregar e acompanhar os pedidos mais recentes."
     >
       <section className="space-y-5">
-        <AppCard className="overflow-hidden bg-primary p-6 text-primary-foreground">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground/80">
+        {/* Hero card — gradiente com profundidade */}
+        <div
+          className="overflow-hidden rounded-2xl p-6 text-primary-foreground"
+          style={{
+            background:
+              "linear-gradient(135deg, #1A5C3E 0%, #134830 60%, #0D3324 100%)"
+          }}
+        >
+          {/* Subtle radial orb for depth */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full opacity-20"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(196,98,26,0.5) 0%, transparent 70%)"
+            }}
+          />
+          <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
             O que fazer hoje
           </p>
-          <h2 className="mt-3 text-2xl font-semibold tracking-normal">
-            Cobrar, entregar e chamar de novo - tudo em um só lugar.
+          <h2 className="mt-2.5 text-[1.35rem] font-semibold leading-[1.25] tracking-[-0.02em]">
+            Cobrar, entregar e chamar de novo.
           </h2>
-          <p className="mt-2 text-sm leading-7 text-primary-foreground/85">
+          <p className="mt-2 text-sm leading-6 text-primary-foreground/80">
             {heroDescription}
           </p>
-        </AppCard>
+
+          {/* Stats row */}
+          {hasTasks ? (
+            <div className="mt-5 flex items-center gap-4 border-t border-primary-foreground/15 pt-4">
+              {pendingCharges.length > 0 ? (
+                <div className="text-center">
+                  <p className="text-xl font-bold leading-none">
+                    {pendingCharges.length}
+                  </p>
+                  <p className="mt-1 text-[10px] font-medium text-primary-foreground/70">
+                    {pendingCharges.length === 1 ? "cobrança" : "cobranças"}
+                  </p>
+                </div>
+              ) : null}
+              {pendingDeliveries.length > 0 ? (
+                <div className="text-center">
+                  <p className="text-xl font-bold leading-none">
+                    {pendingDeliveries.length}
+                  </p>
+                  <p className="mt-1 text-[10px] font-medium text-primary-foreground/70">
+                    {pendingDeliveries.length === 1 ? "entrega" : "entregas"}
+                  </p>
+                </div>
+              ) : null}
+              {recentOrders.length > 0 ? (
+                <div className="text-center">
+                  <p className="text-xl font-bold leading-none">
+                    {recentOrders.length}
+                  </p>
+                  <p className="mt-1 text-[10px] font-medium text-primary-foreground/70">
+                    {recentOrders.length === 1 ? "pedido" : "pedidos"}
+                  </p>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
 
         {shouldShowFirstSteps ? (
           <AppCard className="p-6" id="primeiros-passos">
             <p className="lv-section-label">Primeiros passos</p>
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+            <h2 className="mt-2.5 text-[1.1rem] font-semibold tracking-[-0.015em] text-foreground">
               Vamos organizar sua primeira venda?
             </h2>
-            <p className="mt-2 text-sm leading-7 text-text-secondary">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
               {firstSteps.intro}
             </p>
 
@@ -184,10 +236,10 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <StatusBadge tone="warning">Pagamento pendente</StatusBadge>
-                    <h3 className="text-base font-semibold text-foreground">
+                    <h3 className="mt-2 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
-                    <p className="mt-1 text-sm text-stone-600">
+                    <p className="mt-1 text-sm text-text-secondary">
                       {formatOrderTotalCents(order.total_cents)}
                     </p>
                   </div>
@@ -217,7 +269,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                     <StatusBadge tone="success">
                       {getDeliveryStatusLabel(order.delivery_status)}
                     </StatusBadge>
-                    <h3 className="text-base font-semibold text-foreground">
+                    <h3 className="mt-2 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
                   </div>
@@ -244,7 +296,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
-                <h3 className="mt-3 text-base font-semibold text-foreground">
+                <h3 className="mt-2.5 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
                   Volte a falar com as clientes no momento certo.
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-text-secondary">
@@ -273,10 +325,10 @@ export default async function HojePage({ searchParams }: HojePageProps) {
               <AppCard className="p-4" key={order.id}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h3 className="text-base font-semibold text-foreground">
+                    <h3 className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
-                    <p className="mt-1 text-sm text-stone-600">
+                    <p className="mt-1 text-sm text-text-secondary">
                       {formatDateTime(order.created_at)}
                     </p>
                   </div>

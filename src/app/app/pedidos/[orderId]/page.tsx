@@ -117,7 +117,7 @@ export default async function PedidoDetalhePage({
                 {detail.customer?.name ?? "Cliente não encontrada"}
               </h2>
             </div>
-            <p className="text-sm text-stone-600">
+            <p className="text-sm text-text-secondary">
               {formatDateTime(detail.order.created_at)}
             </p>
           </div>
@@ -203,7 +203,7 @@ export default async function PedidoDetalhePage({
                     <h3 className="text-sm font-semibold text-foreground">
                       {item.product_name_snapshot}
                     </h3>
-                    <p className="mt-1 text-sm text-stone-600">
+                    <p className="mt-1 text-sm text-text-secondary">
                       {formatOrderTotalCents(item.unit_price_cents)} x{" "}
                       {item.quantity}
                     </p>

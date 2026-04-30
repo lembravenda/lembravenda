@@ -11,7 +11,7 @@ export default function RecompraLoading() {
         <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Buscando oportunidades de recompra
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           Estamos analisando clientes, produtos e compras anteriores.
         </p>
       </section>

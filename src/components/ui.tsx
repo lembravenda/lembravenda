@@ -23,7 +23,14 @@ type AppCardProps = ComponentPropsWithoutRef<"section"> & {
 
 export function AppCard({ children, className, ...props }: AppCardProps) {
   return (
-    <section className={joinClasses("lv-card p-5", className)} {...props}>
+    <section
+      className={joinClasses(
+        "rounded-xl border border-border bg-surface shadow-sm",
+        "p-5",
+        className
+      )}
+      {...props}
+    >
       {children}
     </section>
   );
@@ -45,7 +52,7 @@ export function EmptyState({
   return (
     <AppCard className="border-dashed border-border/90 text-center">
       <p className="lv-section-label text-center">{eyebrow}</p>
-      <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+      <h2 className="mt-3 text-xl font-semibold tracking-[-0.01em] text-foreground">
         {title}
       </h2>
       <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-text-secondary">
@@ -70,11 +77,11 @@ export function SectionHeader({
   return (
     <div className="flex items-center justify-between gap-4">
       <div>
-        <h2 className="text-base font-semibold tracking-[-0.01em] text-foreground">
+        <h2 className="text-[0.9375rem] font-semibold tracking-[-0.015em] text-foreground">
           {title}
         </h2>
         {description ? (
-          <p className="mt-1 text-sm leading-5 text-text-secondary">
+          <p className="mt-0.5 text-sm leading-5 text-text-secondary">
             {description}
           </p>
         ) : null}
@@ -92,24 +99,24 @@ type StatusBadgeProps = {
 export function StatusBadge({ children, tone = "neutral" }: StatusBadgeProps) {
   const toneMap = {
     success: {
-      className: "bg-emerald-50 text-emerald-800",
-      icon: "✓"
+      className: "bg-primary-lighter text-success",
+      dotClass: "bg-success"
     },
     warning: {
-      className: "bg-accent-light text-[color:#8A4D16]",
-      icon: "!"
+      className: "bg-accent-subtle text-warning",
+      dotClass: "bg-warning"
     },
     urgent: {
-      className: "bg-[color:#FCE9DB] text-[color:#9C4515]",
-      icon: "•"
+      className: "bg-accent-subtle text-urgent",
+      dotClass: "bg-accent"
     },
     danger: {
-      className: "bg-red-50 text-red-700",
-      icon: "×"
+      className: "bg-red-50 text-danger",
+      dotClass: "bg-danger"
     },
     neutral: {
       className: "bg-muted text-text-secondary",
-      icon: "•"
+      dotClass: "bg-neutral"
     }
   } as const;
 
@@ -118,13 +125,17 @@ export function StatusBadge({ children, tone = "neutral" }: StatusBadgeProps) {
   return (
     <span
       className={joinClasses(
-        "inline-flex min-h-8 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+        "inline-flex min-h-7 items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold",
         currentTone.className
       )}
     >
-      <span aria-hidden="true" className="text-[11px] leading-none">
-        {currentTone.icon}
-      </span>
+      <span
+        aria-hidden="true"
+        className={joinClasses(
+          "inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full",
+          currentTone.dotClass
+        )}
+      />
       {children}
     </span>
   );
@@ -149,29 +160,31 @@ export function StepCard({
     <article
       className={joinClasses(
         "rounded-2xl border p-4",
-        done ? "border-emerald-200 bg-emerald-50" : "border-border bg-surface"
+        done
+          ? "border-success/25 bg-primary-lighter"
+          : "border-border bg-surface"
       )}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
             {step}
           </p>
-          <h3 className="mt-2 text-base font-semibold text-foreground">
+          <h3 className="mt-2 text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
             {title}
           </h3>
           {description ? (
-            <p className="mt-2 text-sm leading-6 text-text-secondary">
+            <p className="mt-1.5 text-sm leading-6 text-text-secondary">
               {description}
             </p>
           ) : null}
           <p
             className={joinClasses(
-              "mt-3 text-sm font-medium",
-              done ? "text-emerald-700" : "text-text-secondary"
+              "mt-2.5 text-sm font-medium",
+              done ? "text-success" : "text-text-secondary"
             )}
           >
-            {done ? "Concluído" : "Próximo passo"}
+            {done ? "✓ Concluído" : "Próximo passo"}
           </p>
         </div>
         {action}
@@ -188,16 +201,18 @@ type FeatureCardProps = {
 
 export function FeatureCard({ title, description, icon }: FeatureCardProps) {
   return (
-    <article className="lv-card p-5">
+    <article className="rounded-xl border border-border bg-surface p-5 shadow-sm">
       <div className="flex items-start gap-4">
         {icon ? (
-          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-light text-primary">
+          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-[0.875rem] bg-primary-light text-primary">
             {icon}
           </div>
         ) : null}
         <div>
-          <h3 className="text-base font-semibold text-foreground">{title}</h3>
-          <p className="mt-2 text-sm leading-6 text-text-secondary">
+          <h3 className="text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground">
+            {title}
+          </h3>
+          <p className="mt-1.5 text-sm leading-6 text-text-secondary">
             {description}
           </p>
         </div>
@@ -213,14 +228,12 @@ type AppHeaderProps = {
 
 export function AppHeader({ title, action }: AppHeaderProps) {
   return (
-    <header className="border-b border-border bg-background/95 px-4 pb-2 pt-3 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/95 px-4 pb-3 pt-4 backdrop-blur-md">
       <div className="mx-auto max-w-md">
         <div className="flex items-center justify-between gap-4">
-          <div>
-            <h1 className="text-[1.35rem] font-semibold tracking-[-0.02em] text-foreground">
-              {title}
-            </h1>
-          </div>
+          <h1 className="text-[1.25rem] font-semibold tracking-[-0.025em] text-foreground">
+            {title}
+          </h1>
           {action}
         </div>
       </div>

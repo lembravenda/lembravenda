@@ -192,7 +192,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                   <span className="block text-sm font-medium text-foreground">
                     {product.name}
                   </span>
-                  <span className="block text-sm text-stone-600">
+                  <span className="block text-sm text-text-secondary">
                     {formatPriceCents(product.price_cents)}
                   </span>
                 </span>
@@ -214,7 +214,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
           <h3 className="text-sm font-semibold text-foreground">
             Itens do pedido
           </h3>
-          <p className="mt-1 text-sm leading-6 text-stone-600">
+          <p className="mt-1 text-sm leading-6 text-text-secondary">
             Ajuste as quantidades e acompanhe o subtotal de cada item.
           </p>
         </div>
@@ -234,7 +234,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                   <h4 className="text-sm font-semibold text-foreground">
                     {item.product.name}
                   </h4>
-                  <p className="mt-1 text-sm text-stone-600">
+                  <p className="mt-1 text-sm text-text-secondary">
                     {formatPriceCents(item.product.price_cents)}
                   </p>
                 </div>
@@ -286,7 +286,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                   <p className="text-sm font-medium text-foreground">
                     Subtotal
                   </p>
-                  <p className="mt-2 text-sm text-stone-700">
+                  <p className="mt-2 text-sm text-text-secondary">
                     {formatPriceCents(item.subtotal_cents)}
                   </p>
                 </div>

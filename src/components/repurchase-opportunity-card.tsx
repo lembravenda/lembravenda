@@ -61,7 +61,7 @@ export function RepurchaseOpportunityCard({
           <h3 className="text-base font-semibold text-foreground">
             {opportunity.customer_name}
           </h3>
-          <p className="mt-1 text-sm text-stone-600">
+          <p className="mt-1 text-sm text-text-secondary">
             {opportunity.product_name}
           </p>
         </div>
@@ -70,7 +70,7 @@ export function RepurchaseOpportunityCard({
         </p>
       </div>
 
-      <dl className="mt-4 space-y-2 text-sm text-stone-700">
+      <dl className="mt-4 space-y-2 text-sm text-text-secondary">
         <div className="flex items-start justify-between gap-4">
           <dt className="font-medium text-foreground">Última compra</dt>
           <dd>{formatDate(opportunity.last_purchase_at)}</dd>

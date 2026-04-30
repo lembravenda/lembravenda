@@ -192,7 +192,7 @@ export default async function ClientesPage({
                     <h2 className="text-base font-semibold text-foreground">
                       {customer.name}
                     </h2>
-                    <p className="mt-1 text-sm text-stone-600">
+                    <p className="mt-1 text-sm text-text-secondary">
                       {customer.phone || "Sem telefone cadastrado"}
                     </p>
                   </div>
@@ -204,7 +204,7 @@ export default async function ClientesPage({
                   </Link>
                 </div>
 
-                <dl className="mt-4 space-y-2 text-sm text-stone-700">
+                <dl className="mt-4 space-y-2 text-sm text-text-secondary">
                   <div className="flex items-start justify-between gap-4">
                     <dt className="font-medium text-foreground">Aniversário</dt>
                     <dd>
@@ -232,7 +232,7 @@ export default async function ClientesPage({
                 </dl>
 
                 {customer.notes ? (
-                  <p className="mt-4 rounded-2xl bg-muted px-4 py-4 text-sm leading-6 text-stone-700">
+                  <p className="mt-4 rounded-2xl bg-muted px-4 py-4 text-sm leading-6 text-text-secondary">
                     {customer.notes}
                   </p>
                 ) : null}

@@ -6,7 +6,7 @@ export default function AppAreaLoading() {
         <h1 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Preparando sua área
         </h1>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           Estamos validando sua sessão e seu perfil.
         </p>
       </section>

@@ -19,7 +19,7 @@ export default function ClientesError({
         <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Não foi possível abrir suas clientes
         </h2>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           {error.message || "Tente novamente em instantes."}
         </p>
         <button

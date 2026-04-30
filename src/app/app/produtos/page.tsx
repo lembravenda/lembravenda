@@ -181,7 +181,7 @@ export default async function ProdutosPage({
                   </Link>
                 </div>
 
-                <dl className="mt-4 space-y-2 text-sm text-stone-700">
+                <dl className="mt-4 space-y-2 text-sm text-text-secondary">
                   <div className="flex items-start justify-between gap-4">
                     <dt className="font-medium text-foreground">Categoria</dt>
                     <dd className="text-right">

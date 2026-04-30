@@ -14,7 +14,7 @@ export default function OnboardingError({
         <h1 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
           Não foi possível abrir seu perfil
         </h1>
-        <p className="mt-2 text-sm leading-6 text-stone-600">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           {error.message || "Tente novamente em instantes."}
         </p>
         <button
