@@ -112,8 +112,8 @@ export default async function PedidoDetalhePage({
         <AppCard className="p-5" id="itens-pedido">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="lv-section-label">Cliente</p>
-              <h2 className="mt-2 text-xl font-semibold tracking-normal text-foreground">
+              <p className="lv-eyebrow">Cliente</p>
+              <h2 className="mt-2 text-xl font-bold tracking-[-0.025em] text-foreground">
                 {detail.customer?.name ?? "Cliente não encontrada"}
               </h2>
             </div>
@@ -184,7 +184,7 @@ export default async function PedidoDetalhePage({
 
         <AppCard className="p-5">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-lg font-semibold tracking-normal text-foreground">
+            <h2 className="text-lg font-semibold tracking-[-0.02em] text-foreground">
               Itens do pedido
             </h2>
             <p className="text-lg font-semibold text-foreground">
@@ -195,7 +195,7 @@ export default async function PedidoDetalhePage({
           <div className="mt-4 space-y-3">
             {detail.items.map((item) => (
               <article
-                className="rounded-2xl border border-border bg-muted p-4"
+                className="rounded-[10px] border border-border bg-muted p-4"
                 key={item.id}
               >
                 <div className="flex items-start justify-between gap-3">

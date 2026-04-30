@@ -24,11 +24,11 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
         <BrandLogo href="/" showTagline />
       </section>
       <AppCard className="mb-5 overflow-hidden bg-surface p-6">
-        <p className="lv-section-label">Entrar ou criar conta</p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-normal text-foreground">
+        <p className="lv-eyebrow">Entrar ou criar conta</p>
+        <h1 className="mt-3 text-2xl font-bold tracking-[-0.025em] text-foreground">
           Organize sua rotina de vendas em poucos minutos.
         </h1>
-        <p className="mt-3 text-sm leading-7 text-text-secondary">
+        <p className="mt-3 text-sm leading-6 text-text-secondary">
           Entre para acompanhar pedidos, cobranças e recompra com mais clareza
           no dia a dia.
         </p>

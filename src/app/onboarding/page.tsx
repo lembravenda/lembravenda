@@ -21,11 +21,11 @@ export default async function OnboardingPage() {
         <BrandLogo href="/" showTagline />
       </section>
       <AppCard className="mb-5 overflow-hidden bg-surface p-6">
-        <p className="lv-section-label">Vamos começar</p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-normal text-foreground">
+        <p className="lv-eyebrow">Vamos começar</p>
+        <h1 className="mt-3 text-2xl font-bold tracking-[-0.025em] text-foreground">
           Complete seu perfil de revendedora
         </h1>
-        <p className="mt-3 text-sm leading-7 text-text-secondary">
+        <p className="mt-3 text-sm leading-6 text-text-secondary">
           Essas informações ajudam a montar suas mensagens e organizar seus
           próximos passos no LembraVenda.
         </p>

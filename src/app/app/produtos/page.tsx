@@ -61,9 +61,9 @@ export default async function ProdutosPage({
     >
       <section className="space-y-4">
         {createdState === "product-order" ? (
-          <AppCard className="border-emerald-200 p-6">
-            <p className="lv-section-label">Produto salvo</p>
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+          <AppCard className="border-success/30 bg-primary-lighter p-6">
+            <p className="lv-eyebrow">Produto salvo</p>
+            <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora crie seu primeiro pedido.
             </h2>
             <p className="mt-2 text-sm leading-7 text-text-secondary">

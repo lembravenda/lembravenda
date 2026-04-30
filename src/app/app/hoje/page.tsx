@@ -110,7 +110,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
       <section className="space-y-5">
         {/* Hero card — gradiente com profundidade */}
         <div
-          className="overflow-hidden rounded-2xl p-6 text-primary-foreground"
+          className="relative overflow-hidden rounded-xl p-6 text-primary-foreground"
           style={{
             background:
               "linear-gradient(135deg, #1A5C3E 0%, #134830 60%, #0D3324 100%)"
@@ -128,7 +128,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
           <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
             O que fazer hoje
           </p>
-          <h2 className="mt-2.5 text-[1.35rem] font-semibold leading-[1.25] tracking-[-0.02em]">
+          <h2 className="mt-2.5 text-xl font-bold leading-[1.25] tracking-[-0.025em]">
             Cobrar, entregar e chamar de novo.
           </h2>
           <p className="mt-2 text-sm leading-6 text-primary-foreground/80">

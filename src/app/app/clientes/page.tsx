@@ -71,12 +71,12 @@ export default async function ClientesPage({
     >
       <section className="space-y-4">
         {createdState === "customer-product" ? (
-          <AppCard className="border-emerald-200 bg-surface p-6">
-            <p className="lv-section-label">Cliente salva</p>
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+          <AppCard className="border-success/30 bg-primary-lighter p-6">
+            <p className="lv-eyebrow">Cliente salva</p>
+            <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora cadastre seu primeiro produto.
             </h2>
-            <p className="mt-2 text-sm leading-7 text-text-secondary">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
               Com cliente e produto, você já consegue criar sua primeira venda.
             </p>
             <div className="mt-5 grid gap-3">
@@ -97,12 +97,12 @@ export default async function ClientesPage({
         ) : null}
 
         {createdState === "customer-order" ? (
-          <AppCard className="border-emerald-200 bg-surface p-6">
-            <p className="lv-section-label">Cliente salva</p>
-            <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+          <AppCard className="border-success/30 bg-primary-lighter p-6">
+            <p className="lv-eyebrow">Cliente salva</p>
+            <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora você pode criar um pedido.
             </h2>
-            <p className="mt-2 text-sm leading-7 text-text-secondary">
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
               Sua base já está pronta para registrar a primeira venda.
             </p>
             <div className="mt-5 grid gap-3">
@@ -189,7 +189,7 @@ export default async function ClientesPage({
               <AppCard className="p-4" key={customer.id}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="text-base font-semibold text-foreground">
+                    <h2 className="lv-item-title">
                       {customer.name}
                     </h2>
                     <p className="mt-1 text-sm text-text-secondary">
@@ -232,7 +232,7 @@ export default async function ClientesPage({
                 </dl>
 
                 {customer.notes ? (
-                  <p className="mt-4 rounded-2xl bg-muted px-4 py-4 text-sm leading-6 text-text-secondary">
+                  <p className="mt-4 rounded-[10px] bg-muted px-4 py-3 text-sm leading-6 text-text-secondary">
                     {customer.notes}
                   </p>
                 ) : null}
