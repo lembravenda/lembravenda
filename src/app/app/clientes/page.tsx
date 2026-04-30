@@ -58,6 +58,14 @@ export default async function ClientesPage({
 
   return (
     <AppShell
+      action={
+        <Link
+          className={buttonStyles("primary", false)}
+          href="/app/clientes?mode=new#nova-cliente"
+        >
+          Adicionar
+        </Link>
+      }
       title="Clientes"
       description="Cadastre, encontre e atualize sua base de clientes pelo celular."
     >
@@ -175,7 +183,6 @@ export default async function ClientesPage({
           <section className="space-y-3">
             <SectionHeader
               description="Sua base fica mais clara quando cada cliente tem telefone, grupos e observações."
-              eyebrow="Base organizada"
               title="Clientes cadastradas"
             />
             {customers.map((customer) => (
@@ -212,7 +219,7 @@ export default async function ClientesPage({
                       {customer.tags.length > 0 ? (
                         <div className="flex flex-wrap justify-end gap-2">
                           {customer.tags.map((tag) => (
-                            <StatusBadge key={tag} tone="muted">
+                            <StatusBadge key={tag} tone="neutral">
                               {tag}
                             </StatusBadge>
                           ))}

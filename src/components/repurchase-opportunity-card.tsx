@@ -56,7 +56,7 @@ export function RepurchaseOpportunityCard({
         <div>
           <div className="flex items-center gap-2">
             <p className="lv-section-label">Recompra</p>
-            <StatusBadge tone="accent">Hora de chamar</StatusBadge>
+            <StatusBadge tone="urgent">Hora de chamar</StatusBadge>
           </div>
           <h3 className="text-base font-semibold text-foreground">
             {opportunity.customer_name}

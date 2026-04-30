@@ -78,6 +78,14 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
 
   return (
     <AppShell
+      action={
+        <Link
+          className={buttonStyles("primary", false)}
+          href="/app/pedidos?mode=new#novo-pedido"
+        >
+          Criar
+        </Link>
+      }
       title="Pedidos"
       description="Monte pedidos com cliente, itens, total e acompanhamento separado de pagamento e entrega."
     >
@@ -121,7 +129,6 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
           <section className="space-y-3">
             <SectionHeader
               description="Veja rapidamente o total e os status de cada pedido."
-              eyebrow="Pedidos"
               title="Pedidos cadastrados"
             />
             {orders.map((order) => (
@@ -151,7 +158,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                         ? "success"
                         : order.payment_status === "canceled"
                           ? "danger"
-                          : "accent"
+                          : "warning"
                     }
                   >
                     Pagamento: {getPaymentStatusLabel(order.payment_status)}
@@ -162,7 +169,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                         ? "success"
                         : order.delivery_status === "canceled"
                           ? "danger"
-                          : "primary"
+                          : "neutral"
                     }
                   >
                     Entrega: {getDeliveryStatusLabel(order.delivery_status)}

@@ -52,7 +52,7 @@ export function OrderChargeCard({
       <div>
         <div className="flex items-center gap-3">
           <p className="lv-section-label">Cobrar cliente</p>
-          <StatusBadge tone="accent">Mensagem pronta</StatusBadge>
+          <StatusBadge tone="warning">Mensagem pronta</StatusBadge>
         </div>
         <h2 className="mt-2 text-xl font-semibold tracking-normal text-foreground">
           Mensagem pronta para copiar

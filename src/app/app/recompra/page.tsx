@@ -48,7 +48,6 @@ export default async function RecompraPage() {
         <section className="space-y-4">
           <SectionHeader
             description="Use a data da última compra para retomar a conversa no momento certo."
-            eyebrow="Oportunidades"
             title="Chamar de novo"
           />
           {opportunities.map((opportunity) => (

@@ -160,16 +160,15 @@ export default async function HojePage({ searchParams }: HojePageProps) {
         {pendingCharges.length > 0 ? (
           <section aria-label="Cobranças pendentes" className="space-y-3">
             <SectionHeader
-              eyebrow="Prioridade 1"
               title="Cobrar"
               description="Veja quem ainda precisa acertar o pagamento."
             />
 
             {pendingCharges.map((order) => (
-              <AppCard className="p-4" key={order.id}>
+              <AppCard className="lv-card-urgent p-4" key={order.id}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <StatusBadge tone="accent">Pagamento pendente</StatusBadge>
+                    <StatusBadge tone="warning">Pagamento pendente</StatusBadge>
                     <h3 className="text-base font-semibold text-foreground">
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h3>
@@ -192,16 +191,15 @@ export default async function HojePage({ searchParams }: HojePageProps) {
         {pendingDeliveries.length > 0 ? (
           <section aria-label="Entregas pendentes" className="space-y-3">
             <SectionHeader
-              eyebrow="Prioridade 2"
               title="Entregar"
               description="Acompanhe o que ainda precisa sair hoje."
             />
 
             {pendingDeliveries.map((order) => (
-              <AppCard className="p-4" key={order.id}>
+              <AppCard className="lv-card-success p-4" key={order.id}>
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <StatusBadge tone="primary">
+                    <StatusBadge tone="success">
                       {getDeliveryStatusLabel(order.delivery_status)}
                     </StatusBadge>
                     <h3 className="text-base font-semibold text-foreground">
@@ -224,14 +222,13 @@ export default async function HojePage({ searchParams }: HojePageProps) {
 
         <section aria-label="Chamar de novo" className="space-y-3">
           <SectionHeader
-            eyebrow="Lembrete"
             title="Chamar de novo"
             description="Abra a lista de recompra para ver quem pode estar pronta para um novo pedido."
           />
-          <AppCard className="p-4">
+          <AppCard className="lv-card-urgent p-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <StatusBadge tone="primary">Recompra</StatusBadge>
+                <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
                 <h3 className="mt-3 text-base font-semibold text-foreground">
                   Volte a falar com as clientes no momento certo.
                 </h3>
@@ -253,7 +250,6 @@ export default async function HojePage({ searchParams }: HojePageProps) {
         {recentOrders.length > 0 ? (
           <section aria-label="Pedidos recentes" className="space-y-3">
             <SectionHeader
-              eyebrow="Visão rápida"
               title="Pedidos recentes"
               description="Tudo o que você registrou mais recentemente."
             />
@@ -284,7 +280,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                         ? "success"
                         : order.payment_status === "canceled"
                           ? "danger"
-                          : "accent"
+                          : "warning"
                     }
                   >
                     Pagamento: {getPaymentStatusLabel(order.payment_status)}
@@ -295,7 +291,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                         ? "success"
                         : order.delivery_status === "canceled"
                           ? "danger"
-                          : "primary"
+                          : "neutral"
                     }
                   >
                     Entrega: {getDeliveryStatusLabel(order.delivery_status)}

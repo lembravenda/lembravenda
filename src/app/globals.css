@@ -4,23 +4,30 @@
 
 :root {
   color-scheme: light;
-  --lv-bg: #f5f0e8;
+  --lv-bg: #f4efe6;
   --lv-surface: #ffffff;
-  --lv-surface-muted: #f8f3ec;
-  --lv-primary: #2e7d57;
-  --lv-primary-dark: #1a5c40;
-  --lv-primary-light: #eaf4ef;
-  --lv-accent: #f5a623;
-  --lv-accent-light: #fff9e6;
-  --lv-text: #111827;
-  --lv-text-secondary: #6b7280;
-  --lv-border: #e5e7eb;
-  --lv-success: #16a34a;
-  --lv-danger: #dc2626;
-  --lv-radius-card: 1.25rem;
-  --lv-radius-button: 0.95rem;
-  --lv-shadow-card: 0 16px 40px rgba(17, 24, 39, 0.08);
-  --lv-shadow-lift: 0 24px 64px rgba(26, 92, 64, 0.14);
+  --lv-surface-muted: #f7f2ea;
+  --lv-primary: #1d6348;
+  --lv-primary-dark: #165438;
+  --lv-primary-light: #e8f5ee;
+  --lv-primary-lighter: #f0faf4;
+  --lv-accent: #c96b1a;
+  --lv-accent-light: #fff0e0;
+  --lv-accent-subtle: #fef7ee;
+  --lv-text: #1a1714;
+  --lv-text-secondary: #5c5650;
+  --lv-text-tertiary: #8c8680;
+  --lv-border: #e2ddd6;
+  --lv-border-strong: #c8c2ba;
+  --lv-success: #1f8a57;
+  --lv-warning: #a15b18;
+  --lv-urgent: #ad4b17;
+  --lv-danger: #b9382a;
+  --lv-neutral: #6c655f;
+  --lv-radius-card: 1.1rem;
+  --lv-radius-button: 0.9rem;
+  --lv-shadow-card: 0 10px 28px rgba(26, 23, 20, 0.06);
+  --lv-shadow-lift: 0 16px 40px rgba(29, 99, 72, 0.1);
 }
 
 * {
@@ -34,17 +41,10 @@ html {
 body {
   min-height: 100vh;
   background:
-    radial-gradient(circle at top, rgba(245, 166, 35, 0.08), transparent 26%),
+    radial-gradient(circle at top, rgba(201, 107, 26, 0.06), transparent 26%),
     var(--lv-bg);
   color: var(--lv-text);
-  font-family:
-    Inter,
-    Geist,
-    "Plus Jakarta Sans",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: var(--font-sans), Inter, system-ui, sans-serif;
 }
 
 a {
@@ -68,12 +68,12 @@ select {
 }
 
 ::selection {
-  background: rgba(46, 125, 87, 0.16);
+  background: rgba(29, 99, 72, 0.14);
 }
 
 @layer base {
   :focus-visible {
-    outline: 2px solid rgba(46, 125, 87, 0.65);
+    outline: 2px solid rgba(29, 99, 72, 0.58);
     outline-offset: 2px;
   }
 }
@@ -88,11 +88,11 @@ select {
   }
 
   .lv-section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-primary;
+    @apply text-xs font-semibold tracking-[0.04em] text-text-secondary;
   }
 
   .lv-title {
-    @apply text-2xl font-semibold tracking-normal text-foreground;
+    @apply text-2xl font-semibold tracking-[-0.01em] text-foreground;
   }
 
   .lv-body {
@@ -108,7 +108,7 @@ select {
   }
 
   .lv-button-secondary {
-    @apply lv-button border border-border bg-surface text-foreground hover:bg-primary-light;
+    @apply lv-button border border-border bg-surface text-foreground hover:bg-primary-lighter;
   }
 
   .lv-button-ghost {
@@ -129,5 +129,13 @@ select {
 
   .lv-chip {
     @apply inline-flex min-h-10 items-center rounded-full border border-border bg-surface px-3 py-2 text-sm font-medium text-foreground transition hover:border-primary hover:bg-primary-light;
+  }
+
+  .lv-card-urgent {
+    @apply border-l-4 border-l-accent bg-accent-subtle;
+  }
+
+  .lv-card-success {
+    @apply border-l-4 border-l-success bg-primary-lighter;
   }
 }

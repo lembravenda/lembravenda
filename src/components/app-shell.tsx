@@ -1,6 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { BrandLogo } from "@/components/brand-logo";
-import { LogoutButton } from "@/components/logout-button";
+import { usePathname } from "next/navigation";
 import { AppHeader } from "@/components/ui";
 
 const navigationItems = [
@@ -10,14 +11,21 @@ const navigationItems = [
     icon: (
       <svg
         aria-hidden="true"
-        className="h-4 w-4"
+        className="h-[18px] w-[18px]"
         fill="none"
         viewBox="0 0 24 24"
       >
         <path
-          d="M5 12h14M12 5v14"
+          d="M12 4.5 4.5 10v8a1.5 1.5 0 0 0 1.5 1.5h12A1.5 1.5 0 0 0 19.5 18v-8L12 4.5Z"
+          stroke="currentColor"
+          strokeLinejoin="round"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M9.5 19.5v-5h5v5"
           stroke="currentColor"
           strokeLinecap="round"
+          strokeLinejoin="round"
           strokeWidth="1.8"
         />
       </svg>
@@ -29,32 +37,14 @@ const navigationItems = [
     icon: (
       <svg
         aria-hidden="true"
-        className="h-4 w-4"
+        className="h-[18px] w-[18px]"
         fill="none"
         viewBox="0 0 24 24"
       >
         <path
-          d="M8.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM4 19a4.5 4.5 0 0 1 9 0M16.5 10a2.5 2.5 0 1 0 0-5M15 19a3.5 3.5 0 0 1 5 0"
+          d="M8.5 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM4 19a4.5 4.5 0 0 1 9 0M16.5 10a2.5 2.5 0 1 0 0-5M15.5 19a3.5 3.5 0 0 1 4.5 0"
           stroke="currentColor"
           strokeLinecap="round"
-          strokeWidth="1.8"
-        />
-      </svg>
-    )
-  },
-  {
-    href: "/app/produtos",
-    label: "Produtos",
-    icon: (
-      <svg
-        aria-hidden="true"
-        className="h-4 w-4"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M6 8.5h12M7 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-          stroke="currentColor"
           strokeWidth="1.8"
         />
       </svg>
@@ -66,12 +56,17 @@ const navigationItems = [
     icon: (
       <svg
         aria-hidden="true"
-        className="h-4 w-4"
+        className="h-[18px] w-[18px]"
         fill="none"
         viewBox="0 0 24 24"
       >
         <path
-          d="M8 4v4M16 4v4M6 8h12M7 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2ZM9 12h6M9 16h4"
+          d="M7 5h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+        />
+        <path
+          d="M8.5 9.5h7M8.5 13h7M8.5 16.5H13"
           stroke="currentColor"
           strokeLinecap="round"
           strokeWidth="1.8"
@@ -85,7 +80,7 @@ const navigationItems = [
     icon: (
       <svg
         aria-hidden="true"
-        className="h-4 w-4"
+        className="h-[18px] w-[18px]"
         fill="none"
         viewBox="0 0 24 24"
       >
@@ -104,7 +99,7 @@ const navigationItems = [
     icon: (
       <svg
         aria-hidden="true"
-        className="h-4 w-4"
+        className="h-[18px] w-[18px]"
         fill="none"
         viewBox="0 0 24 24"
       >
@@ -117,49 +112,64 @@ const navigationItems = [
       </svg>
     )
   }
-];
+] as const;
 
 type AppShellProps = {
   title: string;
   description: string;
+  action?: React.ReactNode;
   children?: React.ReactNode;
 };
 
-export function AppShell({ title, description, children }: AppShellProps) {
+export function AppShell({
+  title,
+  description,
+  action,
+  children
+}: AppShellProps) {
+  const pathname = usePathname();
+
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background">
-      <AppHeader
-        action={<LogoutButton />}
-        description={description}
-        eyebrow="LembraVenda"
-        title={title}
-      />
-      <main className="flex-1 px-5 py-5 pb-[calc(12.5rem+env(safe-area-inset-bottom))]">
+      <AppHeader action={action} description={description} title={title} />
+      <main className="flex-1 px-4 py-4 pb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         {children}
       </main>
       <nav
         aria-label="Navegação principal"
-        className="fixed inset-x-0 bottom-0 bg-transparent px-3 pb-[calc(0.85rem+env(safe-area-inset-bottom))] pt-3"
+        className="fixed inset-x-0 bottom-0 border-t border-border bg-surface/98 backdrop-blur"
       >
-        <div className="mx-auto max-w-md rounded-[1.75rem] border border-border/90 bg-surface/95 p-2 shadow-lift backdrop-blur">
-          <div className="mb-2 flex items-center justify-between px-2">
-            <BrandLogo href="/app/hoje" size="sm" />
-            <span className="text-xs font-medium text-text-secondary">
-              Sua agenda do dia
-            </span>
-          </div>
-          <div className="grid grid-cols-3 gap-2">
-            {navigationItems.map((item) => (
+        <div className="mx-auto grid h-16 max-w-md grid-cols-5 items-stretch px-1 pb-[env(safe-area-inset-bottom)]">
+          {navigationItems.map((item) => {
+            const isActive =
+              item.href === "/app/hoje"
+                ? pathname === item.href
+                : pathname === item.href ||
+                  pathname.startsWith(`${item.href}/`);
+
+            return (
               <Link
-                className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-2xl px-2 py-3 text-center text-[11px] font-semibold leading-tight text-text-secondary transition hover:bg-primary-light hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                className={`flex min-h-16 flex-col items-center justify-center gap-1 px-1 text-center transition ${
+                  isActive
+                    ? "text-primary"
+                    : "text-text-tertiary hover:text-primary"
+                }`}
                 href={item.href}
                 key={item.href}
               >
-                <span className="text-primary">{item.icon}</span>
-                <span>{item.label}</span>
+                <span
+                  className={`flex h-7 w-7 items-center justify-center rounded-full ${
+                    isActive ? "bg-primary-light" : ""
+                  }`}
+                >
+                  {item.icon}
+                </span>
+                <span className="text-[10px] font-semibold leading-none">
+                  {item.label}
+                </span>
               </Link>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </nav>
     </div>

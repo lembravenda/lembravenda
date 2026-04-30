@@ -83,6 +83,11 @@ export default async function PedidoDetalhePage({
 
   return (
     <AppShell
+      action={
+        <Link className={buttonStyles("secondary", false)} href="/app/pedidos">
+          Voltar
+        </Link>
+      }
       title="Detalhe do pedido"
       description="Acompanhe itens, total, pagamento e entrega sem depender do produto atual."
     >
@@ -104,10 +109,6 @@ export default async function PedidoDetalhePage({
           </AppCard>
         ) : null}
 
-        <Link className={buttonStyles("secondary", false)} href="/app/pedidos">
-          Voltar para pedidos
-        </Link>
-
         <AppCard className="p-5" id="itens-pedido">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -128,7 +129,7 @@ export default async function PedidoDetalhePage({
                   ? "success"
                   : detail.order.payment_status === "canceled"
                     ? "danger"
-                    : "accent"
+                    : "warning"
               }
             >
               Pagamento: {getPaymentStatusLabel(detail.order.payment_status)}
@@ -139,7 +140,7 @@ export default async function PedidoDetalhePage({
                   ? "success"
                   : detail.order.delivery_status === "canceled"
                     ? "danger"
-                    : "primary"
+                    : "neutral"
               }
             >
               Entrega: {getDeliveryStatusLabel(detail.order.delivery_status)}

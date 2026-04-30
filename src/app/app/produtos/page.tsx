@@ -48,6 +48,14 @@ export default async function ProdutosPage({
 
   return (
     <AppShell
+      action={
+        <Link
+          className={buttonStyles("primary", false)}
+          href="/app/produtos?mode=new#novo-produto"
+        >
+          Adicionar
+        </Link>
+      }
       title="Produtos"
       description="Cadastre preços, recompra e status dos produtos do seu catálogo."
     >
@@ -145,7 +153,6 @@ export default async function ProdutosPage({
           <section className="space-y-3">
             <SectionHeader
               description="Mantenha seus preços e prazos de recompra organizados para vender com mais segurança."
-              eyebrow="Catálogo"
               title="Produtos cadastrados"
             />
             {products.map((product) => (
@@ -157,7 +164,7 @@ export default async function ProdutosPage({
                         {product.name}
                       </h2>
                       <StatusBadge
-                        tone={product.is_active ? "success" : "muted"}
+                        tone={product.is_active ? "success" : "neutral"}
                       >
                         {product.is_active ? "Ativo" : "Inativo"}
                       </StatusBadge>

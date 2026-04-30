@@ -56,27 +56,24 @@ export function EmptyState({
 }
 
 type SectionHeaderProps = {
-  eyebrow?: string;
   title: string;
   description?: string;
   action?: ReactNode;
 };
 
 export function SectionHeader({
-  eyebrow,
   title,
   description,
   action
 }: SectionHeaderProps) {
   return (
-    <div className="flex items-end justify-between gap-4">
+    <div className="flex items-center justify-between gap-4">
       <div>
-        {eyebrow ? <p className="lv-section-label">{eyebrow}</p> : null}
-        <h2 className="mt-2 text-lg font-semibold tracking-normal text-foreground">
+        <h2 className="text-base font-semibold tracking-[-0.01em] text-foreground">
           {title}
         </h2>
         {description ? (
-          <p className="mt-1 text-sm leading-6 text-text-secondary">
+          <p className="mt-1 text-sm leading-5 text-text-secondary">
             {description}
           </p>
         ) : null}
@@ -88,26 +85,45 @@ export function SectionHeader({
 
 type StatusBadgeProps = {
   children: ReactNode;
-  tone?: "accent" | "danger" | "muted" | "primary" | "success";
+  tone?: "danger" | "neutral" | "success" | "urgent" | "warning";
 };
 
-export function StatusBadge({ children, tone = "muted" }: StatusBadgeProps) {
-  const toneClassName =
-    {
-      primary: "bg-primary-light text-primary",
-      success: "bg-emerald-50 text-emerald-700",
-      accent: "bg-accent-light text-amber-700",
-      danger: "bg-red-50 text-red-700",
-      muted: "bg-muted text-foreground"
-    }[tone] ?? "bg-muted text-foreground";
+export function StatusBadge({ children, tone = "neutral" }: StatusBadgeProps) {
+  const toneMap = {
+    success: {
+      className: "bg-emerald-50 text-emerald-800",
+      icon: "✓"
+    },
+    warning: {
+      className: "bg-accent-light text-[color:#8A4D16]",
+      icon: "!"
+    },
+    urgent: {
+      className: "bg-[color:#FCE9DB] text-[color:#9C4515]",
+      icon: "•"
+    },
+    danger: {
+      className: "bg-red-50 text-red-700",
+      icon: "×"
+    },
+    neutral: {
+      className: "bg-muted text-text-secondary",
+      icon: "•"
+    }
+  } as const;
+
+  const currentTone = toneMap[tone] ?? toneMap.neutral;
 
   return (
     <span
       className={joinClasses(
-        "inline-flex min-h-8 items-center rounded-full px-3 py-1 text-xs font-semibold",
-        toneClassName
+        "inline-flex min-h-8 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+        currentTone.className
       )}
     >
+      <span aria-hidden="true" className="text-[11px] leading-none">
+        {currentTone.icon}
+      </span>
       {children}
     </span>
   );
@@ -193,30 +209,24 @@ type AppHeaderProps = {
   title: string;
   description: string;
   action?: ReactNode;
-  eyebrow?: string;
 };
 
-export function AppHeader({
-  title,
-  description,
-  action,
-  eyebrow = "LembraVenda"
-}: AppHeaderProps) {
+export function AppHeader({ title, description, action }: AppHeaderProps) {
   return (
-    <div className="relative overflow-hidden rounded-b-[2rem] border-b border-border bg-surface px-5 pb-6 pt-5 shadow-soft">
-      <div className="absolute inset-x-6 top-0 h-24 rounded-b-full bg-primary-light blur-2xl" />
-      <div className="relative flex items-start justify-between gap-4">
-        <div>
-          <p className="lv-section-label">{eyebrow}</p>
-          <h1 className="mt-2 text-[1.75rem] font-semibold tracking-normal text-foreground">
-            {title}
-          </h1>
-          <p className="mt-2 max-w-sm text-sm leading-6 text-text-secondary">
-            {description}
-          </p>
+    <header className="border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur">
+      <div className="mx-auto max-w-md">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <h1 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">
+              {title}
+            </h1>
+            <p className="mt-1 max-w-sm text-sm leading-5 text-text-secondary">
+              {description}
+            </p>
+          </div>
+          {action}
         </div>
-        {action}
       </div>
-    </div>
+    </header>
   );
 }

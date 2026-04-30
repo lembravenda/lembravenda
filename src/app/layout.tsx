@@ -1,5 +1,12 @@
 import type { Metadata, Viewport } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  fallback: ["Inter", "system-ui", "sans-serif"]
+});
 
 export const metadata: Metadata = {
   title: "LembraVenda",
@@ -11,7 +18,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#2E7D57"
+  themeColor: "#1D6348"
 };
 
 export default function RootLayout({
@@ -21,7 +28,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className={`${plusJakartaSans.variable} min-h-screen antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
