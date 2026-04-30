@@ -51,13 +51,13 @@ export function OrderChargeCard({
     <AppCard className="overflow-hidden p-6" id="cobranca-pedido">
       <div>
         <div className="flex items-center gap-3">
-          <p className="lv-section-label">Cobrar cliente</p>
+          <p className="lv-eyebrow">Cobrar cliente</p>
           <StatusBadge tone="warning">Mensagem pronta</StatusBadge>
         </div>
-        <h2 className="mt-2 text-xl font-semibold tracking-normal text-foreground">
+        <h2 className="mt-2 text-xl font-bold tracking-[-0.025em] text-foreground">
           Mensagem pronta para copiar
         </h2>
-        <p className="mt-2 text-sm leading-7 text-text-secondary">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           Copie a mensagem ou abra o WhatsApp com tudo pronto para enviar.
         </p>
       </div>
@@ -90,21 +90,21 @@ export function OrderChargeCard({
             Abrir no WhatsApp
           </a>
         ) : (
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-800">
+          <p className="rounded-[10px] border border-warning/30 bg-[#FEF9EE] px-4 py-3 text-sm leading-6 text-warning">
             Cadastre um telefone válido da cliente para abrir essa cobrança no
             WhatsApp. Por enquanto, você ainda pode copiar a mensagem.
           </p>
         )}
 
         {!pixKey ? (
-          <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
+          <p className="rounded-[10px] border border-dashed border-border bg-muted px-4 py-3 text-sm leading-6 text-foreground">
             Se você ainda não cadastrou uma chave Pix, a mensagem segue pronta
             para combinar outra forma de pagamento.
           </p>
         ) : null}
 
         {copyStatus === "success" ? (
-          <p className="text-sm font-medium text-emerald-700">
+          <p className="text-sm font-medium text-success">
             Mensagem copiada.
           </p>
         ) : null}

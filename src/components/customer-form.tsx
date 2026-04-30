@@ -46,17 +46,17 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
+      className="lv-card space-y-5 p-6"
       id={mode === "create" ? "nova-cliente" : undefined}
     >
       <div>
-        <p className="lv-section-label">
+        <p className="lv-eyebrow">
           {mode === "create" ? "Nova cliente" : "Editar cliente"}
         </p>
-        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
           {mode === "create" ? "Nova cliente" : "Editar cliente"}
         </h2>
-        <p className="mt-2 text-sm leading-7 text-text-secondary">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           {mode === "create"
             ? "Salve os dados essenciais para organizar contatos e pedidos depois."
             : "Atualize as informações da cliente sem perder o histórico."}
@@ -141,7 +141,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
       </div>
 
       {state.error ? (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="rounded-[10px] border border-danger/30 bg-[#FEF2F2] px-4 py-3 text-sm text-danger">
           {state.error}
         </p>
       ) : null}

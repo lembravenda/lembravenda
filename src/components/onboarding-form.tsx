@@ -20,20 +20,20 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
   return (
     <form
       action={formAction}
-      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
+      className="lv-card space-y-5 p-6"
     >
       <div>
-        <p className="lv-section-label">Seu perfil</p>
-        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+        <p className="lv-eyebrow">Seu perfil</p>
+        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
           Complete seu perfil
         </h2>
-        <p className="mt-2 text-sm leading-7 text-text-secondary">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           Vamos salvar apenas os dados essenciais para liberar sua área.
         </p>
       </div>
 
       {!profile ? (
-        <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
+        <p className="rounded-[10px] border border-dashed border-border bg-muted px-4 py-3 text-sm leading-6 text-foreground">
           Preencha os campos abaixo para abrir sua área e começar a organizar
           suas vendas.
         </p>
@@ -100,7 +100,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </label>
 
       {state.error ? (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="rounded-[10px] border border-danger/30 bg-[#FEF2F2] px-4 py-3 text-sm text-danger">
           {state.error}
         </p>
       ) : null}

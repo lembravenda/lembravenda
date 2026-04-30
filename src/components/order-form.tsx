@@ -94,20 +94,20 @@ export function OrderForm({ customers, products }: OrderFormProps) {
   if (customers.length === 0 || activeProducts.length === 0) {
     return (
       <section
-        className="space-y-4 rounded-2xl border border-border bg-white p-6 shadow-card"
+        className="lv-card space-y-4 p-6"
         id="novo-pedido"
       >
         <div>
-          <p className="lv-section-label">Novo pedido</p>
-          <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+          <p className="lv-eyebrow">Novo pedido</p>
+          <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
             Novo pedido
           </h2>
-          <p className="mt-2 text-sm leading-7 text-text-secondary">
+          <p className="mt-2 text-sm leading-6 text-text-secondary">
             Para criar um pedido, você precisa ter pelo menos uma cliente e um
             produto ativo cadastrados.
           </p>
         </div>
-        <div className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm leading-6 text-foreground">
+        <div className="rounded-[10px] border border-dashed border-border bg-muted px-4 py-3 text-sm leading-6 text-foreground">
           {customers.length === 0
             ? "Cadastre uma cliente antes de registrar sua primeira venda."
             : "Cadastre um produto ativo para começar a montar pedidos."}
@@ -119,15 +119,15 @@ export function OrderForm({ customers, products }: OrderFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-5 rounded-2xl border border-border bg-white p-6 shadow-card"
+      className="lv-card space-y-5 p-6"
       id="novo-pedido"
     >
       <div>
-        <p className="lv-section-label">Novo pedido</p>
-        <h2 className="mt-3 text-xl font-semibold tracking-normal text-foreground">
+        <p className="lv-eyebrow">Novo pedido</p>
+        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
           Novo pedido
         </h2>
-        <p className="mt-2 text-sm leading-7 text-text-secondary">
+        <p className="mt-2 text-sm leading-6 text-text-secondary">
           Escolha a cliente, adicione produtos ativos e confira o total antes de
           salvar.
         </p>
@@ -149,7 +149,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         </select>
       </label>
 
-      <section className="space-y-4 rounded-2xl border border-border bg-muted p-4">
+      <section className="space-y-4 rounded-[14px] border border-border bg-muted p-4">
         <div>
           <h3 className="text-sm font-semibold text-foreground">
             Produtos ativos
@@ -174,7 +174,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product) => (
               <button
-                className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface px-4 py-4 text-left shadow-soft"
+                className="flex w-full items-center justify-between rounded-[10px] border border-border bg-surface px-4 py-4 text-left shadow-sm transition-colors hover:bg-muted"
                 key={product.id}
                 onClick={() => {
                   setSelectedItems((currentItems) => [
@@ -202,7 +202,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
               </button>
             ))
           ) : (
-            <p className="rounded-2xl border border-dashed border-border bg-surface px-4 py-4 text-sm text-text-secondary">
+            <p className="rounded-[10px] border border-dashed border-border bg-surface px-4 py-3 text-sm text-text-secondary">
               Nenhum produto ativo encontrado para essa busca.
             </p>
           )}
@@ -220,13 +220,13 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         </div>
 
         {selectedItemsWithProduct.length === 0 ? (
-          <p className="rounded-2xl border border-dashed border-border bg-muted px-4 py-4 text-sm text-foreground">
+          <p className="rounded-[10px] border border-dashed border-border bg-muted px-4 py-3 text-sm text-foreground">
             Nenhum produto adicionado ainda.
           </p>
         ) : (
           selectedItemsWithProduct.map((item) => (
             <article
-              className="rounded-2xl border border-border bg-surface p-4 shadow-soft"
+              className="rounded-[14px] border border-border bg-surface p-4 shadow-sm"
               key={item.product.id}
             >
               <div className="flex items-start justify-between gap-3">
@@ -239,7 +239,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
                   </p>
                 </div>
                 <button
-                  className="inline-flex min-h-11 items-center justify-center rounded-[0.95rem] border border-red-200 px-4 py-3 text-sm font-semibold text-red-700"
+                  className="lv-button-danger h-12"
                   onClick={() => {
                     setSelectedItems((currentItems) =>
                       currentItems.filter(
@@ -302,7 +302,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
         value={JSON.stringify(selectedItems)}
       />
 
-      <section className="rounded-2xl bg-primary px-4 py-4 text-primary-foreground">
+      <section className="rounded-[14px] bg-primary px-4 py-4 text-primary-foreground">
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-medium text-primary-foreground">
             Total do pedido
@@ -314,7 +314,7 @@ export function OrderForm({ customers, products }: OrderFormProps) {
       </section>
 
       {state.error ? (
-        <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="rounded-[10px] border border-danger/30 bg-[#FEF2F2] px-4 py-3 text-sm text-danger">
           {state.error}
         </p>
       ) : null}
