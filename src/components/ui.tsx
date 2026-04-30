@@ -5,10 +5,11 @@ function joinClasses(...classes: Array<string | false | null | undefined>) {
 }
 
 export function buttonStyles(
-  variant: "ghost" | "primary" | "secondary" = "primary",
+  variant: "danger" | "ghost" | "primary" | "secondary" = "primary",
   fullWidth = true
 ) {
   return joinClasses(
+    variant === "danger" && "lv-button-danger",
     variant === "primary" && "lv-button-primary",
     variant === "secondary" && "lv-button-secondary",
     variant === "ghost" && "lv-button-ghost",
@@ -207,22 +208,18 @@ export function FeatureCard({ title, description, icon }: FeatureCardProps) {
 
 type AppHeaderProps = {
   title: string;
-  description: string;
   action?: ReactNode;
 };
 
-export function AppHeader({ title, description, action }: AppHeaderProps) {
+export function AppHeader({ title, action }: AppHeaderProps) {
   return (
-    <header className="border-b border-border bg-background/95 px-4 pb-3 pt-4 backdrop-blur">
+    <header className="border-b border-border bg-background/95 px-4 pb-2 pt-3 backdrop-blur">
       <div className="mx-auto max-w-md">
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center justify-between gap-4">
           <div>
-            <h1 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">
+            <h1 className="text-[1.35rem] font-semibold tracking-[-0.02em] text-foreground">
               {title}
             </h1>
-            <p className="mt-1 max-w-sm text-sm leading-5 text-text-secondary">
-              {description}
-            </p>
           </div>
           {action}
         </div>

@@ -31,6 +31,10 @@ function formatDateTime(value: string) {
   }).format(new Date(value));
 }
 
+function formatItemCount(count: number) {
+  return `${count} ${count === 1 ? "item" : "itens"}`;
+}
+
 function getPaymentStatusLabel(status: string) {
   if (status === "paid") {
     return "Pago";
@@ -90,23 +94,6 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
       description="Monte pedidos com cliente, itens, total e acompanhamento separado de pagamento e entrega."
     >
       <section className="space-y-4">
-        <AppCard className="p-4">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="lv-section-label">Novo pedido</p>
-              <p className="mt-2 text-sm leading-6 text-text-secondary">
-                Produtos ativos aparecem como lista principal para pedido novo.
-              </p>
-            </div>
-            <Link
-              className={buttonStyles("secondary", false)}
-              href="/app/pedidos?mode=new"
-            >
-              Criar pedido
-            </Link>
-          </div>
-        </AppCard>
-
         {isCreating ? (
           <OrderForm customers={customers} products={activeProducts} />
         ) : null}
@@ -139,7 +126,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                       {order.customer_name ?? "Cliente não encontrada"}
                     </h2>
                     <p className="mt-1 text-sm text-stone-600">
-                      {order.item_count} item(ns) ·{" "}
+                      {formatItemCount(order.item_count)} ·{" "}
                       {formatDateTime(order.created_at)}
                     </p>
                   </div>

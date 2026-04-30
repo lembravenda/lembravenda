@@ -86,6 +86,21 @@ export default async function HojePage({ searchParams }: HojePageProps) {
     hasProduct: products.length > 0
   });
   const shouldShowFirstSteps = params.welcome === "1" || !firstSteps.allDone;
+  const tasksSummary = [
+    pendingCharges.length > 0
+      ? `${pendingCharges.length} cobrança${pendingCharges.length === 1 ? "" : "s"}`
+      : null,
+    pendingDeliveries.length > 0
+      ? `${pendingDeliveries.length} entrega${pendingDeliveries.length === 1 ? "" : "s"}`
+      : null,
+    recentOrders.length > 0
+      ? `${recentOrders.length} pedido${recentOrders.length === 1 ? "" : "s"} recente${recentOrders.length === 1 ? "" : "s"}`
+      : null
+  ].filter(Boolean);
+  const heroDescription =
+    tasksSummary.length > 0
+      ? `Hoje você tem ${tasksSummary.join(", ")} para acompanhar.`
+      : "Veja o que precisa da sua atenção hoje.";
 
   return (
     <AppShell
@@ -98,10 +113,10 @@ export default async function HojePage({ searchParams }: HojePageProps) {
             O que fazer hoje
           </p>
           <h2 className="mt-3 text-2xl font-semibold tracking-normal">
-            Sua rotina organizada em um só lugar.
+            Cobrar, entregar e chamar de novo - tudo em um só lugar.
           </h2>
           <p className="mt-2 text-sm leading-7 text-primary-foreground/85">
-            Veja primeiro quem cobrar, o que entregar e o que vale retomar.
+            {heroDescription}
           </p>
         </AppCard>
 

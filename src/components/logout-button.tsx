@@ -4,7 +4,7 @@ import { buttonStyles } from "@/components/ui";
 export function LogoutButton() {
   return (
     <form action={logoutAction}>
-      <button className={buttonStyles("secondary", false)} type="submit">
+      <button className={buttonStyles("danger", false)} type="submit">
         Sair
       </button>
     </form>

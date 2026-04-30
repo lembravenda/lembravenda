@@ -116,22 +116,17 @@ const navigationItems = [
 
 type AppShellProps = {
   title: string;
-  description: string;
+  description?: string;
   action?: React.ReactNode;
   children?: React.ReactNode;
 };
 
-export function AppShell({
-  title,
-  description,
-  action,
-  children
-}: AppShellProps) {
+export function AppShell({ title, action, children }: AppShellProps) {
   const pathname = usePathname();
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background">
-      <AppHeader action={action} description={description} title={title} />
+      <AppHeader action={action} title={title} />
       <main className="flex-1 px-4 py-4 pb-[calc(5.5rem+env(safe-area-inset-bottom))]">
         {children}
       </main>

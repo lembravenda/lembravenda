@@ -115,6 +115,10 @@ select {
     @apply lv-button bg-primary-light text-primary hover:bg-primary-light/80;
   }
 
+  .lv-button-danger {
+    @apply lv-button border border-red-200 bg-red-50 text-red-700 hover:bg-red-100;
+  }
+
   .lv-input {
     @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-stone-400 focus:border-primary;
   }
