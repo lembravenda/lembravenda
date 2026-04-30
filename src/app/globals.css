@@ -4,30 +4,32 @@
 
 :root {
   color-scheme: light;
-  --lv-bg: #f4efe6;
+  --lv-bg: #F5F0E8;
   --lv-surface: #ffffff;
-  --lv-surface-muted: #f7f2ea;
-  --lv-primary: #1d6348;
-  --lv-primary-dark: #165438;
-  --lv-primary-light: #e8f5ee;
-  --lv-primary-lighter: #f0faf4;
-  --lv-accent: #c96b1a;
-  --lv-accent-light: #fff0e0;
-  --lv-accent-subtle: #fef7ee;
-  --lv-text: #1a1714;
-  --lv-text-secondary: #5c5650;
-  --lv-text-tertiary: #8c8680;
-  --lv-border: #e2ddd6;
-  --lv-border-strong: #c8c2ba;
-  --lv-success: #1f8a57;
-  --lv-warning: #a15b18;
-  --lv-urgent: #ad4b17;
-  --lv-danger: #b9382a;
-  --lv-neutral: #6c655f;
-  --lv-radius-card: 1.1rem;
-  --lv-radius-button: 0.9rem;
-  --lv-shadow-card: 0 10px 28px rgba(26, 23, 20, 0.06);
-  --lv-shadow-lift: 0 16px 40px rgba(29, 99, 72, 0.1);
+  --lv-surface-warm: #FAF7F2;
+  --lv-surface-muted: #EDE7DC;
+  --lv-primary: #1A5C3E;
+  --lv-primary-dark: #134830;
+  --lv-primary-light: #E4F2EC;
+  --lv-primary-lighter: #EFF9F4;
+  --lv-accent: #C4621A;
+  --lv-accent-light: #FFF0E0;
+  --lv-accent-subtle: #FEF7EE;
+  --lv-text: #0F0D0B;
+  --lv-text-secondary: #564E48;
+  --lv-text-tertiary: #887F78;
+  --lv-border: #E6E0D6;
+  --lv-border-strong: #CAC4BA;
+  --lv-success: #187A48;
+  --lv-warning: #985416;
+  --lv-urgent: #A24014;
+  --lv-danger: #B03020;
+  --lv-neutral: #68625C;
+  --lv-radius-card: 1rem;
+  --lv-radius-button: 0.875rem;
+  --lv-shadow-card: 0 4px 16px rgba(15,13,11,0.09), 0 2px 4px rgba(15,13,11,0.05);
+  --lv-shadow-lift: 0 16px 48px rgba(26,92,62,0.20), 0 4px 12px rgba(26,92,62,0.12);
+  --lv-shadow-green: 0 8px 32px rgba(26,92,62,0.22), 0 2px 8px rgba(26,92,62,0.14);
 }
 
 * {
@@ -36,13 +38,13 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(201, 107, 26, 0.06), transparent 26%),
-    var(--lv-bg);
+  background-color: var(--lv-bg);
   color: var(--lv-text);
   font-family: var(--font-sans), Inter, system-ui, sans-serif;
 }
@@ -68,73 +70,151 @@ select {
 }
 
 ::selection {
-  background: rgba(29, 99, 72, 0.14);
+  background: rgba(26, 92, 62, 0.14);
 }
 
 @layer base {
   :focus-visible {
-    outline: 2px solid rgba(29, 99, 72, 0.58);
+    outline: 2px solid rgba(26, 92, 62, 0.55);
     outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
+/* ─── Landing-specific layout classes ────────────────────────── */
+
+/* Hero section: dual radial gradient orbs — green top, amber right */
+.lv-hero-bg {
+  background-color: var(--lv-bg);
+  background-image:
+    radial-gradient(ellipse 100% 55% at 50% -8%, rgba(26,92,62,0.11) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 85% 15%, rgba(196,98,26,0.06) 0%, transparent 55%);
+}
+
+/* Phone mockup: 3D perspective tilt — hover eases back to near-flat */
+.lv-phone-wrap {
+  transform: perspective(1200px) rotateY(-6deg) rotateX(2deg);
+  transform-origin: center center;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+  will-change: transform;
+}
+
+.lv-phone-wrap:hover {
+  transform: perspective(1200px) rotateY(-2deg) rotateX(1deg);
+}
+
+/* Feature icon container */
+.lv-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
+  background: var(--lv-primary-light);
+  color: var(--lv-primary);
+  flex-shrink: 0;
+}
+
+/* ─── Component layer ─────────────────────────────────────────── */
 @layer components {
+  /* Cards */
   .lv-card {
-    @apply rounded-2xl border border-border bg-surface shadow-card;
+    @apply rounded-xl border border-border bg-surface shadow-card;
   }
 
   .lv-card-soft {
-    @apply rounded-2xl border border-border/80 bg-surface/80 shadow-soft backdrop-blur-sm;
+    @apply rounded-xl border border-border/60 bg-surface/80 shadow-sm backdrop-blur-sm;
   }
 
+  .lv-card-float {
+    @apply rounded-2xl bg-surface shadow-md;
+  }
+
+  /* Typography helpers */
   .lv-section-label {
-    @apply text-xs font-semibold tracking-[0.04em] text-text-secondary;
+    @apply text-xs font-semibold tracking-[0.06em] uppercase text-text-secondary;
   }
 
   .lv-title {
-    @apply text-2xl font-semibold tracking-[-0.01em] text-foreground;
+    @apply text-2xl font-semibold tracking-[-0.015em] text-foreground;
   }
 
   .lv-body {
     @apply text-sm leading-6 text-text-secondary;
   }
 
+  /* Buttons */
   .lv-button {
-    @apply inline-flex min-h-11 items-center justify-center rounded-[var(--lv-radius-button)] px-4 py-3 text-sm font-semibold transition duration-150 disabled:cursor-not-allowed disabled:opacity-70;
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-[var(--lv-radius-button)] px-5 py-2.5 text-sm font-semibold transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-60 select-none;
   }
 
   .lv-button-primary {
-    @apply lv-button bg-primary text-primary-foreground shadow-soft hover:bg-primary-dark;
+    @apply lv-button bg-primary text-primary-foreground;
+    box-shadow: var(--lv-shadow-green);
+  }
+
+  .lv-button-primary:hover:not(:disabled) {
+    background-color: var(--lv-primary-dark);
+    box-shadow: 0 20px 60px rgba(26,92,62,0.30), 0 4px 16px rgba(26,92,62,0.18);
+    transform: translateY(-1px);
+  }
+
+  .lv-button-primary:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--lv-shadow-green);
   }
 
   .lv-button-secondary {
-    @apply lv-button border border-border bg-surface text-foreground hover:bg-primary-lighter;
+    @apply lv-button border border-border bg-surface text-foreground hover:bg-muted hover:border-border-strong;
   }
 
   .lv-button-ghost {
-    @apply lv-button bg-primary-light text-primary hover:bg-primary-light/80;
+    @apply lv-button bg-primary-light text-primary hover:bg-primary-light/70;
   }
 
   .lv-button-danger {
     @apply lv-button border border-red-200 bg-red-50 text-red-700 hover:bg-red-100;
   }
 
+  /* CTA large variant (landing hero / section CTAs) */
+  .lv-button-cta {
+    @apply lv-button h-14 rounded-2xl px-8 text-base font-bold bg-primary text-primary-foreground;
+    box-shadow: var(--lv-shadow-green);
+    letter-spacing: -0.01em;
+  }
+
+  .lv-button-cta:hover:not(:disabled) {
+    background-color: var(--lv-primary-dark);
+    box-shadow: 0 24px 72px rgba(26,92,62,0.32), 0 6px 20px rgba(26,92,62,0.20);
+    transform: translateY(-2px);
+  }
+
+  .lv-button-cta:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: var(--lv-shadow-green);
+  }
+
+  /* Inputs */
   .lv-input {
-    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-stone-400 focus:border-primary;
+    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-text-tertiary focus:border-primary focus:ring-2 focus:ring-primary/10 transition;
   }
 
   .lv-textarea {
-    @apply mt-2 min-h-28 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-stone-400 focus:border-primary;
+    @apply mt-2 min-h-28 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none placeholder:text-text-tertiary focus:border-primary focus:ring-2 focus:ring-primary/10 transition;
   }
 
   .lv-select {
-    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none focus:border-primary;
+    @apply mt-2 w-full rounded-xl border border-border bg-surface px-4 py-3 text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition;
   }
 
+  /* Chips */
   .lv-chip {
-    @apply inline-flex min-h-10 items-center rounded-full border border-border bg-surface px-3 py-2 text-sm font-medium text-foreground transition hover:border-primary hover:bg-primary-light;
+    @apply inline-flex min-h-9 items-center rounded-full border border-border bg-surface px-3 py-1.5 text-sm font-medium text-foreground transition hover:border-primary hover:bg-primary-lighter;
   }
 
+  /* Status cards */
   .lv-card-urgent {
     @apply border-l-4 border-l-accent bg-accent-subtle;
   }
