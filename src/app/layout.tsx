@@ -5,6 +5,7 @@ import "./globals.css";
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: "swap",
   fallback: ["Inter", "system-ui", "sans-serif"]
 });
 

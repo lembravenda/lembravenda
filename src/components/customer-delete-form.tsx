@@ -7,7 +7,7 @@ function DeleteButtonInner() {
 
   return (
     <button
-      className="inline-flex min-h-11 items-center justify-center rounded-[0.95rem] border border-red-200 px-4 py-3 text-sm font-semibold text-red-700 transition disabled:cursor-not-allowed disabled:opacity-70"
+      className="lv-button-danger"
       disabled={pending}
       type="submit"
     >

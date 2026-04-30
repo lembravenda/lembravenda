@@ -13,7 +13,7 @@ export function BrandLogo({
 }: BrandLogoProps) {
   const content = (
     <div className="inline-flex items-center gap-3">
-      <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-soft">
+      <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-soft">
         <svg
           aria-hidden="true"
           className="h-6 w-6"
@@ -40,7 +40,7 @@ export function BrandLogo({
       </span>
       <span>
         <span
-          className={`block font-semibold tracking-normal text-foreground ${
+          className={`block font-bold tracking-[-0.02em] text-foreground ${
             size === "sm" ? "text-base" : "text-lg"
           }`}
         >

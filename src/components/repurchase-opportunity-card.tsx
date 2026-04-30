@@ -55,7 +55,7 @@ export function RepurchaseOpportunityCard({
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <p className="lv-section-label">Recompra</p>
+            <p className="lv-eyebrow">Recompra</p>
             <StatusBadge tone="urgent">Hora de chamar</StatusBadge>
           </div>
           <h3 className="text-base font-semibold text-foreground">
@@ -115,7 +115,7 @@ export function RepurchaseOpportunityCard({
             Abrir no WhatsApp
           </a>
         ) : (
-          <p className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm leading-6 text-amber-800">
+          <p className="rounded-[10px] border border-warning/30 bg-[#FEF9EE] px-4 py-3 text-sm leading-6 text-warning">
             Cadastre um telefone válido da cliente para abrir a conversa no
             WhatsApp. Por enquanto, você ainda pode copiar a mensagem.
           </p>
@@ -143,13 +143,13 @@ export function RepurchaseOpportunityCard({
         </form>
 
         {copyStatus === "success" ? (
-          <p className="text-sm font-medium text-emerald-700">
+          <p className="text-sm font-medium text-success">
             Mensagem copiada.
           </p>
         ) : null}
 
         {copyStatus === "error" ? (
-          <p className="text-sm font-medium text-red-700">
+          <p className="text-sm font-medium text-danger">
             Não foi possível copiar agora. Tente novamente.
           </p>
         ) : null}
