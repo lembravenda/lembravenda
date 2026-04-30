@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OrderDetailAnalyticsTracker } from "@/components/analytics-tracker";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import {
@@ -91,6 +92,7 @@ export default async function PedidoDetalhePage({
       title="Detalhe do pedido"
       description="Acompanhe itens, total, pagamento e entrega sem depender do produto atual."
     >
+      <OrderDetailAnalyticsTracker orderId={detail.order.id} itemCount={detail.items.length} />
       <section className="space-y-4">
         {parsedSearchParams.created === "1" ? (
           <AppCard className="border-emerald-200 p-6" id="pedido-criado">
@@ -177,6 +179,7 @@ export default async function PedidoDetalhePage({
             customerName={detail.customer?.name ?? "cliente"}
             customerPhone={detail.customer?.phone ?? null}
             items={detail.items}
+            orderId={detail.order.id}
             pixKey={authState.profile?.pix_key ?? null}
             totalCents={detail.order.total_cents}
           />

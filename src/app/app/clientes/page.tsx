@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ListPageAnalyticsTracker } from "@/components/analytics-tracker";
 import { AppShell } from "@/components/app-shell";
 import { CustomerDeleteForm } from "@/components/customer-delete-form";
 import { CustomerForm } from "@/components/customer-form";
@@ -69,6 +70,7 @@ export default async function ClientesPage({
       title="Clientes"
       description="Cadastre, encontre e atualize sua base de clientes pelo celular."
     >
+      <ListPageAnalyticsTracker type="customer" />
       <section className="space-y-4">
         {createdState === "customer-product" ? (
           <AppCard className="border-success/30 bg-primary-lighter p-6">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ListPageAnalyticsTracker } from "@/components/analytics-tracker";
 import { AppShell } from "@/components/app-shell";
 import { ProductDeactivateForm } from "@/components/product-deactivate-form";
 import { ProductForm } from "@/components/product-form";
@@ -59,6 +60,7 @@ export default async function ProdutosPage({
       title="Produtos"
       description="Cadastre preços, recompra e status dos produtos do seu catálogo."
     >
+      <ListPageAnalyticsTracker type="product" />
       <section className="space-y-4">
         {createdState === "product-order" ? (
           <AppCard className="border-success/30 bg-primary-lighter p-6">

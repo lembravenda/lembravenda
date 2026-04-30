@@ -38,6 +38,24 @@ export default function ConfiguracoesPage() {
         </AppCard>
 
         <AppCard className="p-6">
+          <p className="lv-eyebrow">Feedback</p>
+          <h2 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-foreground">
+            O que achou do LembraVenda?
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-text-secondary">
+            Sua opinião ajuda a melhorar o app. Leva menos de 2 minutos.
+          </p>
+          <a
+            className={`mt-4 ${buttonStyles("secondary", false)}`}
+            href="https://tally.so/r/lembravenda"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Dar feedback
+          </a>
+        </AppCard>
+
+        <AppCard className="p-6">
           <p className="lv-eyebrow">Conta</p>
           <h2 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-foreground">
             Acesso seguro

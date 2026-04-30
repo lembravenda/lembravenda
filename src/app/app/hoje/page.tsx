@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
+import { HojeAnalyticsTracker } from "@/components/analytics-tracker";
 import { OrderStatusActionForm } from "@/components/order-status-action-form";
 import {
   AppCard,
@@ -107,6 +108,11 @@ export default async function HojePage({ searchParams }: HojePageProps) {
       title="Hoje"
       description="Comece pelo que pede ação agora: cobrar, entregar e acompanhar os pedidos mais recentes."
     >
+      <HojeAnalyticsTracker
+        chargesCount={pendingCharges.length}
+        deliveriesCount={pendingDeliveries.length}
+        repurchasesCount={0}
+      />
       <section className="space-y-5">
         {/* Hero card — gradiente com profundidade */}
         <div

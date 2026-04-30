@@ -4,11 +4,16 @@ import { useMemo, useState } from "react";
 import type { OrderItem } from "@/types/database";
 import { AppCard, StatusBadge, buttonStyles } from "@/components/ui";
 import { buildPaymentMessage, buildWhatsAppLink } from "@/lib/orders/charge";
+import {
+  trackPaymentMessageCopied,
+  trackWhatsappLinkOpened
+} from "@/lib/analytics";
 
 type OrderChargeCardProps = {
   customerName: string;
   customerPhone: string | null;
   items: Pick<OrderItem, "product_name_snapshot" | "quantity">[];
+  orderId?: string;
   pixKey: string | null;
   totalCents: number;
 };
@@ -17,6 +22,7 @@ export function OrderChargeCard({
   customerName,
   customerPhone,
   items,
+  orderId,
   pixKey,
   totalCents
 }: OrderChargeCardProps) {
@@ -42,6 +48,7 @@ export function OrderChargeCard({
     try {
       await navigator.clipboard.writeText(paymentMessage);
       setCopyStatus("success");
+      trackPaymentMessageCopied({ order_id: orderId ?? "" });
     } catch {
       setCopyStatus("error");
     }
@@ -84,6 +91,12 @@ export function OrderChargeCard({
           <a
             className={buttonStyles("secondary")}
             href={whatsappLink}
+            onClick={() =>
+              trackWhatsappLinkOpened({
+                order_id: orderId ?? "",
+                context: "charge"
+              })
+            }
             rel="noreferrer"
             target="_blank"
           >

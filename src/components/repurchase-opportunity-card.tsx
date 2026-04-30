@@ -5,6 +5,10 @@ import { useFormStatus } from "react-dom";
 import { AppCard, StatusBadge, buttonStyles } from "@/components/ui";
 import type { RepurchaseOpportunity } from "@/lib/repurchase/server";
 import { buildWhatsAppLink } from "@/lib/orders/charge";
+import {
+  trackRepurchaseMessageCopied,
+  trackWhatsappLinkOpened
+} from "@/lib/analytics";
 
 function ContactedButton() {
   const { pending } = useFormStatus();
@@ -45,6 +49,9 @@ export function RepurchaseOpportunityCard({
     try {
       await navigator.clipboard.writeText(opportunity.message);
       setCopyStatus("success");
+      trackRepurchaseMessageCopied({
+        follow_up_id: opportunity.order_id
+      });
     } catch {
       setCopyStatus("error");
     }
@@ -109,6 +116,12 @@ export function RepurchaseOpportunityCard({
           <a
             className={buttonStyles("secondary")}
             href={whatsappLink}
+            onClick={() =>
+              trackWhatsappLinkOpened({
+                order_id: opportunity.order_id,
+                context: "repurchase"
+              })
+            }
             rel="noreferrer"
             target="_blank"
           >

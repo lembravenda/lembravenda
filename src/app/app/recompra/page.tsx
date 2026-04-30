@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RecompraAnalyticsTracker } from "@/components/analytics-tracker";
 import { AppShell } from "@/components/app-shell";
 import { RepurchaseOpportunityCard } from "@/components/repurchase-opportunity-card";
 import { EmptyState, SectionHeader, buttonStyles } from "@/components/ui";
@@ -26,6 +27,8 @@ export default async function RecompraPage() {
   const opportunities = await listRepurchaseOpportunities(currentUserId);
 
   return (
+    <>
+    <RecompraAnalyticsTracker />
     <AppShell
       title="Recompra"
       description="Acompanhe quando pode ser um bom momento para oferecer reposição de produtos comprados."
@@ -62,5 +65,6 @@ export default async function RecompraPage() {
         </section>
       )}
     </AppShell>
+    </>
   );
 }

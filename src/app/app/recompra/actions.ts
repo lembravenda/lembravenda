@@ -73,5 +73,5 @@ export async function markRepurchaseContactedAction(formData: FormData) {
 
   revalidatePath("/app/recompra");
   revalidatePath("/app/hoje");
-  redirect("/app/recompra");
+  redirect("/app/recompra?contacted=1");
 }
