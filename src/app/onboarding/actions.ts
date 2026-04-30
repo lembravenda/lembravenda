@@ -29,7 +29,7 @@ export async function saveOnboardingAction(
   const primaryCategory = String(formData.get("primary_category") ?? "").trim();
 
   if (!fullName) {
-    return { error: "Informe o nome da revendedora." };
+    return { error: "Informe seu nome." };
   }
 
   if (!primaryCategory) {

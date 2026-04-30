@@ -76,4 +76,4 @@
 3. Se a conta ainda não tem base suficiente, a tela mostra checklist de primeiros passos com CTAs claros.
 4. Usuária toca em uma tarefa para agir.
 5. Ao concluir, tarefa desaparece ou muda de seção.
-6. Se não houver tarefas e a usuária já tiver criado a base inicial, app mostra estado vazio da rotina do dia.
+6. Se não houver tarefas e o usuário já tiver criado a base inicial, app mostra estado vazio da rotina do dia.

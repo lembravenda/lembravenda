@@ -25,7 +25,7 @@
 
 ## Testes E2E
 
-- `/login` redireciona para `/onboarding` quando a usuária já está autenticada e o perfil ainda está incompleto.
+- `/login` redireciona para `/onboarding` quando o usuário já está autenticada e o perfil ainda está incompleto.
 - `/onboarding` redireciona para `/login` sem sessão.
 - Onboarding completo.
 - Criar cliente, produto e pedido.

@@ -2,7 +2,7 @@
 
 ## Perfil inicial
 
-Revendedoras brasileiras e social sellers que:
+Vendedores autônomos brasileiros e social sellers que:
 
 - vendem principalmente por WhatsApp e Instagram
 - trabalham sozinhas

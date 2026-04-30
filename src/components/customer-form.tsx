@@ -47,7 +47,7 @@ export function CustomerForm({ customer, mode }: CustomerFormProps) {
     <form
       action={formAction}
       className="lv-card space-y-5 p-6"
-      id={mode === "create" ? "nova-cliente" : undefined}
+      id={mode === "create" ? "novo-cliente" : undefined}
     >
       <div>
         <p className="lv-eyebrow">

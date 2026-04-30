@@ -62,7 +62,7 @@ export default async function ClientesPage({
       action={
         <Link
           className={buttonStyles("primary", false)}
-          href="/app/clientes?mode=new#nova-cliente"
+          href="/app/clientes?mode=new#novo-cliente"
         >
           Adicionar
         </Link>
@@ -74,7 +74,7 @@ export default async function ClientesPage({
       <section className="space-y-4">
         {createdState === "customer-product" ? (
           <AppCard className="border-success/30 bg-primary-lighter p-6">
-            <p className="lv-eyebrow">Cliente salva</p>
+            <p className="lv-eyebrow">Cliente salvo</p>
             <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora cadastre seu primeiro produto.
             </h2>
@@ -90,9 +90,9 @@ export default async function ClientesPage({
               </Link>
               <Link
                 className={buttonStyles("secondary")}
-                href="/app/clientes?mode=new#nova-cliente"
+                href="/app/clientes?mode=new#novo-cliente"
               >
-                Adicionar outra cliente
+                Adicionar outro cliente
               </Link>
             </div>
           </AppCard>
@@ -100,7 +100,7 @@ export default async function ClientesPage({
 
         {createdState === "customer-order" ? (
           <AppCard className="border-success/30 bg-primary-lighter p-6">
-            <p className="lv-eyebrow">Cliente salva</p>
+            <p className="lv-eyebrow">Cliente salvo</p>
             <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
               Agora você pode criar um pedido.
             </h2>
@@ -163,29 +163,29 @@ export default async function ClientesPage({
               !hasSearch ? (
                 <Link
                   className={buttonStyles("primary")}
-                  href="/app/clientes?mode=new#nova-cliente"
+                  href="/app/clientes?mode=new#novo-cliente"
                 >
-                  Adicionar primeira cliente
+                  Adicionar primeiro cliente
                 </Link>
               ) : undefined
             }
             description={
               hasSearch
-                ? "Tente outro nome ou telefone para encontrar a cliente."
+                ? "Tente outro nome ou telefone para encontrar o cliente."
                 : "Assim você começa a organizar contatos, pedidos e cobranças."
             }
             eyebrow={hasSearch ? "Busca" : "Primeiro passo"}
             title={
               hasSearch
-                ? "Nenhuma cliente encontrada"
-                : "Cadastre sua primeira cliente"
+                ? "Nenhum cliente encontrado"
+                : "Cadastre seu primeiro cliente"
             }
           />
         ) : (
           <section className="space-y-3">
             <SectionHeader
               description="Sua base fica mais clara quando cada cliente tem telefone, grupos e observações."
-              title="Clientes cadastradas"
+              title="Clientes cadastrados"
             />
             {customers.map((customer) => (
               <AppCard className="p-4" key={customer.id}>
@@ -215,7 +215,7 @@ export default async function ClientesPage({
                   </div>
                   <div className="flex items-start justify-between gap-4">
                     <dt className="font-medium text-foreground">
-                      Grupos da cliente
+                      Grupos do cliente
                     </dt>
                     <dd className="text-right">
                       {customer.tags.length > 0 ? (

@@ -42,7 +42,7 @@
 
 | Evitar                  | Usar                              |
 | ----------------------- | --------------------------------- |
-| Tag                     | Grupos da cliente                 |
+| Tag                     | Grupos do cliente                 |
 | Dias para recompra      | Quando lembrar de vender de novo? |
 | Lead                    | Cliente                           |
 | Instrumentação pendente | Não exibir na interface           |
@@ -59,13 +59,13 @@
 
 ### Use
 
-- `Cadastre sua primeira cliente`
+- `Cadastre seu primeiro cliente`
 - `Cadastre seu primeiro produto`
 - `Crie seu primeiro pedido`
 - `Copiar mensagem`
 - `Abrir no WhatsApp`
 - `Vamos organizar sua primeira venda?`
-- `Volte a falar com as clientes no momento certo.`
+- `Volte a falar com seus clientes no momento certo.`
 
 ### Não use
 

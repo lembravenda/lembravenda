@@ -3,7 +3,7 @@
 ## Entra no MVP
 
 - Autenticação com e-mail ou provedor simples suportado pela stack.
-- Perfil da revendedora.
+- Perfil do usuário.
 - Cadastro, edição, listagem e exclusão segura de clientes.
 - Cadastro, edição, listagem e inativação segura de produtos.
 - Criação de pedidos com múltiplos itens.

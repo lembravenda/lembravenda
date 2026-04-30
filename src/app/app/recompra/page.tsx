@@ -30,7 +30,7 @@ export default async function RecompraPage() {
     <>
     <RecompraAnalyticsTracker />
     <AppShell
-      title="Recompra"
+      title="Cobranças"
       description="Acompanhe quando pode ser um bom momento para oferecer reposição de produtos comprados."
     >
       {opportunities.length === 0 ? (
@@ -45,7 +45,7 @@ export default async function RecompraPage() {
           }
           description="As oportunidades aparecem quando você cria pedidos com produtos que têm lembrete de recompra."
           eyebrow="Sem alertas agora"
-          title="Nenhuma cliente para chamar de novo ainda"
+          title="Nenhum cliente para chamar de novo ainda"
         />
       ) : (
         <section className="space-y-4">

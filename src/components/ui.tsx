@@ -229,7 +229,7 @@ export function AppHeader({ title, action }: AppHeaderProps) {
     <header
       className="sticky top-0 z-30 px-4 pb-3 pt-4"
       style={{
-        background: "rgba(248,247,245,0.88)",
+        background: "rgba(245,240,232,0.90)",
         backdropFilter: "blur(20px) saturate(180%)",
         WebkitBackdropFilter: "blur(20px) saturate(180%)",
         borderBottom: "1px solid rgba(0,0,0,0.06)"

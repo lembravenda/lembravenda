@@ -142,7 +142,7 @@ export async function updateCustomerAction(
     const customer = await updateCustomer(customerId, user.id, draft);
 
     if (!customer) {
-      return { error: "Cliente não encontrada para edição." };
+      return { error: "Cliente não encontrado para edição." };
     }
   } catch (error) {
     return {

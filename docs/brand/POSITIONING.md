@@ -26,6 +26,6 @@ Em poucos minutos, a pessoa sai do improviso e passa a ter clareza sobre:
 
 ## Mensagens de apoio
 
-- pensado para revendedoras e social sellers
+- pensado para quem vende pelo WhatsApp e redes sociais
 - sem linguagem técnica
 - sem prometer automação complexa

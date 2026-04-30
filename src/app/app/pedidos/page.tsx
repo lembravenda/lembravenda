@@ -123,7 +123,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <h2 className="text-base font-semibold text-foreground">
-                      {order.customer_name ?? "Cliente não encontrada"}
+                      {order.customer_name ?? "Cliente não encontrado"}
                     </h2>
                     <p className="mt-1 text-sm text-text-secondary">
                       {formatItemCount(order.item_count)} ·{" "}

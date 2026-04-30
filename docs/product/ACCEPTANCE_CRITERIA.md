@@ -8,14 +8,14 @@
 - Erros de login são exibidos em português brasileiro.
 - Nenhum segredo é exposto no frontend.
 
-## Perfil da revendedora
+## Perfil do usuário
 
 - Perfil pertence ao usuário autenticado.
-- Nome da revendedora é obrigatório.
+- Nome do usuário é obrigatório.
 - Categoria principal é obrigatória.
 - Chave Pix é opcional.
 - Dados salvos aparecem nas mensagens geradas.
-- Após concluir o onboarding, a usuária volta para a tela "Hoje" com orientação de primeiros passos.
+- Após concluir o onboarding, o usuário volta para a tela "Hoje" com orientação de primeiros passos.
 - Tela possui loading, erro e estado vazio/incompleto.
 
 ## Clientes
@@ -73,7 +73,7 @@
 
 - Oportunidade de recompra é calculada a partir da última compra elegível de um produto com `repurchase_interval_days`.
 - Pedido cancelado não gera oportunidade de recompra.
-- `follow_ups` com `type = repurchase` persistem status de contato como `done` ou `dismissed` quando a usuária age sobre a oportunidade.
+- `follow_ups` com `type = repurchase` persistem status de contato como `done` ou `dismissed` quando o usuário age sobre a oportunidade.
 - Oportunidades vencidas ou de hoje aparecem na página `Recompra`.
 - Mensagem de recompra pode ser copiada.
 - Marcar como contatada remove a oportunidade da lista pendente.

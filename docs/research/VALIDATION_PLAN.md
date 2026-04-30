@@ -21,7 +21,7 @@ Validar se o LembraVenda gera ativação inicial, uso recorrente e intenção re
 
 ### 3. Piloto controlado
 
-- grupo pequeno de revendedoras alinhadas ao ICP
+- grupo pequeno de usuários alinhadas ao ICP
 - suporte próximo
 - observação de ativação e uso
 
@@ -60,7 +60,7 @@ Validar se o LembraVenda gera ativação inicial, uso recorrente e intenção re
 ## Insumos já discutidos e agora consolidados
 
 - canais iniciais mais promissores:
-  - comunidades de revendedoras
+  - comunidades de vendedores
   - indicação
   - conteúdo curto em Instagram e TikTok
   - abordagem manual para validação com rede próxima

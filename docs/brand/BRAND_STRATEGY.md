@@ -12,7 +12,7 @@ Lembrar quem cobrar, entregar e chamar para comprar de novo.
 
 - simples de entender
 - mobile-first de verdade
-- pensado para rotina de revendedoras
+- pensado para a rotina de quem vende
 - mensagem pronta para copiar e enviar
 - sem complexidade de ERP ou CRM pesado
 

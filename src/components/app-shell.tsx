@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AppHeader } from "@/components/ui";
 
 // ─── Nav icons — outline (inativo) + solid fill (ativo) ──────────
 const navigationItems = [
@@ -82,7 +81,7 @@ const navigationItems = [
   },
   {
     href: "/app/recompra",
-    label: "Recompra",
+    label: "Cobranças",
     iconOutline: (
       <svg aria-hidden="true" className="h-[20px] w-[20px]" fill="none" viewBox="0 0 24 24">
         <path
@@ -105,7 +104,7 @@ const navigationItems = [
   },
   {
     href: "/app/configuracoes",
-    label: "Ajustes",
+    label: "Conta",
     iconOutline: (
       <svg aria-hidden="true" className="h-[20px] w-[20px]" fill="none" viewBox="0 0 24 24">
         <path
@@ -140,18 +139,42 @@ export function AppShell({ title, action, children }: AppShellProps) {
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background">
-      <AppHeader action={action} title={title} />
+      {/* Header — Liquid Glass com fundo pedra-quente */}
+      <header
+        className="sticky top-0 z-30 px-4 pb-3 pt-4"
+        style={{
+          background: "rgba(245,240,232,0.90)",
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
+          borderBottom: "1px solid rgba(0,0,0,0.06)"
+        }}
+      >
+        <div className="mx-auto max-w-md">
+          <div className="flex items-center justify-between gap-4">
+            {/* Logo wordmark Instrument Serif */}
+            <h1 className="text-xl font-bold tracking-[-0.025em] text-foreground">
+              <span className="font-display italic" style={{ color: "#2E7D57", fontStyle: "italic" }}>
+                Lembra
+              </span>
+              <span className="font-display" style={{ color: "#1A1A1A" }}>
+                Venda
+              </span>
+            </h1>
+            {action}
+          </div>
+        </div>
+      </header>
 
       <main className="flex-1 px-4 py-5 pb-[calc(5rem+env(safe-area-inset-bottom))]">
         {children}
       </main>
 
-      {/* Bottom Navigation — Liquid Glass */}
+      {/* Bottom Navigation — Liquid Glass pedra-quente */}
       <nav
         aria-label="Navegação principal"
         className="fixed inset-x-0 bottom-0 z-40"
         style={{
-          background: "rgba(255,255,255,0.85)",
+          background: "rgba(245,240,232,0.92)",
           backdropFilter: "blur(24px) saturate(180%)",
           WebkitBackdropFilter: "blur(24px) saturate(180%)",
           borderTop: "1px solid rgba(0,0,0,0.07)"
@@ -175,32 +198,35 @@ export function AppShell({ title, action, children }: AppShellProps) {
                 href={item.href}
                 key={item.href}
               >
-                {/* Pill indicator — Liquid Glass style */}
+                {/* Pill indicator — topo */}
                 <span
                   aria-hidden="true"
                   className={`absolute inset-x-2.5 top-0 h-[2.5px] rounded-b-full transition-all duration-300 ${
-                    isActive ? "bg-primary opacity-100" : "opacity-0"
+                    isActive ? "opacity-100" : "opacity-0"
                   }`}
+                  style={isActive ? { background: "#F5A623" } : undefined}
                 />
 
-                {/* Icon container — solid quando ativo */}
+                {/* Icon — filled quando ativo, fundo âmbar suave */}
                 <span
                   className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${
                     isActive
-                      ? "bg-primary/10 text-primary scale-100"
+                      ? "scale-100"
                       : "text-text-tertiary group-hover:text-text-secondary group-hover:bg-muted"
                   }`}
+                  style={isActive ? { background: "rgba(46,125,87,0.12)", color: "#2E7D57" } : undefined}
                 >
                   {isActive ? item.iconSolid : item.iconOutline}
                 </span>
 
                 {/* Label */}
                 <span
-                  className={`text-[9.5px] leading-none transition-all ${
+                  className={`text-[9px] leading-none transition-all ${
                     isActive
-                      ? "font-semibold text-primary"
+                      ? "font-bold"
                       : "font-medium text-text-tertiary group-hover:text-text-secondary"
                   }`}
+                  style={isActive ? { color: "#2E7D57" } : undefined}
                 >
                   {item.label}
                 </span>

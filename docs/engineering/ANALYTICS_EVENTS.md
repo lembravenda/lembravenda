@@ -2,7 +2,7 @@
 
 Eventos devem evitar dados pessoais em propriedades. Usar IDs internos quando necessário e nunca enviar nome de cliente, telefone, chave Pix, endereço, observações ou conteúdo completo de mensagens.
 
-Status atual: os eventos abaixo estão definidos na documentação, mas a instrumentação ainda não foi implementada no app. Isso não bloqueia a cobrança manual do MVP.
+Status atual: eventos instrumentados com Vercel Analytics + PostHog (implementado em abril 2026). Componente `analytics-tracker.tsx` e helper `analytics.ts` ativos em todas as telas principais.
 
 | Evento                          | Quando dispara                   | Propriedades sugeridas          |
 | ------------------------------- | -------------------------------- | ------------------------------- |

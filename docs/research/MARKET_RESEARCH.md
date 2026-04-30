@@ -6,7 +6,7 @@ O LembraVenda nasce para um nicho com rotina comercial recorrente, baixa estrutu
 
 ## O que já sabemos
 
-- Revendedoras e social sellers operam grande parte da rotina pelo celular.
+- Vendedores autônomos e social sellers operam grande parte da rotina pelo celular.
 - Muitas controlam clientes, pedidos e cobranças em caderno, bloco de notas, planilha ou conversa perdida.
 - O WhatsApp resolve conversa, mas não organiza prioridades do dia.
 - Cobrança e recompra costumam depender de memória ou esforço manual sem apoio.
@@ -39,7 +39,7 @@ Uma ferramenta simples e mobile-first pode capturar valor se ajudar a pessoa a:
 
 - Confundir desejo por automação com necessidade real do problema inicial.
 - Superestimar a importância de recursos “de CRM” antes de validar rotina básica.
-- Projetar comportamento de revendedoras experientes em cima de perfis iniciantes.
+- Projetar comportamento de vendedores experientes em cima de perfis iniciantes.
 
 ## Próximos aprendizados necessários
 

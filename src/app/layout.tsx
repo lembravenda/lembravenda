@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans, Instrument_Serif } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -8,6 +8,14 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
   display: "swap",
   fallback: ["Inter", "system-ui", "sans-serif"]
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap"
 });
 
 export const metadata: Metadata = {
@@ -27,7 +35,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#1D6348"
+  themeColor: "#2E7D57"
 };
 
 export default function RootLayout({
@@ -37,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${plusJakartaSans.variable} min-h-screen antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${instrumentSerif.variable} min-h-screen antialiased`}>
         {children}
         <Analytics />
       </body>

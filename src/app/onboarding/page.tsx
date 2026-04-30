@@ -23,7 +23,7 @@ export default async function OnboardingPage() {
       <AppCard className="mb-5 overflow-hidden bg-surface p-6">
         <p className="lv-eyebrow">Vamos começar</p>
         <h1 className="mt-3 text-2xl font-bold tracking-[-0.025em] text-foreground">
-          Complete seu perfil de revendedora
+          Complete seu perfil
         </h1>
         <p className="mt-3 text-sm leading-6 text-text-secondary">
           Essas informações ajudam a montar suas mensagens e organizar seus

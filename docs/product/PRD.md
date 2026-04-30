@@ -1,22 +1,22 @@
-# PRD - Agenda Inteligente para Revendedoras
+# PRD — LembraVenda
 
 ## Visão do produto
 
-Ser a agenda operacional mais simples para revendedoras que vendem por WhatsApp e Instagram, ajudando a lembrar quem cobrar, quem atender, o que entregar e quando sugerir recompra, sempre com ações manuais assistidas.
+Ser a agenda operacional mais simples para quem vende por WhatsApp e Instagram, ajudando a lembrar quem cobrar, quem atender, o que entregar e quando sugerir recompra, sempre com ações manuais assistidas.
 
 ## Problema
 
-Revendedoras usam conversas, caderno, planilhas e memória para controlar vendas. Isso gera pedidos esquecidos, cobranças atrasadas, perda de recompra e dificuldade para enxergar o que precisa ser feito hoje.
+Vendedores autônomos usam conversas, caderno, planilhas e memória para controlar vendas. Isso gera pedidos esquecidos, cobranças atrasadas, perda de recompra e dificuldade para enxergar o que precisa ser feito hoje.
 
 ## ICP
 
-Revendedoras autônomas no Brasil que vendem produtos recorrentes ou de catálogo por canais sociais, com 20 a 300 clientes ativos, operação individual ou familiar, e baixa tolerância a ferramentas complexas.
+Vendedores autônomos no Brasil que vendem produtos recorrentes ou de catálogo por canais sociais, com 20 a 300 clientes ativos, operação individual ou familiar, e baixa tolerância a ferramentas complexas.
 
 ## Personas
 
-- **Revendedora solo:** vende cosméticos, roupas, semijoias ou produtos de catálogo; precisa lembrar pedidos e cobrar sem parecer desorganizada.
+- **Vendedor solo:** vende cosméticos, roupas, semijoias ou produtos de catálogo; precisa lembrar pedidos e cobrar sem parecer desorganizada.
 - **Social seller recorrente:** vende pelo Instagram e fecha no WhatsApp; quer saber quando chamar clientes para recompra.
-- **Microempreendedora informal:** controla tudo no celular e precisa de uma solução leve, em português, sem configuração técnica.
+- **Microempreendedor informal:** controla tudo no celular e precisa de uma solução leve, em português, sem configuração técnica.
 
 ## Proposta de valor
 
@@ -24,12 +24,12 @@ Uma agenda de vendas mobile-first que transforma pedidos, cobranças e recompras
 
 ## Objetivo do MVP
 
-Validar se a usuária percebe valor suficiente para usar e pagar por uma agenda operacional sem automações complexas, WhatsApp API, checkout próprio, split, emissão fiscal, marketplace, app nativo ou intermediação financeira.
+Validar se o usuário percebe valor suficiente para usar e pagar por uma agenda operacional sem automações complexas, WhatsApp API, checkout próprio, split, emissão fiscal, marketplace, app nativo ou intermediação financeira.
 
 ## Funcionalidades obrigatórias
 
 - Autenticação.
-- Perfil da revendedora com nome, marca, telefone, categoria principal e chave Pix opcional.
+- Perfil do usuário com nome, marca, telefone, categoria principal e chave Pix opcional.
 - Cadastro e listagem de clientes.
 - Cadastro e listagem de produtos.
 - Criação de pedidos com itens, valores e status.

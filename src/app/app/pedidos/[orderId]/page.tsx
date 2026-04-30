@@ -116,7 +116,7 @@ export default async function PedidoDetalhePage({
             <div>
               <p className="lv-eyebrow">Cliente</p>
               <h2 className="mt-2 text-xl font-bold tracking-[-0.025em] text-foreground">
-                {detail.customer?.name ?? "Cliente não encontrada"}
+                {detail.customer?.name ?? "Cliente não encontrado"}
               </h2>
             </div>
             <p className="text-sm text-text-secondary">

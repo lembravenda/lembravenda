@@ -237,7 +237,7 @@ export default async function HomePage() {
       <div className="border-y border-border bg-surface">
         <div className="mx-auto max-w-6xl px-5 py-4 md:px-10">
           <p className="text-center text-sm text-text-secondary">
-            Usado por vendedoras de{" "}
+            Usado por quem vende{" "}
             <strong className="font-semibold text-foreground">cosméticos</strong>,{" "}
             <strong className="font-semibold text-foreground">semijoias</strong>,{" "}
             <strong className="font-semibold text-foreground">moda</strong>,{" "}
@@ -504,12 +504,12 @@ export default async function HomePage() {
             {
               quote: "Parei de perder cobrança no meio da semana. Abro o app e já sei exatamente quem chamar.",
               name: "Juliana M.",
-              role: "Revendedora de cosméticos"
+              role: "Vendedor de cosméticos"
             },
             {
               quote: "Sempre esquecia de voltar para clientes que sumiram. O lembrete de recompra mudou minha rotina.",
               name: "Carla S.",
-              role: "Vendedora de semijoias"
+              role: "Vendedor de semijoias"
             },
             {
               quote: "App simples e direto. Abri, cadastrei, já entendi o que precisava fazer no dia.",

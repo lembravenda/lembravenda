@@ -3,12 +3,12 @@
 ## LGPD
 
 - Coletar apenas dados necessários para a operação do MVP.
-- Informar finalidade dos dados de clientes cadastrados pela revendedora.
+- Informar finalidade dos dados de clientes cadastrados pelo usuário.
 - Permitir exclusão ou anonimização mediante solicitação.
 - Evitar dados sensíveis; observações de clientes devem ter orientação contra informações excessivas.
 - Registrar política de retenção antes do piloto público.
 - Não usar dados de clientes finais para marketing próprio da plataforma.
-- Exportação e exclusão de dados da revendedora devem ser planejadas antes de monetização pública.
+- Exportação e exclusão de dados do usuário devem ser planejadas antes de monetização pública.
 
 ## Autenticação
 

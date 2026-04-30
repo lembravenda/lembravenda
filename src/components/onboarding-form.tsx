@@ -40,7 +40,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       ) : null}
 
       <label className="block text-sm font-medium text-foreground">
-        Nome da revendedora
+        Seu nome
         <input
           className="lv-input"
           defaultValue={profile?.full_name ?? ""}

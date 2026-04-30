@@ -6,7 +6,7 @@ O LembraVenda é um webapp mobile-first para quem vende pelo WhatsApp organizar 
 
 - MVP funcional
 - produção online: [https://lembravenda.vercel.app](https://lembravenda.vercel.app)
-- aprovado para teste externo pequeno
+- aprovado para piloto externo — design system v2 Calor Profissional implementado
 - documentação reorganizada como fonte de verdade do projeto
 
 O produto não envia mensagens automaticamente, não usa WhatsApp API, não processa pagamentos, não faz checkout, não faz split, não emite nota fiscal e não é marketplace.
@@ -199,6 +199,21 @@ git remote add origin https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git
 git push -u origin main
 ```
 
-## Próximo passo recomendado
+## Estado atual — abril 2026
 
-Usar [docs/engineering/RELEASE_CHECKLIST.md](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/engineering/RELEASE_CHECKLIST.md) como gate final antes de novos ciclos de teste externo, e preparar a rodada de identidade visual e landing page com base nos briefs em [docs/brand](/Users/wagnersoares/Documents/Codex/2026-04-28/voc-o-tech-lead-product-manager/docs/brand).
+### Implementado
+- Design system Calor Profissional v2 (verde-floresta, âmbar, pedra-quente)
+- Logo wordmark Instrument Serif
+- Bottom nav Liquid Glass com ícones solid/outline
+- PWA instalável (manifest + ícones 192/512/apple-touch)
+- Analytics: Vercel Analytics + PostHog instrumentados
+- Feedback link nas Configurações
+- Landing page mobile-first (10 blocos)
+- Linguagem neutra PT-BR em toda a interface
+
+### Próximos passos
+1. Rodar piloto com primeiros usuários reais.
+2. Medir ativação e intenção de pagamento (métricas em [docs/product/PRD.md](/docs/product/PRD.md)).
+3. Customizar e-mail de confirmação do Supabase para a marca LembraVenda.
+4. Configurar SMTP com domínio próprio antes de tráfego pago.
+5. CSP (Content Security Policy) — V3.

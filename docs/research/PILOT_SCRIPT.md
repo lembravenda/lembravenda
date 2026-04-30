@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Guiar entrevistas e sessões de teste com revendedoras reais durante o piloto controlado.
+Guiar entrevistas e sessões de teste com usuários reais durante o piloto controlado.
 
 ## Antes da sessão
 

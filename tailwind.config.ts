@@ -5,41 +5,48 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // ─── Neutrals — off-white neutro, não warm-craft (abril 2026)
-        background: "#F8F7F5",
-        foreground: "#111110",
-        muted: "#F1F0EE",
+        // ─── Neutrals — Pedra Quente (Calor Profissional 2026)
+        background: "#F5F0E8",
+        foreground: "#1A1A1A",
+        muted: "#EDE8DF",
         surface: "#FFFFFF",
-        "surface-raised": "#FAFAF9",
-        border: "#E2E0DD",
-        "border-strong": "#C8C5C0",
+        "surface-raised": "#FAF8F4",
+        border: "#DDD8CE",
+        "border-strong": "#C4BEAF",
 
-        // ─── Primary — verde mantido
-        primary: "#1A5C3E",
-        "primary-dark": "#134830",
-        "primary-light": "#EBF5F0",
+        // ─── Primary — Verde Floresta #2E7D57
+        primary: "#2E7D57",
+        "primary-dark": "#1A5C3E",
+        "primary-light": "#EAF4EF",
         "primary-lighter": "#F3FAF6",
         "primary-foreground": "#ffffff",
 
-        // ─── Accent — laranja atenção
-        accent: "#C4621A",
-        "accent-light": "#FFF0E0",
-        "accent-subtle": "#FEF7EE",
+        // ─── Amber — Âmbar #F5A623 (CTA principal)
+        amber: "#F5A623",
+        "amber-dark": "#D4881A",
+        "amber-light": "#FFF8E7",
+        "amber-foreground": "#1A1A1A",
 
-        // ─── Semânticos — valores 2026
+        // ─── Accent — legado mantido (alias amber)
+        accent: "#F5A623",
+        "accent-light": "#FFF8E7",
+        "accent-subtle": "#FEFAF0",
+
+        // ─── Semânticos — 2026
         success: "#16A34A",
         danger: "#DC2626",
-        warning: "#B45309",
+        warning: "#D97706",
         urgent: "#C2410C",
         neutral: "#71717A",
 
         // ─── Texto
-        "text-secondary": "#6B6560",
-        "text-tertiary": "#9B9590"
+        "text-secondary": "#6B7280",
+        "text-tertiary": "#9CA3AF"
       },
 
       fontFamily: {
-        sans: ["var(--font-sans)", "Inter var", "Inter", "system-ui", "sans-serif"]
+        sans: ["var(--font-sans)", "Plus Jakarta Sans", "Inter", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"]
       },
 
       fontSize: {
@@ -95,11 +102,13 @@ const config: Config = {
 
       backgroundImage: {
         "hero-glow":
-          "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(26,92,62,0.10) 0%, transparent 60%)",
+          "radial-gradient(ellipse 80% 50% at 50% -10%, rgba(46,125,87,0.10) 0%, transparent 60%)",
         "accent-glow":
-          "radial-gradient(ellipse 50% 35% at 80% 15%, rgba(196,98,26,0.06) 0%, transparent 55%)",
+          "radial-gradient(ellipse 50% 35% at 80% 15%, rgba(245,166,35,0.08) 0%, transparent 55%)",
         "green-section":
-          "linear-gradient(135deg, #1A5C3E 0%, #134830 55%, #0E3525 100%)"
+          "linear-gradient(135deg, #2E7D57 0%, #1A5C3E 55%, #134830 100%)",
+        "amber-section":
+          "linear-gradient(135deg, #F5A623 0%, #D4881A 100%)"
       },
 
       keyframes: {

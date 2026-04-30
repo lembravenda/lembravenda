@@ -22,7 +22,7 @@ O LembraVenda é um webapp mobile-first em Next.js App Router com autenticação
 
 - tabelas principais: `profiles`, `customers`, `products`, `orders`, `order_items`, `follow_ups`
 - `user_id` obrigatório em dados da conta
-- RLS habilitado nas tabelas da usuária
+- RLS habilitado nas tabelas do usuário
 
 ### Lógica de negócio
 
@@ -45,6 +45,23 @@ O LembraVenda é um webapp mobile-first em Next.js App Router com autenticação
 
 ## Pendências técnicas conhecidas
 
-- criação de `orders + order_items` ainda não é transação SQL única
+- criação de `orders + order_items` ainda não é transação SQL única (cleanup compensatório ativo)
 - E2E depende de ambiente com porta liberada
-- CSP ainda não está aplicada para evitar quebra prematura do app
+- CSP ainda não está aplicada — prioridade para V3 antes de escalar tráfego pago
+
+## Implementações adicionais (abril 2026)
+
+### Analytics
+- `@vercel/analytics` e `posthog-js` instalados.
+- Helper `src/lib/analytics.ts` centraliza todos os eventos.
+- Componente `src/components/analytics-tracker.tsx` instrumenta page views e ações.
+
+### PWA
+- Ícones em `public/`: `icon-192.png`, `icon-512.png`, `apple-touch-icon.png`, `favicon-32.png`.
+- `manifest.ts` atualizado com nome, cores e ícones do Calor Profissional.
+
+### Design System v2 — Calor Profissional
+- Paleta atualizada em `tailwind.config.ts` e `globals.css`.
+- Tokens CSS `--lv-amber`, `--lv-whatsapp`, `--lv-shadow-amber` adicionados.
+- Instrument Serif via `next/font/google` como `--font-display`.
+- Bottom nav com Liquid Glass (`backdrop-filter`).

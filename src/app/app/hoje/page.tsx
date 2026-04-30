@@ -119,16 +119,16 @@ export default async function HojePage({ searchParams }: HojePageProps) {
           className="relative overflow-hidden rounded-xl p-6 text-primary-foreground"
           style={{
             background:
-              "linear-gradient(135deg, #1A5C3E 0%, #134830 60%, #0D3324 100%)"
+              "linear-gradient(135deg, #2E7D57 0%, #1A5C3E 60%, #134830 100%)"
           }}
         >
-          {/* Subtle radial orb for depth */}
+          {/* Subtle radial orb âmbar para profundidade */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full opacity-20"
+            className="pointer-events-none absolute -right-6 -top-6 h-36 w-36 rounded-full opacity-25"
             style={{
               background:
-                "radial-gradient(circle, rgba(196,98,26,0.5) 0%, transparent 70%)"
+                "radial-gradient(circle, rgba(245,166,35,0.55) 0%, transparent 70%)"
             }}
           />
           <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
@@ -243,7 +243,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                   <div>
                     <StatusBadge tone="warning">Pagamento pendente</StatusBadge>
                     <h3 className="mt-2 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
-                      {order.customer_name ?? "Cliente não encontrada"}
+                      {order.customer_name ?? "Cliente não encontrado"}
                     </h3>
                     <p className="mt-1 text-sm text-text-secondary">
                       {formatOrderTotalCents(order.total_cents)}
@@ -276,7 +276,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                       {getDeliveryStatusLabel(order.delivery_status)}
                     </StatusBadge>
                     <h3 className="mt-2 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
-                      {order.customer_name ?? "Cliente não encontrada"}
+                      {order.customer_name ?? "Cliente não encontrado"}
                     </h3>
                   </div>
                   <OrderStatusActionForm
@@ -303,11 +303,11 @@ export default async function HojePage({ searchParams }: HojePageProps) {
               <div>
                 <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
                 <h3 className="mt-2.5 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
-                  Volte a falar com as clientes no momento certo.
+                  Volte a falar com seus clientes na hora certa.
                 </h3>
                 <p className="mt-1 text-sm leading-6 text-text-secondary">
                   O LembraVenda acompanha os ciclos dos produtos e mostra quem
-                  vale retomar.
+                  está na hora certa de comprar de novo.
                 </p>
               </div>
               <Link
@@ -332,7 +332,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h3 className="text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
-                      {order.customer_name ?? "Cliente não encontrada"}
+                      {order.customer_name ?? "Cliente não encontrado"}
                     </h3>
                     <p className="mt-1 text-sm text-text-secondary">
                       {formatDateTime(order.created_at)}
