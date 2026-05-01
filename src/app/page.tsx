@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 import { BrandLogo } from "@/components/brand-logo";
 import { getAuthState } from "@/lib/auth/server";
@@ -279,8 +280,18 @@ export default async function HomePage() {
             </ul>
           </div>
 
-          {/* mockup — Cobranças screen */}
-          <div className="lv-phone-wrap">
+          {/* hero visual — persona + mockup */}
+          <div className="lv-phone-wrap flex flex-col items-center gap-6">
+            <div className="relative w-[280px] overflow-hidden rounded-3xl shadow-xl ring-1 ring-black/5">
+              <Image
+                src="/images/hero.webp"
+                alt="Empreendedor usando o LembraVenda no celular"
+                width={280}
+                height={320}
+                className="w-full object-cover"
+                priority
+              />
+            </div>
             <PhoneMockupCobrancas />
           </div>
         </div>
@@ -428,9 +439,17 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* mockup Hoje */}
+          {/* feature image — produto em contexto real */}
           <div className="flex justify-center md:justify-end">
-            <PhoneMockupHoje />
+            <div className="relative w-[300px] overflow-hidden rounded-3xl shadow-2xl ring-1 ring-white/10">
+              <Image
+                src="/images/feature.webp"
+                alt="Mão segurando celular com o app LembraVenda em feira de orgânicos"
+                width={300}
+                height={360}
+                className="w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -560,23 +579,23 @@ export default async function HomePage() {
           {[
             {
               quote: "Parei de perder cobrança no meio da semana. Abro o app e já sei exatamente quem chamar.",
-              name: "Juliana M.",
-              role: "Cosméticos",
-              initials: "JM"
+              name: "Carlos M.",
+              role: "Cosméticos e cuidados",
+              avatar: "/images/avatar-1.webp"
             },
             {
               quote: "Sempre esquecia de voltar para clientes que sumiram. O lembrete de recompra mudou minha rotina.",
               name: "Carla S.",
               role: "Semijoias",
-              initials: "CS"
+              avatar: "/images/avatar-2.webp"
             },
             {
               quote: "App simples e direto. Abri, cadastrei, já entendi o que precisava fazer no dia.",
               name: "Fernanda R.",
               role: "Moda e achadinhos",
-              initials: "FR"
+              avatar: "/images/avatar-3.webp"
             }
-          ].map(({ quote, name, role, initials }) => (
+          ].map(({ quote, name, role, avatar }) => (
             <div
               className="flex flex-col justify-between rounded-2xl bg-surface border border-border p-7 shadow-sm"
               key={name}
@@ -593,12 +612,13 @@ export default async function HomePage() {
               </div>
 
               <div className="mt-6 flex items-center gap-3">
-                <div
-                  aria-hidden="true"
-                  className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground"
-                >
-                  {initials}
-                </div>
+                <Image
+                  src={avatar}
+                  alt={`Foto de ${name}`}
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 flex-shrink-0 rounded-full object-cover"
+                />
                 <div>
                   <p className="text-sm font-semibold text-foreground">{name}</p>
                   <p className="text-xs text-text-secondary">{role}</p>
