@@ -41,6 +41,7 @@ export async function listCustomers(
     .from("customers")
     .select("*")
     .eq("user_id", userId)
+    .is("deleted_at", null)
     .order("name", { ascending: true });
 
   const normalizedSearch = search.trim();

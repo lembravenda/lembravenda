@@ -234,19 +234,19 @@ export default async function HomePage() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary-lighter px-3.5 py-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-primary" />
               <span className="text-xs font-semibold tracking-wide text-primary">
-                Novo · Cobrança automática no WhatsApp
+                Para quem vende pelo WhatsApp
               </span>
             </div>
 
             {/* headline — Instrument Serif com acento italic */}
             <h1 className="mt-6 max-w-xl text-[2.5rem] leading-[1.1] tracking-[-0.025em] text-foreground md:text-[3.5rem] md:leading-[1.08]">
-              <span className="font-display font-normal">Não perca mais </span>
-              <span className="font-display italic text-primary">venda, cobrança</span>
-              <span className="font-display font-normal"> ou cliente.</span>
+              <span className="font-display font-normal">Quem ainda </span>
+              <span className="font-display italic text-primary">deve pra você</span>
+              <span className="font-display font-normal"> essa semana?</span>
             </h1>
 
             <p className="mt-5 max-w-lg text-base leading-[1.8] text-text-secondary md:text-[1.0625rem]">
-              O LembraVenda mostra todo dia quem cobrar, o que entregar e quem está no momento certo para comprar de novo — pelo WhatsApp.
+              O LembraVenda organiza seus pedidos e mostra todo dia quem cobrar, o que entregar e quem está pronto para comprar de novo — sem depender da sua memória.
             </p>
 
             {/* CTAs */}

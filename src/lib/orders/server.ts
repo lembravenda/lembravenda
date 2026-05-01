@@ -77,6 +77,7 @@ export async function listOrders(userId: string, options?: ListOrdersOptions) {
     .from("orders")
     .select("*")
     .eq("user_id", userId)
+    .is("deleted_at", null)
     .order("created_at", { ascending: false });
 
   if (limit !== undefined) {
@@ -273,6 +274,7 @@ export async function listOrdersByCustomer(customerId: string, userId: string) {
     .select("*")
     .eq("user_id", userId)
     .eq("customer_id", customerId)
+    .is("deleted_at", null)
     .order("created_at", { ascending: false });
 
   if (ordersError) {

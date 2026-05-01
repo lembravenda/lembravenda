@@ -1,6 +1,35 @@
 import type { NextConfig } from "next";
 
+const CSP = [
+  "default-src 'self'",
+  // Next.js App Router requires unsafe-inline for hydration scripts
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+  // Google Fonts + inline styles from Next.js
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' data: https://fonts.gstatic.com",
+  "img-src 'self' data: blob:",
+  // Supabase (API + Realtime), Vercel Analytics, PostHog
+  [
+    "connect-src 'self'",
+    "https://*.supabase.co",
+    "wss://*.supabase.co",
+    "https://vitals.vercel-insights.com",
+    "https://va.vercel-scripts.com",
+    "https://app.posthog.com",
+    "https://us.i.posthog.com"
+  ].join(" "),
+  "frame-src 'none'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "upgrade-insecure-requests"
+].join("; ");
+
 export const SECURITY_HEADERS = [
+  {
+    key: "Content-Security-Policy",
+    value: CSP
+  },
   {
     key: "X-Frame-Options",
     value: "DENY"

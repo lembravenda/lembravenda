@@ -58,6 +58,9 @@ export function buildPaymentMessage({
     );
   }
 
+  // Assinatura viral — gera awareness orgânico a cada cobrança enviada
+  messageBlocks.push("_Organizado com LembraVenda 🟢 lembravenda.com.br_");
+
   return messageBlocks.join("\n\n");
 }
 

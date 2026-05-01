@@ -38,7 +38,7 @@ export default async function CobrancasPage() {
   function buildWhatsAppMessage(customerName: string | null, totalCents: number) {
     const name = customerName ?? "cliente";
     const valor = formatOrderTotalCents(totalCents);
-    const msg = `Olá ${name}! 😊 Passando para lembrar sobre o pagamento de ${valor} referente ao seu pedido. Quando puder acertar, me avisa! Qualquer dúvida é só falar. 🙏`;
+    const msg = `Olá ${name}! 😊 Passando para lembrar sobre o pagamento de ${valor} referente ao seu pedido. Quando puder acertar, me avisa! Qualquer dúvida é só falar. 🙏\n\n_Organizado com LembraVenda 🟢 lembravenda.com.br_`;
     return `https://wa.me/?text=${encodeURIComponent(msg)}`;
   }
 
