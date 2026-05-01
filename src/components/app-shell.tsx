@@ -81,7 +81,7 @@ const navigationItems = [
   },
   {
     href: "/app/recompra",
-    label: "Cobranças",
+    label: "Recompra",
     iconOutline: (
       <svg aria-hidden="true" className="h-[20px] w-[20px]" fill="none" viewBox="0 0 24 24">
         <path

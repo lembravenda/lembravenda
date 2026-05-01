@@ -11,6 +11,7 @@ import {
   buttonStyles
 } from "@/components/ui";
 import { deactivateProductAction } from "@/app/app/produtos/actions";
+import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
 import { formatPriceCents } from "@/lib/products/format";
 import { getProductById, listProducts } from "@/lib/products/server";
@@ -33,7 +34,7 @@ export default async function ProdutosPage({
   const currentUserId = authState.user?.id;
 
   if (!currentUserId) {
-    return null;
+    redirect("/login");
   }
 
   const [products, editingProduct] = await Promise.all([

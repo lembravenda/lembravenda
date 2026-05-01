@@ -15,7 +15,7 @@ import { getOrderDetail } from "@/lib/orders/server";
 
 function formatDateTime(value: string | null) {
   if (!value) {
-    return null;
+    return "—";
   }
 
   return new Intl.DateTimeFormat("pt-BR", {

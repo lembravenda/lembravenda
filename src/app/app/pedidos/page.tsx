@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { OrderForm } from "@/components/order-form";
@@ -12,6 +13,11 @@ import { getAuthState } from "@/lib/auth/server";
 import { listCustomers } from "@/lib/customers/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
 import {
+  formatDateTime,
+  getDeliveryStatusLabel,
+  getPaymentStatusLabel
+} from "@/lib/orders/labels";
+import {
   listActiveProductsForNewOrders,
   listOrders
 } from "@/lib/orders/server";
@@ -22,45 +28,8 @@ type PedidosPageProps = {
   }>;
 };
 
-function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    month: "2-digit"
-  }).format(new Date(value));
-}
-
 function formatItemCount(count: number) {
   return `${count} ${count === 1 ? "item" : "itens"}`;
-}
-
-function getPaymentStatusLabel(status: string) {
-  if (status === "paid") {
-    return "Pago";
-  }
-
-  if (status === "canceled") {
-    return "Cancelado";
-  }
-
-  return "Pendente";
-}
-
-function getDeliveryStatusLabel(status: string) {
-  if (status === "prepared") {
-    return "Preparado";
-  }
-
-  if (status === "delivered") {
-    return "Entregue";
-  }
-
-  if (status === "canceled") {
-    return "Cancelado";
-  }
-
-  return "A preparar";
 }
 
 export default async function PedidosPage({ searchParams }: PedidosPageProps) {
@@ -69,7 +38,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
   const currentUserId = authState.user?.id;
 
   if (!currentUserId) {
-    return null;
+    redirect("/login");
   }
 
   const [orders, customers, activeProducts] = await Promise.all([

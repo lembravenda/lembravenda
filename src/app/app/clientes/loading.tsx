@@ -1,20 +1,15 @@
-import { AppShell } from "@/components/app-shell";
-
 export default function ClientesLoading() {
   return (
-    <AppShell
-      title="Clientes"
-      description="Cadastre, encontre e atualize sua base de clientes pelo celular."
-    >
-      <section className="lv-card p-5">
-        <p className="lv-eyebrow">Carregando</p>
-        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
-          Buscando seus clientes
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-text-secondary">
-          Estamos preparando a listagem e os formulários desta área.
-        </p>
-      </section>
-    </AppShell>
+    <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background">
+      <div className="flex-1 px-4 py-5 space-y-4 pb-24">
+        <div className="h-10 w-full rounded-[10px] bg-muted animate-pulse" />
+        {[1, 2, 3, 4, 5].map((i) => (
+          <div key={i} className="rounded-[14px] border border-border p-4 space-y-2">
+            <div className="h-5 w-36 rounded bg-muted animate-pulse" />
+            <div className="h-4 w-28 rounded bg-muted animate-pulse" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

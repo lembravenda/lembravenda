@@ -11,6 +11,7 @@ import {
   buttonStyles
 } from "@/components/ui";
 import { deleteCustomerAction } from "@/app/app/clientes/actions";
+import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
 import { getCustomerById, listCustomers } from "@/lib/customers/server";
 
@@ -25,7 +26,7 @@ type ClientesPageProps = {
 
 function formatBirthday(value: string | null) {
   if (!value) {
-    return null;
+    redirect("/login");
   }
 
   return new Intl.DateTimeFormat("pt-BR", {
@@ -43,7 +44,7 @@ export default async function ClientesPage({
   const currentUserId = authState.user?.id;
 
   if (!currentUserId) {
-    return null;
+    redirect("/login");
   }
 
   const [customers, editingCustomer] = await Promise.all([

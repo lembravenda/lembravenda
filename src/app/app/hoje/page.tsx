@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { HojeAnalyticsTracker } from "@/components/analytics-tracker";
@@ -15,45 +16,13 @@ import { getAuthState } from "@/lib/auth/server";
 import { listCustomers } from "@/lib/customers/server";
 import { buildFirstStepsState } from "@/lib/onboarding/first-steps";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
+import {
+  getDeliveryStatusLabel,
+  getPaymentStatusLabel,
+  formatDateTime
+} from "@/lib/orders/labels";
 import { getTodayDashboard, listOrders } from "@/lib/orders/server";
 import { listProducts } from "@/lib/products/server";
-
-function getPaymentStatusLabel(status: string) {
-  if (status === "paid") {
-    return "Pago";
-  }
-
-  if (status === "canceled") {
-    return "Cancelado";
-  }
-
-  return "Pendente";
-}
-
-function getDeliveryStatusLabel(status: string) {
-  if (status === "prepared") {
-    return "Preparado";
-  }
-
-  if (status === "delivered") {
-    return "Entregue";
-  }
-
-  if (status === "canceled") {
-    return "Cancelado";
-  }
-
-  return "A preparar";
-}
-
-function formatDateTime(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", {
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    month: "2-digit"
-  }).format(new Date(value));
-}
 
 type HojePageProps = {
   searchParams?: Promise<{
@@ -67,7 +36,7 @@ export default async function HojePage({ searchParams }: HojePageProps) {
   const params = (await searchParams) ?? {};
 
   if (!currentUserId) {
-    return null;
+    redirect("/login");
   }
 
   const [dashboard, customers, products, orders] = await Promise.all([
@@ -102,6 +71,12 @@ export default async function HojePage({ searchParams }: HojePageProps) {
     tasksSummary.length > 0
       ? `Hoje você tem ${tasksSummary.join(", ")} para acompanhar.`
       : "Veja o que precisa da sua atenção hoje.";
+
+  // Oportunidades de recompra: clientes com ciclo vencido
+  // Por ora usa a lista de pedidos para checar se há algum contexto de recompra
+  const hasRecompraOpportunities = orders.some(
+    (order) => order.payment_status === "paid" && order.delivery_status === "delivered"
+  );
 
   return (
     <AppShell
@@ -235,6 +210,14 @@ export default async function HojePage({ searchParams }: HojePageProps) {
             <SectionHeader
               title="Cobrar"
               description="Veja quem ainda precisa acertar o pagamento."
+              action={
+                <Link
+                  className="text-xs font-semibold text-primary"
+                  href="/app/cobrancas"
+                >
+                  Ver todas →
+                </Link>
+              }
             />
 
             {pendingCharges.map((order) => (
@@ -293,32 +276,35 @@ export default async function HojePage({ searchParams }: HojePageProps) {
           </section>
         ) : null}
 
-        <section aria-label="Chamar de novo" className="space-y-3">
-          <SectionHeader
-            title="Chamar de novo"
-            description="Abra a lista de recompra para ver quem pode estar pronta para um novo pedido."
-          />
-          <AppCard className="lv-card-urgent p-4">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
-                <h3 className="mt-2.5 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
-                  Volte a falar com seus clientes na hora certa.
-                </h3>
-                <p className="mt-1 text-sm leading-6 text-text-secondary">
-                  O LembraVenda acompanha os ciclos dos produtos e mostra quem
-                  está na hora certa de comprar de novo.
-                </p>
+        {/* Seção "Chamar de novo" — só aparece quando há oportunidades reais */}
+        {hasRecompraOpportunities ? (
+          <section aria-label="Chamar de novo" className="space-y-3">
+            <SectionHeader
+              title="Chamar de novo"
+              description="Abra a lista de recompra para ver quem pode estar pronta para um novo pedido."
+            />
+            <AppCard className="lv-card-urgent p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <StatusBadge tone="urgent">Recompra vencida</StatusBadge>
+                  <h3 className="mt-2.5 text-[0.9375rem] font-bold tracking-[-0.02em] text-foreground">
+                    Volte a falar com seus clientes na hora certa.
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-text-secondary">
+                    O LembraVenda acompanha os ciclos dos produtos e mostra quem
+                    está na hora certa de comprar de novo.
+                  </p>
+                </div>
+                <Link
+                  className={buttonStyles("secondary", false)}
+                  href="/app/recompra"
+                >
+                  Ver lista
+                </Link>
               </div>
-              <Link
-                className={buttonStyles("secondary", false)}
-                href="/app/recompra"
-              >
-                Ver lista
-              </Link>
-            </div>
-          </AppCard>
-        </section>
+            </AppCard>
+          </section>
+        ) : null}
 
         {recentOrders.length > 0 ? (
           <section aria-label="Pedidos recentes" className="space-y-3">

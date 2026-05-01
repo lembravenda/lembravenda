@@ -3,6 +3,7 @@ import { RecompraAnalyticsTracker } from "@/components/analytics-tracker";
 import { AppShell } from "@/components/app-shell";
 import { RepurchaseOpportunityCard } from "@/components/repurchase-opportunity-card";
 import { EmptyState, SectionHeader, buttonStyles } from "@/components/ui";
+import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
 import { listRepurchaseOpportunities } from "@/lib/repurchase/server";
@@ -21,7 +22,7 @@ export default async function RecompraPage() {
   const currentUserId = authState.user?.id;
 
   if (!currentUserId) {
-    return null;
+    redirect("/login");
   }
 
   const opportunities = await listRepurchaseOpportunities(currentUserId);

@@ -20,7 +20,29 @@ function isSupabaseConfigured() {
 }
 
 export async function middleware(request: NextRequest) {
-  if (isE2EAuthModeEnabled() || !isSupabaseConfigured()) {
+  // Modo E2E: bypass completo para testes automatizados
+  if (isE2EAuthModeEnabled()) {
+    return NextResponse.next();
+  }
+
+  // Supabase não configurado: falha explícita em vez de bypass silencioso
+  if (!isSupabaseConfigured()) {
+    const url = request.nextUrl.clone();
+    // Permite acesso a rotas públicas mesmo sem Supabase configurado
+    const isPublicRoute =
+      url.pathname === "/" ||
+      url.pathname.startsWith("/login") ||
+      url.pathname.startsWith("/signup") ||
+      url.pathname.startsWith("/_next") ||
+      url.pathname.startsWith("/api/health");
+
+    if (!isPublicRoute) {
+      console.error(
+        "[middleware] Supabase não configurado. Verifique NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY."
+      );
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
     return NextResponse.next();
   }
 

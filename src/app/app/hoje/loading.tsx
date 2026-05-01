@@ -1,20 +1,19 @@
-import { AppShell } from "@/components/app-shell";
-
 export default function HojeLoading() {
   return (
-    <AppShell
-      title="Hoje"
-      description="Comece pelo que pede ação agora: cobrar, entregar e acompanhar os pedidos mais recentes."
-    >
-      <section className="lv-card p-5">
-        <p className="lv-eyebrow">Carregando</p>
-        <h2 className="mt-3 text-xl font-bold tracking-[-0.025em] text-foreground">
-          Organizando sua rotina de hoje
-        </h2>
-        <p className="mt-2 text-sm leading-6 text-text-secondary">
-          Estamos separando cobranças, entregas e pedidos recentes.
-        </p>
-      </section>
-    </AppShell>
+    <div className="mx-auto flex min-h-screen w-full max-w-md flex-col bg-background">
+      <div className="sticky top-0 z-30 px-4 pb-3 pt-4 border-b border-border/40">
+        <div className="h-7 w-32 rounded-lg bg-muted animate-pulse" />
+      </div>
+      <div className="flex-1 px-4 py-5 space-y-5 pb-24">
+        <div className="rounded-xl h-32 bg-muted animate-pulse" />
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="rounded-[14px] border border-border p-4 space-y-3">
+            <div className="h-4 w-24 rounded bg-muted animate-pulse" />
+            <div className="h-5 w-40 rounded bg-muted animate-pulse" />
+            <div className="h-4 w-20 rounded bg-muted animate-pulse" />
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

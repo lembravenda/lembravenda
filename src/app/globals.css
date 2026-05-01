@@ -33,7 +33,7 @@
 
   /* Text */
   --lv-text:            #1A1A1A;
-  --lv-text-secondary:  #6B7280;
+  --lv-text-secondary:  #4B5563; /* WCAG AA corrigido: ratio ~5.4:1 em fundo bege */
   --lv-text-tertiary:   #9CA3AF;
 
   /* Semânticos */
