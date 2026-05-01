@@ -9,6 +9,7 @@ import {
   listTestCustomers,
   updateTestCustomer
 } from "@/lib/customers/test-store";
+import { getEffectivePlan, getPlanLimits } from "@/lib/billing/plan";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type CustomerDraft = Pick<
@@ -92,6 +93,34 @@ export async function createCustomer(userId: string, draft: CustomerDraft) {
   }
 
   const supabase = await createSupabaseServerClient();
+
+  // Verificar limite do plano Free
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("plan, plan_expires_at")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  const effectivePlan = getEffectivePlan(
+    profile?.plan ?? "free",
+    profile?.plan_expires_at ?? null
+  );
+  const limits = getPlanLimits(effectivePlan);
+
+  if (limits.customers !== Infinity) {
+    const { count } = await supabase
+      .from("customers")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .is("deleted_at", null);
+
+    if ((count ?? 0) >= limits.customers) {
+      throw new Error(
+        `PLAN_LIMIT:customers:${limits.customers}`
+      );
+    }
+  }
+
   const { data, error } = await supabase
     .from("customers")
     .insert({

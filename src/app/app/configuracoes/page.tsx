@@ -1,14 +1,29 @@
+import { redirect } from "next/navigation";
 import { AppShell } from "@/components/app-shell";
 import { LogoutButton } from "@/components/logout-button";
+import { BillingCard } from "@/components/billing-card";
 import { AppCard, buttonStyles } from "@/components/ui";
+import { getAuthState } from "@/lib/auth/server";
+import { getPlanUsage } from "@/lib/billing/usage";
 
-export default function ConfiguracoesPage() {
+export default async function ConfiguracoesPage() {
+  const authState = await getAuthState();
+  const userId = authState.user?.id;
+
+  if (!userId) {
+    redirect("/login");
+  }
+
+  const planUsage = await getPlanUsage(userId);
+
   return (
     <AppShell
       title="Configurações"
       description="Gerencie sua conta e deixe o LembraVenda do seu jeito."
     >
       <div className="grid gap-4">
+        <BillingCard planUsage={planUsage} />
+
         <AppCard className="p-6">
           <p className="lv-eyebrow">Perfil</p>
           <h2 className="mt-3 text-lg font-semibold tracking-[-0.02em] text-foreground">

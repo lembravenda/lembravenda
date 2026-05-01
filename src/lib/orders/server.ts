@@ -2,6 +2,7 @@ import "server-only";
 
 import type { Customer, Order, OrderItem } from "@/types/database";
 import { isE2EAuthModeEnabled } from "@/lib/auth/e2e-mode";
+import { getEffectivePlan, getPlanLimits } from "@/lib/billing/plan";
 import { listTestCustomers } from "@/lib/customers/test-store";
 import {
   calculateItemSubtotalCents,
@@ -312,6 +313,40 @@ export async function createOrder(
     return createTestOrder(userId, customerId, items);
   }
 
+  const supabase = await createSupabaseServerClient();
+
+  // Verificar limite do plano Free (pedidos no mês corrente)
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("plan, plan_expires_at")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  const effectivePlan = getEffectivePlan(
+    profile?.plan ?? "free",
+    profile?.plan_expires_at ?? null
+  );
+  const limits = getPlanLimits(effectivePlan);
+
+  if (limits.ordersPerMonth !== Infinity) {
+    const startOfMonth = new Date();
+    startOfMonth.setDate(1);
+    startOfMonth.setHours(0, 0, 0, 0);
+
+    const { count } = await supabase
+      .from("orders")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .is("deleted_at", null)
+      .gte("created_at", startOfMonth.toISOString());
+
+    if ((count ?? 0) >= limits.ordersPerMonth) {
+      throw new Error(
+        `PLAN_LIMIT:orders:${limits.ordersPerMonth}`
+      );
+    }
+  }
+
   const customer = await getCustomerForOrder(userId, customerId);
 
   if (!customer) {
@@ -359,7 +394,6 @@ export async function createOrder(
     }))
   );
 
-  const supabase = await createSupabaseServerClient();
   const { data: order, error: orderError } = await supabase
     .from("orders")
     .insert({

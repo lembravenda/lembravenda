@@ -10,6 +10,8 @@ export type FollowUpType = "payment" | "repurchase" | "delivery" | "custom";
 
 export type FollowUpStatus = "pending" | "done" | "dismissed";
 
+export type Plan = "free" | "pro";
+
 export type Profile = {
   id: string;
   user_id: string;
@@ -18,6 +20,10 @@ export type Profile = {
   phone: string | null;
   pix_key: string | null;
   primary_category: string;
+  plan: Plan;
+  plan_expires_at: string | null;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -99,10 +105,21 @@ export type Database = {
         Row: Profile;
         Insert: Omit<
           Profile,
-          "id" | "user_id" | "created_at" | "updated_at"
+          | "id"
+          | "user_id"
+          | "created_at"
+          | "updated_at"
+          | "plan"
+          | "plan_expires_at"
+          | "stripe_customer_id"
+          | "stripe_subscription_id"
         > & {
           id?: string;
           user_id?: string;
+          plan?: Plan;
+          plan_expires_at?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };

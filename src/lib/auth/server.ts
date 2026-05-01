@@ -41,7 +41,11 @@ export async function getAuthState(): Promise<AuthState> {
           id: session.user.id,
           phone: profileCookie.phone,
           pix_key: profileCookie.pix_key,
+          plan: "free",
+          plan_expires_at: null,
           primary_category: profileCookie.primary_category,
+          stripe_customer_id: null,
+          stripe_subscription_id: null,
           updated_at: new Date().toISOString(),
           user_id: session.user.id
         } satisfies Profile)

@@ -3,6 +3,7 @@ import { ListPageAnalyticsTracker } from "@/components/analytics-tracker";
 import { AppShell } from "@/components/app-shell";
 import { CustomerDeleteForm } from "@/components/customer-delete-form";
 import { CustomerForm } from "@/components/customer-form";
+import { PlanLimitBanner } from "@/components/plan-limit-banner";
 import {
   AppCard,
   EmptyState,
@@ -13,6 +14,8 @@ import {
 import { deleteCustomerAction } from "@/app/app/clientes/actions";
 import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
+import { FREE_LIMITS } from "@/lib/billing/plan";
+import { getPlanUsage } from "@/lib/billing/usage";
 import { getCustomerById, listCustomers } from "@/lib/customers/server";
 
 const PAGE_SIZE = 20;
@@ -53,11 +56,12 @@ export default async function ClientesPage({
   const currentPage = Math.max(0, parseInt(params.page ?? "0", 10) || 0);
   const offset = currentPage * PAGE_SIZE;
 
-  const [customersWithExtra, editingCustomer] = await Promise.all([
+  const [customersWithExtra, editingCustomer, planUsage] = await Promise.all([
     listCustomers(currentUserId, query, { limit: PAGE_SIZE + 1, offset }),
     params.edit
       ? getCustomerById(params.edit, currentUserId)
-      : Promise.resolve(null)
+      : Promise.resolve(null),
+    getPlanUsage(currentUserId)
   ]);
 
   const hasNextPage = customersWithExtra.length > PAGE_SIZE;
@@ -167,7 +171,13 @@ export default async function ClientesPage({
           </div>
         </form>
 
-        {isCreating ? <CustomerForm mode="create" /> : null}
+        {planUsage.atLimit.customers ? (
+          <PlanLimitBanner type="customers" limit={FREE_LIMITS.customers} />
+        ) : null}
+
+        {isCreating && !planUsage.atLimit.customers ? (
+          <CustomerForm mode="create" />
+        ) : null}
 
         {editingCustomer ? (
           <CustomerForm customer={editingCustomer} mode="edit" />

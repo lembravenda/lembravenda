@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { AppShell } from "@/components/app-shell";
 import { OrderForm } from "@/components/order-form";
+import { PlanLimitBanner } from "@/components/plan-limit-banner";
 import {
   AppCard,
   EmptyState,
@@ -10,6 +11,8 @@ import {
   buttonStyles
 } from "@/components/ui";
 import { getAuthState } from "@/lib/auth/server";
+import { FREE_LIMITS } from "@/lib/billing/plan";
+import { getPlanUsage } from "@/lib/billing/usage";
 import { listCustomers } from "@/lib/customers/server";
 import { formatOrderTotalCents } from "@/lib/orders/calc";
 import {
@@ -47,10 +50,11 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
   const currentPage = Math.max(0, parseInt(params.page ?? "0", 10) || 0);
   const offset = currentPage * PAGE_SIZE;
 
-  const [ordersWithExtra, customers, activeProducts] = await Promise.all([
+  const [ordersWithExtra, customers, activeProducts, planUsage] = await Promise.all([
     listOrders(currentUserId, { limit: PAGE_SIZE + 1, offset }),
     listCustomers(currentUserId, ""),
-    listActiveProductsForNewOrders(currentUserId)
+    listActiveProductsForNewOrders(currentUserId),
+    getPlanUsage(currentUserId)
   ]);
 
   const hasNextPage = ordersWithExtra.length > PAGE_SIZE;
@@ -73,7 +77,11 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
       description="Monte pedidos com cliente, itens, total e acompanhamento separado de pagamento e entrega."
     >
       <section className="space-y-4">
-        {isCreating ? (
+        {planUsage.atLimit.orders ? (
+          <PlanLimitBanner type="orders" limit={FREE_LIMITS.ordersPerMonth} />
+        ) : null}
+
+        {isCreating && !planUsage.atLimit.orders ? (
           <OrderForm customers={customers} products={activeProducts} />
         ) : null}
 
