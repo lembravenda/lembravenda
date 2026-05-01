@@ -22,9 +22,12 @@ import {
   listOrders
 } from "@/lib/orders/server";
 
+const PAGE_SIZE = 20;
+
 type PedidosPageProps = {
   searchParams?: Promise<{
     mode?: string;
+    page?: string;
   }>;
 };
 
@@ -41,13 +44,20 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
     redirect("/login");
   }
 
-  const [orders, customers, activeProducts] = await Promise.all([
-    listOrders(currentUserId),
+  const currentPage = Math.max(0, parseInt(params.page ?? "0", 10) || 0);
+  const offset = currentPage * PAGE_SIZE;
+
+  const [ordersWithExtra, customers, activeProducts] = await Promise.all([
+    listOrders(currentUserId, { limit: PAGE_SIZE + 1, offset }),
     listCustomers(currentUserId, ""),
     listActiveProductsForNewOrders(currentUserId)
   ]);
 
-  const isCreating = params.mode === "new" || orders.length === 0;
+  const hasNextPage = ordersWithExtra.length > PAGE_SIZE;
+  const hasPrevPage = currentPage > 0;
+  const orders = ordersWithExtra.slice(0, PAGE_SIZE);
+
+  const isCreating = params.mode === "new" || (currentPage === 0 && orders.length === 0);
 
   return (
     <AppShell
@@ -67,7 +77,7 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
           <OrderForm customers={customers} products={activeProducts} />
         ) : null}
 
-        {orders.length === 0 ? (
+        {currentPage === 0 && orders.length === 0 ? (
           <EmptyState
             action={
               <Link
@@ -151,6 +161,30 @@ export default async function PedidosPage({ searchParams }: PedidosPageProps) {
                 ) : null}
               </AppCard>
             ))}
+
+            {(hasPrevPage || hasNextPage) ? (
+              <div className="flex items-center justify-between gap-3 pt-1">
+                {hasPrevPage ? (
+                  <Link
+                    className={buttonStyles("secondary", false)}
+                    href={`/app/pedidos?page=${currentPage - 1}`}
+                  >
+                    ← Anterior
+                  </Link>
+                ) : <div />}
+                <span className="text-sm text-text-secondary">
+                  Página {currentPage + 1}
+                </span>
+                {hasNextPage ? (
+                  <Link
+                    className={buttonStyles("secondary", false)}
+                    href={`/app/pedidos?page=${currentPage + 1}`}
+                  >
+                    Próxima →
+                  </Link>
+                ) : <div />}
+              </div>
+            ) : null}
           </section>
         )}
       </section>

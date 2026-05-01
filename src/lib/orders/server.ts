@@ -41,7 +41,14 @@ export type TodayDashboard = {
   recentOrders: OrderSummary[];
 };
 
-export async function listOrders(userId: string) {
+export type ListOrdersOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export async function listOrders(userId: string, options?: ListOrdersOptions) {
+  const { limit, offset = 0 } = options ?? {};
+
   if (isE2EAuthModeEnabled()) {
     const [orders, customers, orderItems] = await Promise.all([
       listTestOrders(userId),
@@ -53,19 +60,30 @@ export async function listOrders(userId: string) {
       customers.map((customer) => [customer.id, customer])
     );
 
-    return orders.map((order) => ({
+    const allOrders = orders.map((order) => ({
       ...order,
       customer_name: customerMap.get(order.customer_id)?.name ?? null,
       item_count: orderItems.filter((item) => item.order_id === order.id).length
     }));
+
+    if (limit !== undefined) {
+      return allOrders.slice(offset, offset + limit);
+    }
+    return allOrders;
   }
 
   const supabase = await createSupabaseServerClient();
-  const { data: orders, error: ordersError } = await supabase
+  let ordersQuery = supabase
     .from("orders")
     .select("*")
     .eq("user_id", userId)
     .order("created_at", { ascending: false });
+
+  if (limit !== undefined) {
+    ordersQuery = ordersQuery.range(offset, offset + limit - 1);
+  }
+
+  const { data: orders, error: ordersError } = await ordersQuery;
 
   if (ordersError) {
     throw new Error("Não foi possível carregar seus pedidos.");
@@ -232,6 +250,55 @@ async function getActiveProductsForOrder(userId: string, productIds: string[]) {
   }
 
   return data;
+}
+
+export async function listOrdersByCustomer(customerId: string, userId: string) {
+  if (isE2EAuthModeEnabled()) {
+    const [orders, orderItems] = await Promise.all([
+      listTestOrders(userId),
+      listTestOrderItems(userId)
+    ]);
+    return orders
+      .filter((o) => o.customer_id === customerId)
+      .map((order) => ({
+        ...order,
+        customer_name: null,
+        item_count: orderItems.filter((item) => item.order_id === order.id).length
+      }));
+  }
+
+  const supabase = await createSupabaseServerClient();
+  const { data: orders, error: ordersError } = await supabase
+    .from("orders")
+    .select("*")
+    .eq("user_id", userId)
+    .eq("customer_id", customerId)
+    .order("created_at", { ascending: false });
+
+  if (ordersError) {
+    throw new Error("Não foi possível carregar os pedidos dessa cliente.");
+  }
+
+  if (orders.length === 0) {
+    return [];
+  }
+
+  const orderIds = orders.map((o) => o.id);
+  const { data: orderItems, error: orderItemsError } = await supabase
+    .from("order_items")
+    .select("*")
+    .eq("user_id", userId)
+    .in("order_id", orderIds);
+
+  if (orderItemsError) {
+    throw new Error("Não foi possível carregar os itens dos pedidos.");
+  }
+
+  return orders.map((order) => ({
+    ...order,
+    customer_name: null as string | null,
+    item_count: orderItems.filter((item) => item.order_id === order.id).length
+  }));
 }
 
 export async function createOrder(

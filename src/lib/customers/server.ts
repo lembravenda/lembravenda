@@ -16,9 +16,24 @@ export type CustomerDraft = Pick<
   "birthday" | "name" | "notes" | "phone" | "tags"
 >;
 
-export async function listCustomers(userId: string, search: string) {
+export type ListCustomersOptions = {
+  limit?: number;
+  offset?: number;
+};
+
+export async function listCustomers(
+  userId: string,
+  search: string,
+  options?: ListCustomersOptions
+) {
+  const { limit, offset = 0 } = options ?? {};
+
   if (isE2EAuthModeEnabled()) {
-    return listTestCustomers(userId, search);
+    const all = await listTestCustomers(userId, search);
+    if (limit !== undefined) {
+      return all.slice(offset, offset + limit);
+    }
+    return all;
   }
 
   const supabase = await createSupabaseServerClient();
@@ -35,6 +50,10 @@ export async function listCustomers(userId: string, search: string) {
     query = query.or(
       `name.ilike.%${escapedSearch}%,phone.ilike.%${escapedSearch}%`
     );
+  }
+
+  if (limit !== undefined) {
+    query = query.range(offset, offset + limit - 1);
   }
 
   const { data, error } = await query;

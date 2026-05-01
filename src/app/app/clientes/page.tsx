@@ -15,18 +15,21 @@ import { redirect } from "next/navigation";
 import { getAuthState } from "@/lib/auth/server";
 import { getCustomerById, listCustomers } from "@/lib/customers/server";
 
+const PAGE_SIZE = 20;
+
 type ClientesPageProps = {
   searchParams?: Promise<{
     created?: string;
     edit?: string;
     mode?: string;
+    page?: string;
     q?: string;
   }>;
 };
 
 function formatBirthday(value: string | null) {
   if (!value) {
-    redirect("/login");
+    return null;
   }
 
   return new Intl.DateTimeFormat("pt-BR", {
@@ -47,16 +50,28 @@ export default async function ClientesPage({
     redirect("/login");
   }
 
-  const [customers, editingCustomer] = await Promise.all([
-    listCustomers(currentUserId, query),
+  const currentPage = Math.max(0, parseInt(params.page ?? "0", 10) || 0);
+  const offset = currentPage * PAGE_SIZE;
+
+  const [customersWithExtra, editingCustomer] = await Promise.all([
+    listCustomers(currentUserId, query, { limit: PAGE_SIZE + 1, offset }),
     params.edit
       ? getCustomerById(params.edit, currentUserId)
       : Promise.resolve(null)
   ]);
 
-  const isCreating = params.mode === "new" || customers.length === 0;
+  const hasNextPage = customersWithExtra.length > PAGE_SIZE;
+  const hasPrevPage = currentPage > 0;
+  const customers = customersWithExtra.slice(0, PAGE_SIZE);
+
+  const isCreating = params.mode === "new" || (currentPage === 0 && customers.length === 0);
   const hasSearch = query.length > 0;
   const createdState = params.created;
+
+  // Base URL para links de paginação (preserva search query)
+  const paginationBase = hasSearch
+    ? `/app/clientes?q=${encodeURIComponent(query)}`
+    : "/app/clientes";
 
   return (
     <AppShell
@@ -158,7 +173,7 @@ export default async function ClientesPage({
           <CustomerForm customer={editingCustomer} mode="edit" />
         ) : null}
 
-        {customers.length === 0 ? (
+        {currentPage === 0 && customers.length === 0 ? (
           <EmptyState
             action={
               !hasSearch ? (
@@ -192,19 +207,32 @@ export default async function ClientesPage({
               <AppCard className="p-4" key={customer.id}>
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 className="lv-item-title">
-                      {customer.name}
-                    </h2>
+                    <Link
+                      href={`/app/clientes/${customer.id}`}
+                      className="hover:underline underline-offset-2"
+                    >
+                      <h2 className="lv-item-title">
+                        {customer.name}
+                      </h2>
+                    </Link>
                     <p className="mt-1 text-sm text-text-secondary">
                       {customer.phone || "Sem telefone cadastrado"}
                     </p>
                   </div>
-                  <Link
-                    className={buttonStyles("secondary", false)}
-                    href={`/app/clientes?edit=${customer.id}`}
-                  >
-                    Editar
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link
+                      className={buttonStyles("secondary", false)}
+                      href={`/app/clientes/${customer.id}`}
+                    >
+                      Ver
+                    </Link>
+                    <Link
+                      className={buttonStyles("secondary", false)}
+                      href={`/app/clientes?edit=${customer.id}`}
+                    >
+                      Editar
+                    </Link>
+                  </div>
                 </div>
 
                 <dl className="mt-4 space-y-2 text-sm text-text-secondary">
@@ -249,6 +277,30 @@ export default async function ClientesPage({
                 </div>
               </AppCard>
             ))}
+
+            {(hasPrevPage || hasNextPage) ? (
+              <div className="flex items-center justify-between gap-3 pt-1">
+                {hasPrevPage ? (
+                  <Link
+                    className={buttonStyles("secondary", false)}
+                    href={`${paginationBase}&page=${currentPage - 1}`}
+                  >
+                    ← Anterior
+                  </Link>
+                ) : <div />}
+                <span className="text-sm text-text-secondary">
+                  Página {currentPage + 1}
+                </span>
+                {hasNextPage ? (
+                  <Link
+                    className={buttonStyles("secondary", false)}
+                    href={`${paginationBase}&page=${currentPage + 1}`}
+                  >
+                    Próxima →
+                  </Link>
+                ) : <div />}
+              </div>
+            ) : null}
           </section>
         )}
       </section>

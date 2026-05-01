@@ -1,0 +1,39 @@
+{
+  "name": "LembraVenda",
+  "short_name": "LembraVenda",
+  "description": "Agenda de vendas para quem vende pelo WhatsApp — pedidos, cobranças e recompras.",
+  "start_url": "/app/hoje",
+  "display": "standalone",
+  "background_color": "#F9F5EF",
+  "theme_color": "#2E7D57",
+  "orientation": "portrait",
+  "categories": ["business", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "lang": "pt-BR"
+}
